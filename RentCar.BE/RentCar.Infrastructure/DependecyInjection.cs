@@ -10,6 +10,7 @@ namespace RentCar.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddTransient<ICarRepository, CarRepository>();
+            services.AddTransient<ITypeOfFuelRepository, TypeOfFuelRepository>();
             return services;
         }
     }
