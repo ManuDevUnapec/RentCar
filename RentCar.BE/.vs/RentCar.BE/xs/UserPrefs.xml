@@ -1,11 +1,15 @@
 ﻿<Properties StartupConfiguration="{B00CA829-9C97-4D3F-99E4-4F307720DE7A}|Default">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="CarService/.gitignore">
+    <Files>
+      <File FileName="CarService/.gitignore" Line="1" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
-            <Node name="CarService" expanded="True" />
-            <Node name="RentCar.Infrastructure" selected="True" />
+            <Node name="CarService" expanded="True">
+              <Node name=".gitignore" selected="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
