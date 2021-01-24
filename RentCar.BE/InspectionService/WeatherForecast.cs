@@ -1,6 +1,6 @@
 using System;
 
-namespace CarService
+namespace InspectionService
 {
     public class WeatherForecast
     {

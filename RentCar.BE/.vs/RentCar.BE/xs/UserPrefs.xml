@@ -4,9 +4,8 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
-            <Node name="CarService" expanded="True">
-              <Node name="Controllers" expanded="True" selected="True" />
-            </Node>
+            <Node name="CarService" expanded="True" />
+            <Node name="RentCar.Infrastructure" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -17,6 +16,6 @@
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
-  <MonoDevelop.Ide.ItemProperties.CarService FirstBuild="True" PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.ItemProperties.CarService PreferredExecutionTarget="/Applications/Safari.app" />
   <MultiItemStartupConfigurations />
 </Properties>
