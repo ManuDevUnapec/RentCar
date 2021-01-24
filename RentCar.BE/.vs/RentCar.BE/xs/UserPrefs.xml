@@ -1,11 +1,24 @@
 ﻿<Properties StartupConfiguration="{B00CA829-9C97-4D3F-99E4-4F307720DE7A}|Default">
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench>
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="CarService/Controllers/TypeOfFuelController.cs">
+    <Files>
+      <File FileName="CarService/Controllers/TypeOfFuelController.cs" Line="13" Column="40" />
+    </Files>
+>>>>>>> feature-adding-type-of-fuels-service
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
             <Node name="CarService" expanded="True">
+<<<<<<< HEAD
               <Node name="Controllers" expanded="True" />
+=======
+              <Node name="Controllers" expanded="True">
+                <Node name="TypeOfFuelController.cs" selected="True" />
+              </Node>
+>>>>>>> feature-adding-type-of-fuels-service
             </Node>
             <Node name="RentCar.Core" expanded="True">
               <Node name="Interfaces" expanded="True" />
