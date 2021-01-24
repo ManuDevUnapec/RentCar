@@ -1,30 +1,23 @@
 ﻿<Properties StartupConfiguration="{B00CA829-9C97-4D3F-99E4-4F307720DE7A}|Default">
-<<<<<<< HEAD
-  <MonoDevelop.Ide.Workbench>
-=======
-  <MonoDevelop.Ide.Workbench ActiveDocument="CarService/Controllers/TypeOfFuelController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RentCar.Infrastructure/Repositories/TypeOfCarRepository.cs">
     <Files>
-      <File FileName="CarService/Controllers/TypeOfFuelController.cs" Line="13" Column="40" />
+      <File FileName="CarService/Controllers/TypeOfCarController.cs" Line="24" Column="29" />
+      <File FileName="RentCar.Infrastructure/Repositories/TypeOfCarRepository.cs" Line="69" Column="51" />
     </Files>
->>>>>>> feature-adding-type-of-fuels-service
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
             <Node name="CarService" expanded="True">
-<<<<<<< HEAD
               <Node name="Controllers" expanded="True" />
-=======
-              <Node name="Controllers" expanded="True">
-                <Node name="TypeOfFuelController.cs" selected="True" />
-              </Node>
->>>>>>> feature-adding-type-of-fuels-service
             </Node>
             <Node name="RentCar.Core" expanded="True">
               <Node name="Interfaces" expanded="True" />
             </Node>
             <Node name="RentCar.Infrastructure" expanded="True">
-              <Node name="Repositories" expanded="True" />
+              <Node name="Repositories" expanded="True">
+                <Node name="TypeOfCarRepository.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
         </State>
@@ -34,7 +27,9 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService/Controllers/TypeOfCarController.cs" relfile="CarService/Controllers/TypeOfCarController.cs" line="23" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.CarService PreferredExecutionTarget="/Applications/Safari.app" />
   <MultiItemStartupConfigurations />

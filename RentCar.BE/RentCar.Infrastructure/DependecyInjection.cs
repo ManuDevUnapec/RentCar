@@ -11,6 +11,7 @@ namespace RentCar.Infrastructure
         {
             services.AddTransient<ICarRepository, CarRepository>();
             services.AddTransient<ITypeOfFuelRepository, TypeOfFuelRepository>();
+            services.AddTransient<ITypeOfCarRepository, TypeOfCarRepository>();
             return services;
         }
     }
