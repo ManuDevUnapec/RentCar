@@ -35,7 +35,7 @@ namespace EmployeeService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return 0;
             }
