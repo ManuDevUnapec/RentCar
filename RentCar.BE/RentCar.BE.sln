@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentService.Core", "RentSer
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentService.Infrastructure", "RentService.Infrastructure\RentService.Infrastructure.csproj", "{E8A7AC5E-035D-4701-9EF1-0477AFE27C29}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspectionService.Core", "InspectionService.Core\InspectionService.Core.csproj", "{141E2E89-4838-4198-AF0B-BE803B942A36}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -87,6 +89,10 @@ Global
 		{E8A7AC5E-035D-4701-9EF1-0477AFE27C29}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E8A7AC5E-035D-4701-9EF1-0477AFE27C29}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E8A7AC5E-035D-4701-9EF1-0477AFE27C29}.Release|Any CPU.Build.0 = Release|Any CPU
+		{141E2E89-4838-4198-AF0B-BE803B942A36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{141E2E89-4838-4198-AF0B-BE803B942A36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{141E2E89-4838-4198-AF0B-BE803B942A36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{141E2E89-4838-4198-AF0B-BE803B942A36}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
