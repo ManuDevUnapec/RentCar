@@ -2,13 +2,13 @@
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
-using RentCar.Core.Entities;
-using RentCar.Core.Interfaces;
+using CarService.Core.Entities;
+using CarService.Core.Interfaces;
 using Dapper;
 using System.Linq;
 using System.Collections.Generic;
 
-namespace RentCar.Infrastructure.Repositories
+namespace CarService.Infrastructure.Repositories
 {
     public class ModelRepository : IModelRepository
     {

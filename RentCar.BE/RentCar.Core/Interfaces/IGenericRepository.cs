@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace RentCar.Core.Interfaces
+namespace CarService.Core.Interfaces
 {
     public interface IGenericRepository<T> where T : class
     {

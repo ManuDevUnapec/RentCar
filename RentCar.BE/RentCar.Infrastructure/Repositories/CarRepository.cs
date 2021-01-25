@@ -5,10 +5,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using Microsoft.Extensions.Configuration;
-using RentCar.Core.Entities;
-using RentCar.Core.Interfaces;
+using CarService.Core.Entities;
+using CarService.Core.Interfaces;
 
-namespace RentCar.Infrastructure.Repositories
+namespace CarService.Infrastructure.Repositories
 {
     public class CarRepository : ICarRepository
     {

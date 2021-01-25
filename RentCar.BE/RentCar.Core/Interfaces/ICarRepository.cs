@@ -1,7 +1,7 @@
 ﻿using System;
-using RentCar.Core.Entities;
+using CarService.Core.Entities;
 
-namespace RentCar.Core.Interfaces
+namespace CarService.Core.Interfaces
 {
     public interface ICarRepository : IGenericRepository<Car>
     {
