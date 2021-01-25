@@ -5,11 +5,15 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
+            <Node name="ClientService.Infrastructure" expanded="True">
+              <Node name="Dependencies" expanded="True" selected="True" />
+              <Node name="Repositories" expanded="True" />
+            </Node>
             <Node name="EmployeeService.Core" expanded="True">
-              <Node name="Entities" expanded="True" />
-              <Node name="Interfaces" expanded="True">
-                <Node name="IGenericRepository.cs" selected="True" />
-              </Node>
+              <Node name="Interfaces" expanded="True" />
+            </Node>
+            <Node name="EmployeeService.Infrastructure" expanded="True">
+              <Node name="Repositories" expanded="True" />
             </Node>
           </Node>
         </State>
