@@ -5,7 +5,12 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
-            <Node name="InspectionService.Core" expanded="True" selected="True" />
+            <Node name="InspectionService.Infrastructure" expanded="True">
+              <Node name="Repositories" expanded="True" />
+            </Node>
+            <Node name="RentService.Infrastructure" expanded="True">
+              <Node name="DependecyInjection.cs" selected="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
@@ -20,7 +25,6 @@
     <String>RentCar.Infrastructure/CarService.Infrastructure.csproj</String>
   </DisabledProjects>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.InspectionService.Core FirstBuild="True" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
