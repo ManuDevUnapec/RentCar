@@ -3,7 +3,9 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="RentCar.BE" expanded="True" />
+          <Node name="RentCar.BE" expanded="True">
+            <Node name="RentService.Infrastructure" selected="True" />
+          </Node>
         </State>
       </Pad>
     </Pads>
