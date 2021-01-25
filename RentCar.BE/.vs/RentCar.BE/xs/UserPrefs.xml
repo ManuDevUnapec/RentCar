@@ -1,10 +1,13 @@
 ﻿<Properties StartupConfiguration="{B00CA829-9C97-4D3F-99E4-4F307720DE7A}|Default">
+  <MonoDevelop.Ide.ItemProperties.ClientService.Infrastructure FirstBuild="True" />
   <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
-            <Node name="ClientService.Core" expanded="True" />
+            <Node name="ClientService.Infrastructure" expanded="True">
+              <Node name="Repositories" selected="True" />
+            </Node>
           </Node>
         </State>
       </Pad>
