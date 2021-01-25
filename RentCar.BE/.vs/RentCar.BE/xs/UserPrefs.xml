@@ -4,7 +4,13 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
+<<<<<<< HEAD
           <Node name="RentCar.BE" expanded="True" selected="True" />
+=======
+          <Node name="RentCar.BE" expanded="True">
+            <Node name="ClientService" selected="True" />
+          </Node>
+>>>>>>> d3809f1dc6fa1e35ba0cb96aec8f07caeae0c4fd
         </State>
       </Pad>
     </Pads>
