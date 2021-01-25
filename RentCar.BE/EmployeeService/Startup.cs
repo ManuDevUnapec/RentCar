@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EmployeeService.Core.Interfaces;
+using EmployeeService.Infrastructure;
+using EmployeeService.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +35,12 @@ namespace EmployeeService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EmployeeService", Version = "v1" });
             });
+
+            //Dependecy Injections
+            services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+
+            //Adding the Dependecy Injections for the Client Infrastructue
+            services.AddInfrastructure();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,19 +1,15 @@
 ﻿<Properties StartupConfiguration="RentCar.BE">
-  <MonoDevelop.Ide.ItemProperties.EmployeeService.Infrastructure FirstBuild="True" />
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="EmployeeService/.gitignore">
+    <Files>
+      <File FileName="EmployeeService/.gitignore" Line="1" Column="1" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
-            <Node name="ClientService.Infrastructure" expanded="True">
-              <Node name="Dependencies" expanded="True" selected="True" />
-              <Node name="Repositories" expanded="True" />
-            </Node>
-            <Node name="EmployeeService.Core" expanded="True">
-              <Node name="Interfaces" expanded="True" />
-            </Node>
-            <Node name="EmployeeService.Infrastructure" expanded="True">
-              <Node name="Repositories" expanded="True" />
+            <Node name="EmployeeService" expanded="True">
+              <Node name="Controllers" expanded="True" />
+              <Node name=".gitignore" selected="True" />
             </Node>
           </Node>
         </State>
@@ -22,7 +18,6 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.EmployeeService PreferredExecutionTarget="/Applications/Safari.app" />
   <MonoDevelop.Ide.ItemProperties.ClientService PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.ItemProperties.EmployeeService.Core FirstBuild="True" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <DisabledProjects>
     <String>RentCar.Core/CarService.Core.csproj</String>
