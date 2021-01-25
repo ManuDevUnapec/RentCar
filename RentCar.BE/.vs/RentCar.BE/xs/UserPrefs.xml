@@ -1,11 +1,10 @@
-﻿<Properties StartupConfiguration="{A6360092-1F63-4BAE-A7DD-AF66EFE90AA9}|Default">
+﻿<Properties StartupConfiguration="{44F7E875-3D97-4923-AA2C-0A906747E61C}|Default">
+  <MonoDevelop.Ide.ItemProperties.InspectionService PreferredExecutionTarget="/Applications/Safari.app" />
   <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="RentCar.BE" expanded="True">
-            <Node name="RentService.Infrastructure" selected="True" />
-          </Node>
+          <Node name="RentCar.BE" expanded="True" selected="True" />
         </State>
       </Pad>
     </Pads>
@@ -17,15 +16,22 @@
   <DisabledProjects>
     <String>RentCar.Core/CarService.Core.csproj</String>
     <String>RentCar.Infrastructure/CarService.Infrastructure.csproj</String>
+    <String>InspectionService.Core/InspectionService.Core.csproj</String>
+    <String>InspectionService.Infrastructure/InspectionService.Infrastructure.csproj</String>
   </DisabledProjects>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/InspectionService.Infrastructure/Repositories/InspectionRepository.cs" relfile="InspectionService.Infrastructure/Repositories/InspectionRepository.cs" line="42" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.CarService PreferredExecutionTarget="/Applications/Safari.app" />
   <MultiItemStartupConfigurations>
     <MultiItemSolutionRunConfiguration Id="RentCar.BE" Name="RentCar.BE">
       <Items>
+        <StartupItem ItemId="{B00CA829-9C97-4D3F-99E4-4F307720DE7A}" ItemName="CarService" ConfigurationId="Default" />
+        <StartupItem ItemId="{61613E9B-10A6-4063-84D3-793D42BD7E9A}" ItemName="ClientService" ConfigurationId="Default" />
+        <StartupItem ItemId="{38F3FC36-9015-4CBD-A0BD-8AB81901C965}" ItemName="EmployeeService" ConfigurationId="Default" />
         <StartupItem ItemId="{A6360092-1F63-4BAE-A7DD-AF66EFE90AA9}" ItemName="RentService" ConfigurationId="Default" />
       </Items>
     </MultiItemSolutionRunConfiguration>
