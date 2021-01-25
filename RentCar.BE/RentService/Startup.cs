@@ -11,6 +11,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using RentService.Core.Interfaces;
+using RentService.Infrastructure;
+using RentService.Infrastructure.Repositories;
 
 namespace RentService
 {
@@ -32,6 +35,12 @@ namespace RentService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RentService", Version = "v1" });
             });
+
+            //Dependecy Injections
+            services.AddTransient<IRentRepository, RentRepository>();
+
+            //Adding the Dependecy Injections for the Client Infrastructue
+            services.AddInfrastructure();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
