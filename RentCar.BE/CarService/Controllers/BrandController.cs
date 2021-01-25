@@ -8,11 +8,11 @@ namespace CarService.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class TypeOfFuelController : ControllerBase
+    public class BrandController : ControllerBase
     {
-        private readonly ITypeOfFuelRepository _repository;
+        private readonly IBrandRepository _repository;
 
-        public TypeOfFuelController(ITypeOfFuelRepository repository)
+        public BrandController(IBrandRepository repository)
         {
             _repository = repository;
         }
@@ -20,21 +20,21 @@ namespace CarService.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var typeOfFuels = await _repository.GetAll();
-            return Ok(typeOfFuels);
+            var brands = await _repository.GetAll();
+            return Ok(brands);
         }
 
         [HttpGet("GetByID/{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var typeOfFuel = await _repository.Get(id);
-            return Ok(typeOfFuel);
+            var brand = await _repository.Get(id);
+            return Ok(brand);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(TypeOfFuel typeOfFuel)
+        public async Task<IActionResult> Post(Brand brand)
         {
-            var response = await _repository.Add(typeOfFuel);
+            var response = await _repository.Add(brand);
             if (response != 0)
             {
                 return Ok("Added successfully");
@@ -46,9 +46,9 @@ namespace CarService.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Put(TypeOfFuel typeOfFuel)
+        public async Task<IActionResult> Put(Brand brand)
         {
-            var response = await _repository.Update(typeOfFuel);
+            var response = await _repository.Update(brand);
             if (response != 0)
             {
                 return Ok("Updated successfully");
