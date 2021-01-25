@@ -1,15 +1,17 @@
 ﻿<Properties StartupConfiguration="RentCar.BE">
-  <MonoDevelop.Ide.Workbench ActiveDocument="EmployeeService/.gitignore">
-    <Files>
-      <File FileName="EmployeeService/.gitignore" Line="251" Column="9" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
-            <Node name="EmployeeService" expanded="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name=".gitignore" selected="True" />
+            <Node name="ClientService.Core" expanded="True">
+              <Node name="Interfaces" expanded="True" />
+            </Node>
+            <Node name="RentService.Core" expanded="True">
+              <Node name="Entities" expanded="True" />
+              <Node name="Interfaces" expanded="True">
+                <Node name="IRentRepository.cs" selected="True" />
+              </Node>
             </Node>
           </Node>
         </State>
@@ -24,6 +26,7 @@
     <String>RentCar.Infrastructure/CarService.Infrastructure.csproj</String>
   </DisabledProjects>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.RentService.Core FirstBuild="True" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
