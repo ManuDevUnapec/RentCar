@@ -1235,13 +1235,13 @@
     },
     "CarService.Core/1.0.0": {
       "type": "project",
-      "path": "../RentCar.Core/CarService.Core.csproj",
-      "msbuildProject": "../RentCar.Core/CarService.Core.csproj"
+      "path": "../CarService.Core/CarService.Core.csproj",
+      "msbuildProject": "../CarService.Core/CarService.Core.csproj"
     },
     "CarService.Infrastructure/1.0.0": {
       "type": "project",
-      "path": "../RentCar.Infrastructure/CarService.Infrastructure.csproj",
-      "msbuildProject": "../RentCar.Infrastructure/CarService.Infrastructure.csproj"
+      "path": "../CarService.Infrastructure/CarService.Infrastructure.csproj",
+      "msbuildProject": "../CarService.Infrastructure/CarService.Infrastructure.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1277,8 +1277,8 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "projectReferences": {
-            "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/CarService.Infrastructure.csproj": {
-              "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/CarService.Infrastructure.csproj"
+            "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Infrastructure/CarService.Infrastructure.csproj": {
+              "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Infrastructure/CarService.Infrastructure.csproj"
             }
           }
         }

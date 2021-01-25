@@ -4,6 +4,132 @@
     "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService/CarService.csproj": {}
   },
   "projects": {
+    "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Core/CarService.Core.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Core/CarService.Core.csproj",
+        "projectName": "CarService.Core",
+        "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Core/CarService.Core.csproj",
+        "packagesPath": "/Users/manueldejesusguerrerovasquez/.nuget/packages/",
+        "outputPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Core/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/manueldejesusguerrerovasquez/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.102/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Infrastructure/CarService.Infrastructure.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Infrastructure/CarService.Infrastructure.csproj",
+        "projectName": "CarService.Infrastructure",
+        "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Infrastructure/CarService.Infrastructure.csproj",
+        "packagesPath": "/Users/manueldejesusguerrerovasquez/.nuget/packages/",
+        "outputPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Infrastructure/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/manueldejesusguerrerovasquez/.config/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Core/CarService.Core.csproj": {
+                "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Core/CarService.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.0.78, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[5.0.1, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.2, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.102/RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService/CarService.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -26,8 +152,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/CarService.Infrastructure.csproj": {
-                "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/CarService.Infrastructure.csproj"
+              "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Infrastructure/CarService.Infrastructure.csproj": {
+                "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Infrastructure/CarService.Infrastructure.csproj"
               }
             }
           }
@@ -75,132 +201,6 @@
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
             },
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.102/RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/CarService.Core.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/CarService.Core.csproj",
-        "projectName": "CarService.Core",
-        "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/CarService.Core.csproj",
-        "packagesPath": "/Users/manueldejesusguerrerovasquez/.nuget/packages/",
-        "outputPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/Users/manueldejesusguerrerovasquez/.config/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net5.0"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
-            "projectReferences": {}
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.102/RuntimeIdentifierGraph.json"
-        }
-      }
-    },
-    "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/CarService.Infrastructure.csproj": {
-      "version": "1.0.0",
-      "restore": {
-        "projectUniqueName": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/CarService.Infrastructure.csproj",
-        "projectName": "CarService.Infrastructure",
-        "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/CarService.Infrastructure.csproj",
-        "packagesPath": "/Users/manueldejesusguerrerovasquez/.nuget/packages/",
-        "outputPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/obj/",
-        "projectStyle": "PackageReference",
-        "configFilePaths": [
-          "/Users/manueldejesusguerrerovasquez/.config/NuGet/NuGet.Config"
-        ],
-        "originalTargetFrameworks": [
-          "net5.0"
-        ],
-        "sources": {
-          "https://api.nuget.org/v3/index.json": {}
-        },
-        "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
-            "projectReferences": {
-              "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/CarService.Core.csproj": {
-                "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/CarService.Core.csproj"
-              }
-            }
-          }
-        },
-        "warningProperties": {
-          "warnAsError": [
-            "NU1605"
-          ]
-        }
-      },
-      "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
-          "dependencies": {
-            "Dapper": {
-              "target": "Package",
-              "version": "[2.0.78, )"
-            },
-            "Microsoft.Extensions.Configuration": {
-              "target": "Package",
-              "version": "[5.0.0, )"
-            },
-            "Microsoft.Extensions.DependencyInjection": {
-              "target": "Package",
-              "version": "[5.0.1, )"
-            },
-            "System.Data.SqlClient": {
-              "target": "Package",
-              "version": "[4.8.2, )"
-            }
-          },
-          "imports": [
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }

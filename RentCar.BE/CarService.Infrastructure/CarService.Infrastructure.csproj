@@ -14,6 +14,6 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RentCar.Core\CarService.Core.csproj" />
+    <ProjectReference Include="..\CarService.Core\CarService.Core.csproj" />
   </ItemGroup>
 </Project>
