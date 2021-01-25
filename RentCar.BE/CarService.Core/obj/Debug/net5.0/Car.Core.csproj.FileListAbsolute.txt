@@ -1,0 +1,5 @@
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/obj/Debug/net5.0/Car.Core.csprojAssemblyReference.cache
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/obj/Debug/net5.0/Car.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/obj/Debug/net5.0/Car.Core.AssemblyInfoInputs.cache
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/obj/Debug/net5.0/Car.Core.AssemblyInfo.cs
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/obj/Debug/net5.0/Car.Core.csproj.CoreCompileInputs.cache

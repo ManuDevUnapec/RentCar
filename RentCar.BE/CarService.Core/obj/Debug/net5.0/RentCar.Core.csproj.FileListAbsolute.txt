@@ -1,0 +1,11 @@
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/bin/Debug/net5.0/RentCar.Core.deps.json
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/bin/Debug/net5.0/RentCar.Core.dll
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/bin/Debug/net5.0/ref/RentCar.Core.dll
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/bin/Debug/net5.0/RentCar.Core.pdb
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/obj/Debug/net5.0/RentCar.Core.GeneratedMSBuildEditorConfig.editorconfig
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/obj/Debug/net5.0/RentCar.Core.AssemblyInfoInputs.cache
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/obj/Debug/net5.0/RentCar.Core.AssemblyInfo.cs
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/obj/Debug/net5.0/RentCar.Core.csproj.CoreCompileInputs.cache
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/obj/Debug/net5.0/RentCar.Core.dll
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/obj/Debug/net5.0/ref/RentCar.Core.dll
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/obj/Debug/net5.0/RentCar.Core.pdb
