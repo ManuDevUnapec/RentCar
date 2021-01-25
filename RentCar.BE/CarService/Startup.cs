@@ -32,6 +32,7 @@ namespace CarService
             services.AddTransient<ICarRepository, CarRepository>();
             services.AddTransient<ITypeOfFuelRepository, TypeOfFuelRepository>();
             services.AddTransient<ITypeOfCarRepository, TypeOfCarRepository>();
+            services.AddTransient<IBrandRepository, BrandRepository>();
 
             //Adding the Dependecy Injections for the Car Infrastructue
             services.AddInfrastructure();

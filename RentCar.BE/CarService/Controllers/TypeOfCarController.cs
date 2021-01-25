@@ -20,15 +20,15 @@ namespace CarService.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var cars = await _repository.GetAll();
-            return Ok(cars);
+            var typeOfCars = await _repository.GetAll();
+            return Ok(typeOfCars);
         }
 
         [HttpGet("GetByID/{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var car = await _repository.Get(id);
-            return Ok(car);
+            var typeOfCar = await _repository.Get(id);
+            return Ok(typeOfCar);
         }
 
         [HttpPost]
