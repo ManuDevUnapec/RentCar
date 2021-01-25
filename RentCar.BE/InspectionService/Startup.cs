@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using InspectionService.Core.Interfaces;
+using InspectionService.Infrastructure;
+using InspectionService.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +35,12 @@ namespace InspectionService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "InspectionService", Version = "v1" });
             });
+
+            //Dependecy Injections
+            services.AddTransient<IInspectionRepository, InspectionRepository>();
+
+            //Adding the Dependecy Injections for the Inspection Infrastructue
+            services.AddInfrastructure();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

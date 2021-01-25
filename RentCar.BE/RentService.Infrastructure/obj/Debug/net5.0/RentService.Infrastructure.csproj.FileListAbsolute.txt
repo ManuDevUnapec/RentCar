@@ -1,0 +1,15 @@
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentService.Infrastructure/bin/Debug/net5.0/RentService.Infrastructure.deps.json
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentService.Infrastructure/bin/Debug/net5.0/RentService.Infrastructure.dll
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentService.Infrastructure/bin/Debug/net5.0/ref/RentService.Infrastructure.dll
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentService.Infrastructure/bin/Debug/net5.0/RentService.Infrastructure.pdb
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentService.Infrastructure/bin/Debug/net5.0/RentService.Core.dll
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentService.Infrastructure/bin/Debug/net5.0/RentService.Core.pdb
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentService.Infrastructure/obj/Debug/net5.0/RentService.Infrastructure.csprojAssemblyReference.cache
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentService.Infrastructure/obj/Debug/net5.0/RentService.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentService.Infrastructure/obj/Debug/net5.0/RentService.Infrastructure.AssemblyInfoInputs.cache
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentService.Infrastructure/obj/Debug/net5.0/RentService.Infrastructure.AssemblyInfo.cs
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentService.Infrastructure/obj/Debug/net5.0/RentService.Infrastructure.csproj.CoreCompileInputs.cache
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentService.Infrastructure/obj/Debug/net5.0/RentService.Infrastructure.csproj.CopyComplete
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentService.Infrastructure/obj/Debug/net5.0/RentService.Infrastructure.dll
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentService.Infrastructure/obj/Debug/net5.0/ref/RentService.Infrastructure.dll
+/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentService.Infrastructure/obj/Debug/net5.0/RentService.Infrastructure.pdb
