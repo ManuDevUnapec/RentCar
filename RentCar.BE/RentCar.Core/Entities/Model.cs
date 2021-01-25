@@ -1,5 +1,5 @@
 ﻿using System;
-namespace RentCar.Core.Entities
+namespace CarService.Core.Entities
 {
     public class Model
     {

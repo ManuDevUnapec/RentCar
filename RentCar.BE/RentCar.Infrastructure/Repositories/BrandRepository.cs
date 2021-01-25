@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using CarService.Core.Entities;
+using CarService.Core.Interfaces;
 using Dapper;
 using Microsoft.Extensions.Configuration;
-using RentCar.Core.Entities;
-using RentCar.Core.Interfaces;
 
-namespace RentCar.Infrastructure.Repositories
+
+namespace CarService.Infrastructure.Repositories
 {
     public class BrandRepository : IBrandRepository
     {

@@ -26,8 +26,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/RentCar.Infrastructure.csproj": {
-                "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/RentCar.Infrastructure.csproj"
+              "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/CarService.Infrastructure.csproj": {
+                "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/CarService.Infrastructure.csproj"
               }
             }
           }
@@ -83,12 +83,12 @@
         }
       }
     },
-    "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/RentCar.Core.csproj": {
+    "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/CarService.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/RentCar.Core.csproj",
-        "projectName": "RentCar.Core",
-        "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/RentCar.Core.csproj",
+        "projectUniqueName": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/CarService.Core.csproj",
+        "projectName": "CarService.Core",
+        "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/CarService.Core.csproj",
         "packagesPath": "/Users/manueldejesusguerrerovasquez/.nuget/packages/",
         "outputPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/obj/",
         "projectStyle": "PackageReference",
@@ -135,12 +135,12 @@
         }
       }
     },
-    "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/RentCar.Infrastructure.csproj": {
+    "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/CarService.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/RentCar.Infrastructure.csproj",
-        "projectName": "RentCar.Infrastructure",
-        "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/RentCar.Infrastructure.csproj",
+        "projectUniqueName": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/CarService.Infrastructure.csproj",
+        "projectName": "CarService.Infrastructure",
+        "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/CarService.Infrastructure.csproj",
         "packagesPath": "/Users/manueldejesusguerrerovasquez/.nuget/packages/",
         "outputPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Infrastructure/obj/",
         "projectStyle": "PackageReference",
@@ -157,8 +157,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/RentCar.Core.csproj": {
-                "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/RentCar.Core.csproj"
+              "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/CarService.Core.csproj": {
+                "projectPath": "/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/RentCar.Core/CarService.Core.csproj"
               }
             }
           }

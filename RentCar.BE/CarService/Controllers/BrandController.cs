@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+using CarService.Core.Entities;
+using CarService.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using RentCar.Core.Entities;
-using RentCar.Core.Interfaces;
 
 namespace CarService.Controllers
 {

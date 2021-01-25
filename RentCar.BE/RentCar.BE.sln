@@ -13,9 +13,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentService", "RentService\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InspectionService", "InspectionService\InspectionService.csproj", "{44F7E875-3D97-4923-AA2C-0A906747E61C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCar.Core", "RentCar.Core\RentCar.Core.csproj", "{2A84BAA6-5799-4C8D-8BF9-B3270EAC0B21}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarService.Core", "RentCar.Core\CarService.Core.csproj", "{2A84BAA6-5799-4C8D-8BF9-B3270EAC0B21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCar.Infrastructure", "RentCar.Infrastructure\RentCar.Infrastructure.csproj", "{71C0F11C-0B70-43B6-8B38-765B6D4AE81E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarService.Infrastructure", "RentCar.Infrastructure\CarService.Infrastructure.csproj", "{71C0F11C-0B70-43B6-8B38-765B6D4AE81E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientService.Core", "ClientService.Core\ClientService.Core.csproj", "{B4004B45-861F-4121-90E1-5883396FFB90}"
 EndProject
