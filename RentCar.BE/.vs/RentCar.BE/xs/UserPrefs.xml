@@ -1,19 +1,9 @@
 ﻿<Properties StartupConfiguration="{B00CA829-9C97-4D3F-99E4-4F307720DE7A}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="CarService/Controllers/BrandController.cs">
-    <Files>
-      <File FileName="CarService/Controllers/BrandController.cs" Line="24" Column="31" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="RentCar.BE" expanded="True">
-            <Node name="CarService" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="BrandController.cs" selected="True" />
-              </Node>
-            </Node>
-            <Node name="RentCar.Infrastructure" expanded="True" />
-          </Node>
+          <Node name="RentCar.BE" expanded="True" />
         </State>
       </Pad>
     </Pads>

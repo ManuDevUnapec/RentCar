@@ -13,6 +13,7 @@ namespace RentCar.Infrastructure
             services.AddTransient<ITypeOfFuelRepository, TypeOfFuelRepository>();
             services.AddTransient<ITypeOfCarRepository, TypeOfCarRepository>();
             services.AddTransient<IBrandRepository, BrandRepository>();
+            services.AddTransient<IModelRepository, ModelRepository>();
             return services;
         }
     }
