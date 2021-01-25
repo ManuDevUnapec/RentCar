@@ -14,7 +14,7 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\RentCar.Infrastructure\RentCar.Infrastructure.csproj">
+    <ProjectReference Include="..\CarService.Infrastructure\CarService.Infrastructure.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>

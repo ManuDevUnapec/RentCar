@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using CarService.Core.Entities;
+using CarService.Core.Interfaces;
 using Dapper;
 using Microsoft.Extensions.Configuration;
-using RentCar.Core.Entities;
-using RentCar.Core.Interfaces;
 
-namespace RentCar.Infrastructure.Repositories
+
+namespace CarService.Infrastructure.Repositories
 {
-    public class TypeOfCarRepository : ITypeOfCarRepository
+    public class BrandRepository : IBrandRepository
     {
         private readonly IConfiguration _configuration;
 
-        public TypeOfCarRepository(IConfiguration configuration)
+        public BrandRepository(IConfiguration configuration)
         {
             _configuration = configuration;
         }
 
-        public async Task<int> Add(TypeOfCar entity)
+        public async Task<int> Add(Brand entity)
         {
-            var sql = "INSERT INTO TypeOfCars (Description, Status) " +
+            var sql = "INSERT INTO Brand (Description, Status) " +
                 "Values (@Description, @Status);";
 
             try
@@ -42,7 +43,7 @@ namespace RentCar.Infrastructure.Repositories
 
         public async Task<int> Delete(int id)
         {
-            var sql = "DELETE FROM TypeOfCars WHERE ID = @ID;";
+            var sql = "DELETE FROM Brand WHERE ID = @ID;";
             using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
             {
                 connection.Open();
@@ -51,39 +52,39 @@ namespace RentCar.Infrastructure.Repositories
             }
         }
 
-        public async Task<TypeOfCar> Get(int id)
+        public async Task<Brand> Get(int id)
         {
-            var sql = "SELECT * FROM TypeOfCars WHERE ID = @ID;";
+            var sql = "SELECT * FROM Brand WHERE ID = @ID;";
             using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<TypeOfCar>(sql, new { ID = id });
+                var result = await connection.QueryAsync<Brand>(sql, new { ID = id });
                 return result.FirstOrDefault();
             }
         }
 
-        public async Task<IEnumerable<TypeOfCar>> GetAll()
+        public async Task<IEnumerable<Brand>> GetAll()
         {
             try
             {
-                var sql = "SELECT * FROM TypeOfCars;";
+                var sql = "SELECT * FROM Brand;";
                 using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
                 {
                     connection.Open();
-                    var result = await connection.QueryAsync<TypeOfCar>(sql);
+                    var result = await connection.QueryAsync<Brand>(sql);
                     return result;
                 }
             }
             catch (Exception e)
             {
                 //Log Error
-                return new List<TypeOfCar>();
+                return new List<Brand>();
             }
         }
 
-        public async Task<int> Update(TypeOfCar entity)
+        public async Task<int> Update(Brand entity)
         {
-            var sql = "UPDATE TypeOfCars SET Description = @Description, Status = @Status WHERE ID = @ID;";
+            var sql = "UPDATE Brand SET Description = @Description, Status = @Status WHERE ID = @ID;";
 
             try
             {

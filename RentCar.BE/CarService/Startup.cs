@@ -1,12 +1,12 @@
+using CarService.Core.Interfaces;
+using CarService.Infrastructure;
+using CarService.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using RentCar.Core.Interfaces;
-using RentCar.Infrastructure;
-using RentCar.Infrastructure.Repositories;
 
 namespace CarService
 {

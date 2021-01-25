@@ -1,7 +1,7 @@
 ﻿using System;
-namespace RentCar.Core.Entities
+namespace CarService.Core.Entities
 {
-    public class TypeOfCar
+    public class Brand
     {
         public int ID { get; set; }
         public string Description { get; set; }

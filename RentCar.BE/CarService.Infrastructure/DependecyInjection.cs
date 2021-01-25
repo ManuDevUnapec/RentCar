@@ -1,8 +1,8 @@
-﻿using RentCar.Core.Interfaces;
+﻿using CarService.Core.Interfaces;
+using CarService.Infrastructure.Repositories;
 using Microsoft.Extensions.DependencyInjection;
-using RentCar.Infrastructure.Repositories;
 
-namespace RentCar.Infrastructure
+namespace CarService.Infrastructure
 {
     public static class DependecyInjection
     {

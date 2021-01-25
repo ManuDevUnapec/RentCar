@@ -5,24 +5,26 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using Microsoft.Extensions.Configuration;
-using RentCar.Core.Entities;
-using RentCar.Core.Interfaces;
+using CarService.Core.Entities;
+using CarService.Core.Interfaces;
 
-namespace RentCar.Infrastructure.Repositories
+namespace CarService.Infrastructure.Repositories
 {
-    public class BrandRepository : IBrandRepository
+    public class CarRepository : ICarRepository
     {
         private readonly IConfiguration _configuration;
 
-        public BrandRepository(IConfiguration configuration)
+        public CarRepository(IConfiguration configuration) 
         {
             _configuration = configuration;
         }
 
-        public async Task<int> Add(Brand entity)
+        public async Task<int> Add(Car entity)
         {
-            var sql = "INSERT INTO Brand (Description, Status) " +
-                "Values (@Description, @Status);";
+            var sql = "INSERT INTO Cars (Description, ChassisNumber, EngineNumber, PlateNumber, " +
+                "Status, TypeOfFuelID, TypeOfCarID, BrandID, ModelID) " +
+                "Values (@Description, @ChassisNumber, @EngineNumber, @PlateNumber, @Status, @TypeOfFuelID," +
+                "@TypeOfCarID, @BrandID, @ModelID);";
 
             try
             {
@@ -33,16 +35,16 @@ namespace RentCar.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception)
+            catch(Exception)
             {
                 return 0;
             }
-
+            
         }
 
         public async Task<int> Delete(int id)
         {
-            var sql = "DELETE FROM Brand WHERE ID = @ID;";
+            var sql = "DELETE FROM Cars WHERE ID = @ID;";
             using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
             {
                 connection.Open();
@@ -51,39 +53,40 @@ namespace RentCar.Infrastructure.Repositories
             }
         }
 
-        public async Task<Brand> Get(int id)
+        public async Task<Car> Get(int id)
         {
-            var sql = "SELECT * FROM Brand WHERE ID = @ID;";
+            var sql = "SELECT * FROM Cars WHERE ID = @ID;";
             using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
             {
                 connection.Open();
-                var result = await connection.QueryAsync<Brand>(sql, new { ID = id });
+                var result = await connection.QueryAsync<Car>(sql, new { ID = id });
                 return result.FirstOrDefault();
             }
         }
 
-        public async Task<IEnumerable<Brand>> GetAll()
+        public async Task<IEnumerable<Car>> GetAll()
         {
             try
             {
-                var sql = "SELECT * FROM Brand;";
+                var sql = "SELECT * FROM Cars;";
                 using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
                 {
                     connection.Open();
-                    var result = await connection.QueryAsync<Brand>(sql);
+                    var result = await connection.QueryAsync<Car>(sql);
                     return result;
                 }
-            }
-            catch (Exception e)
+            }catch(Exception e)
             {
                 //Log Error
-                return new List<Brand>();
+                return new List<Car>();
             }
         }
 
-        public async Task<int> Update(Brand entity)
+        public async Task<int> Update(Car entity)
         {
-            var sql = "UPDATE Brand SET Description = @Description, Status = @Status WHERE ID = @ID;";
+            var sql = "UPDATE Cars SET Description = @Description, ChassisNumber = @ChassisNumber, EngineNumber = @EngineNumber," +
+                "PlateNumber = @PlateNumber, Status = @Status, TypeOfFuelID = @TypeOfFuelID," +
+                "TypeOfCarID = @TypeOfCarID, BrandID = @BrandID, ModelID = @ModelID WHERE ID = @ID;";
 
             try
             {
@@ -93,8 +96,7 @@ namespace RentCar.Infrastructure.Repositories
                     var affectedRows = await connection.ExecuteAsync(sql, entity);
                     return affectedRows;
                 }
-            }
-            catch (Exception)
+            }catch(Exception)
             {
                 return 0;
             }
