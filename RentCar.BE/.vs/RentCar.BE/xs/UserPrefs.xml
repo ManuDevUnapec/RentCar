@@ -1,16 +1,14 @@
-﻿<Properties StartupConfiguration="RentCar.BE">
-  <MonoDevelop.Ide.ItemProperties.RentService.Infrastructure FirstBuild="True" />
+﻿<Properties StartupConfiguration="{A6360092-1F63-4BAE-A7DD-AF66EFE90AA9}|Default">
   <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="RentCar.BE" expanded="True">
-            <Node name="RentService.Infrastructure" expanded="True" selected="True" />
-          </Node>
+          <Node name="RentCar.BE" expanded="True" />
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.RentService PreferredExecutionTarget="/Applications/Safari.app" />
   <MonoDevelop.Ide.ItemProperties.EmployeeService PreferredExecutionTarget="/Applications/Safari.app" />
   <MonoDevelop.Ide.ItemProperties.ClientService PreferredExecutionTarget="/Applications/Safari.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
@@ -19,7 +17,6 @@
     <String>RentCar.Infrastructure/CarService.Infrastructure.csproj</String>
   </DisabledProjects>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.RentService.Core FirstBuild="True" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
@@ -27,9 +24,7 @@
   <MultiItemStartupConfigurations>
     <MultiItemSolutionRunConfiguration Id="RentCar.BE" Name="RentCar.BE">
       <Items>
-        <StartupItem ItemId="{B00CA829-9C97-4D3F-99E4-4F307720DE7A}" ItemName="CarService" ConfigurationId="Default" />
-        <StartupItem ItemId="{61613E9B-10A6-4063-84D3-793D42BD7E9A}" ItemName="ClientService" ConfigurationId="Default" />
-        <StartupItem ItemId="{38F3FC36-9015-4CBD-A0BD-8AB81901C965}" ItemName="EmployeeService" ConfigurationId="Default" />
+        <StartupItem ItemId="{A6360092-1F63-4BAE-A7DD-AF66EFE90AA9}" ItemName="RentService" ConfigurationId="Default" />
       </Items>
     </MultiItemSolutionRunConfiguration>
   </MultiItemStartupConfigurations>

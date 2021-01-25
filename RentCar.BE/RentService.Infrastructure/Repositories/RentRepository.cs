@@ -22,9 +22,9 @@ namespace RentService.Infrastructure.Repositories
         public async Task<int> Add(Rent entity)
         {
             entity.RentalDate = DateTime.Now;
-            var sql = "INSERT INTO Rents (RentalDate, ReturnlDate, AmountForDays, NumberOfDays, " +
+            var sql = "INSERT INTO Rents (RentalDate, ReturnDate, AmountForDays, NumberOfDays, " +
                 "Status, Comment, EmployeeID, Employee, ClientID, Client, CarID, Car) " +
-                "Values (@RentalDate, @ReturnlDate, @AmountForDays, @NumberOfDays, @Status, @Comment," +
+                "Values (@RentalDate, @ReturnDate, @AmountForDays, @NumberOfDays, @Status, @Comment," +
                 "@EmployeeID, @Employee, @ClientID, @Client, @CarID, @Car);";
 
             try
@@ -36,7 +36,7 @@ namespace RentService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return 0;
             }
@@ -86,7 +86,7 @@ namespace RentService.Infrastructure.Repositories
 
         public async Task<int> Update(Rent entity)
         {
-            var sql = "UPDATE Rents SET ReturnlDate = @ReturnlDate, AmountForDays = @AmountForDays, NumberOfDays = @NumberOfDays," +
+            var sql = "UPDATE Rents SET ReturnDate = @ReturnDate, AmountForDays = @AmountForDays, NumberOfDays = @NumberOfDays," +
                 "Status = @Status, Comment = @Comment, EmployeeID = @EmployeeID, Employee = @Employee, " +
                 "ClientID = @ClientID, Client = @Client, CarID = @CarID, Car = @Car WHERE ID = @ID;";
 
