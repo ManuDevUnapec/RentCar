@@ -85,7 +85,7 @@ namespace ClientService.Infrastructure.Repositories
         public async Task<int> Update(Client entity)
         {
             var sql = "UPDATE Clients SET Name = @Name, IdentificationCard = @IdentificationCard, CardNumber = @CardNumber," +
-                "CreditLimit = @CreditLimit, Status = @Status, PersonType = @PersonType" +
+                "CreditLimit = @CreditLimit, Status = @Status, PersonType = @PersonType " +
                 "WHERE ID = @ID;";
 
             try
@@ -97,7 +97,7 @@ namespace ClientService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 return 0;
             }

@@ -8,6 +8,7 @@ namespace ClientService.Core.Entities
         public string IdentificationCard { get; set; }
         public string CardNumber { get; set; }
         public int CreditLimit { get; set; }
-        public object MyProperty { get; set; }
+        public string PersonType { get; set; }
+        public string Status { get; set; }
     }
 }

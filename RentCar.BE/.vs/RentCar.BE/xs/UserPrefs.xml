@@ -1,24 +1,30 @@
-﻿<Properties StartupConfiguration="{B00CA829-9C97-4D3F-99E4-4F307720DE7A}|Default">
-  <MonoDevelop.Ide.ItemProperties.ClientService.Infrastructure FirstBuild="True" />
+﻿<Properties StartupConfiguration="RentCar.BE">
   <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
-            <Node name="ClientService.Infrastructure" expanded="True">
-              <Node name="Repositories" selected="True" />
-            </Node>
+            <Node name="ClientService" expanded="True" />
+            <Node name="ClientService.Core" expanded="True" />
+            <Node name="ClientService.Infrastructure" expanded="True" />
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.ClientService PreferredExecutionTarget="/Applications/Safari.app" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.ClientService.Core FirstBuild="True" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.CarService PreferredExecutionTarget="/Applications/Safari.app" />
-  <MultiItemStartupConfigurations />
+  <MultiItemStartupConfigurations>
+    <MultiItemSolutionRunConfiguration Id="RentCar.BE" Name="RentCar.BE">
+      <Items>
+        <StartupItem ItemId="{B00CA829-9C97-4D3F-99E4-4F307720DE7A}" ItemName="CarService" ConfigurationId="Default" />
+        <StartupItem ItemId="{61613E9B-10A6-4063-84D3-793D42BD7E9A}" ItemName="ClientService" ConfigurationId="Default" />
+      </Items>
+    </MultiItemSolutionRunConfiguration>
+  </MultiItemStartupConfigurations>
 </Properties>
