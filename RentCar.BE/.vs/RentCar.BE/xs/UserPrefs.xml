@@ -5,12 +5,7 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
-            <Node name="InspectionService.Infrastructure" expanded="True">
-              <Node name="Repositories" expanded="True" />
-            </Node>
-            <Node name="RentService.Infrastructure" expanded="True">
-              <Node name="DependecyInjection.cs" selected="True" />
-            </Node>
+            <Node name="ClientService" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -26,7 +21,9 @@
   </DisabledProjects>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/InspectionService.Infrastructure/Repositories/InspectionRepository.cs" relfile="InspectionService.Infrastructure/Repositories/InspectionRepository.cs" line="42" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.CarService PreferredExecutionTarget="/Applications/Safari.app" />
   <MultiItemStartupConfigurations>

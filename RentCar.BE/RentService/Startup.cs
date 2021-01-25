@@ -39,7 +39,7 @@ namespace RentService
             //Dependecy Injections
             services.AddTransient<IRentRepository, RentRepository>();
 
-            //Adding the Dependecy Injections for the Client Infrastructue
+            //Adding the Dependecy Injections for the Rent Infrastructue
             services.AddInfrastructure();
         }
 

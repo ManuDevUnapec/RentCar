@@ -39,7 +39,7 @@ namespace EmployeeService
             //Dependecy Injections
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
 
-            //Adding the Dependecy Injections for the Client Infrastructue
+            //Adding the Dependecy Injections for the Employee Infrastructue
             services.AddInfrastructure();
         }
 

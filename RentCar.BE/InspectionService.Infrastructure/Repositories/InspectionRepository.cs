@@ -23,7 +23,7 @@ namespace InspectionService.Infrastructure.Repositories
         {
             entity.InspectionDate = DateTime.Now;
             var sql = "INSERT INTO Inspections (InspectionDate, Grated, Cat, RubberBack, " +
-                "GlassBreak, RubberStateOne, RubberStateTwo, RubberStateThree, RubberStateFour, AmountOfFuel" +
+                "GlassBreak, RubberStateOne, RubberStateTwo, RubberStateThree, RubberStateFour, AmountOfFuel," +
                 "Status,EmployeeID, Employee, ClientID, Client, CarID, Car) " +
                 "Values (@InspectionDate, @Grated, @Cat, @RubberBack, @GlassBreak, @RubberStateOne," +
                 "@RubberStateTwo, @RubberStateThree, @RubberStateFour, @AmountOfFuel, @Status, @EmployeeID, " +
@@ -88,7 +88,7 @@ namespace InspectionService.Infrastructure.Repositories
 
         public async Task<int> Update(Inspection entity)
         {
-            var sql = "UPDATE Inspections SET InspectionDate = @InspectionDate, Grated = @Grated, Cat = @Cat," +
+            var sql = "UPDATE Inspections SET Grated = @Grated, Cat = @Cat, InspectionDate = @InspectionDate," +
                 "RubberBack = @RubberBack, GlassBreak = @GlassBreak, RubberStateOne = @RubberStateOne, RubberStateTwo = @RubberStateTwo, " +
                 "RubberStateThree = @RubberStateThree, RubberStateFour = @RubberStateFour, AmountOfFuel = @AmountOfFuel, Status = @Status, " +
                 "EmployeeID = @EmployeeID, Employee = @Employee, ClientID = @ClientID, Client = @Client, " +
