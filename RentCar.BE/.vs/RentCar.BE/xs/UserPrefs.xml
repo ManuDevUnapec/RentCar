@@ -3,13 +3,16 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="RentCar.BE" expanded="True" />
+          <Node name="RentCar.BE" expanded="True">
+            <Node name="ClientService.Core" expanded="True" />
+          </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.ClientService.Core FirstBuild="True" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

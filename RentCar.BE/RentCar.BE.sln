@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCar.Core", "RentCar.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RentCar.Infrastructure", "RentCar.Infrastructure\RentCar.Infrastructure.csproj", "{71C0F11C-0B70-43B6-8B38-765B6D4AE81E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientService.Core", "ClientService.Core\ClientService.Core.csproj", "{B4004B45-861F-4121-90E1-5883396FFB90}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{71C0F11C-0B70-43B6-8B38-765B6D4AE81E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{71C0F11C-0B70-43B6-8B38-765B6D4AE81E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{71C0F11C-0B70-43B6-8B38-765B6D4AE81E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4004B45-861F-4121-90E1-5883396FFB90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4004B45-861F-4121-90E1-5883396FFB90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4004B45-861F-4121-90E1-5883396FFB90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4004B45-861F-4121-90E1-5883396FFB90}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
