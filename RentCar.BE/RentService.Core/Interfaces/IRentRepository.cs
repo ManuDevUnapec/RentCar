@@ -7,5 +7,6 @@ namespace RentService.Core.Interfaces
     public interface IRentRepository : IGenericRepository<Rent>
     {
         Task<int> UpdateByClient(int clientID, string clientName);
+        Task<int> UpdateByEmployee(int employeeID, string employeeName);
     }
 }

@@ -7,5 +7,6 @@ namespace InspectionService.Core.Interfaces
     public interface IInspectionRepository : IGenericInterface<Inspection>
     {
         Task<int> UpdateByClient(int clientID, string clientName);
+        Task<int> UpdateByEmployee(int employeeID, string employeeName);
     }
 }
