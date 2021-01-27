@@ -8,11 +8,15 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
+<<<<<<< HEAD
           <Node name="RentCar.BE" expanded="True">
             <Node name="RentService" expanded="True">
               <Node name="Startup.cs" selected="True" />
             </Node>
           </Node>
+=======
+          <Node name="RentCar.BE" expanded="True" selected="True" />
+>>>>>>> 0427437657f3e6bb807ed72181e96fa278fcccdc
         </State>
       </Pad>
     </Pads>

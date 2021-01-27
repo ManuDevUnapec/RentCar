@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ClientService.Core.Interfaces;
 using ClientService.Infrastructure;
 using ClientService.Infrastructure.Repositories;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +36,16 @@ namespace ClientService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ClientService", Version = "v1" });
             });
+
+            //MassTransit
+            services.AddMassTransit(config => {
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host(Configuration["Queues:RabbitMQ:DefaultHost:Host"]);
+                });
+            });
+
+            services.AddMassTransitHostedService();
 
             //Dependecy Injections
             services.AddTransient<IClientRepository, ClientRepository>();

@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using ClientService.Core.Entities;
 using ClientService.Core.Interfaces;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClientService.Controllers
@@ -11,10 +12,12 @@ namespace ClientService.Controllers
     public class ClientController : ControllerBase
     {
         private readonly IClientRepository _repository;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public ClientController(IClientRepository repository)
+        public ClientController(IClientRepository repository, IPublishEndpoint publishEndpoint)
         {
             _repository = repository;
+            _publishEndpoint = publishEndpoint;
         }
 
         [HttpGet]
@@ -51,6 +54,9 @@ namespace ClientService.Controllers
             var response = await _repository.Update(client);
             if (response != 0)
             {
+                //Sending the object to the queqe
+                await _publishEndpoint.Publish<Client>(client);
+
                 return Ok("Updated successfully");
             }
             else

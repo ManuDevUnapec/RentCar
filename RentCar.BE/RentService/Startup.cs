@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -14,6 +15,7 @@ using Microsoft.OpenApi.Models;
 using RentService.Core.Interfaces;
 using RentService.Infrastructure;
 using RentService.Infrastructure.Repositories;
+using RentService.Queues;
 
 namespace RentService
 {
@@ -35,6 +37,22 @@ namespace RentService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RentService", Version = "v1" });
             });
+
+            //MassTransit
+            services.AddMassTransit(config => {
+                config.AddConsumer<ClientConsumer>();
+
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host(Configuration["Queues:RabbitMQ:DefaultHost:Host"]);
+
+                    cfg.ReceiveEndpoint(Configuration["Queues:RabbitMQ:DefaultHost:ClientQueue"], c => {
+                        c.ConfigureConsumer<ClientConsumer>(ctx);
+                    });
+                });
+            });
+
+            services.AddMassTransitHostedService();
 
             //Dependecy Injections
             services.AddTransient<IRentRepository, RentRepository>();
