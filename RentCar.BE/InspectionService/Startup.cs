@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using InspectionService.Core.Interfaces;
 using InspectionService.Infrastructure;
 using InspectionService.Infrastructure.Repositories;
+using InspectionService.Queues;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +37,22 @@ namespace InspectionService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "InspectionService", Version = "v1" });
             });
+
+            //MassTransit
+            services.AddMassTransit(config => {
+                config.AddConsumer<ClientConsumer>();
+
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host(Configuration["Queues:RabbitMQ:DefaultHost:Host"]);
+
+                    cfg.ReceiveEndpoint(Configuration["Queues:RabbitMQ:DefaultHost:ClientQueue"], c => {
+                        c.ConfigureConsumer<ClientConsumer>(ctx);
+                    });
+                });
+            });
+
+            services.AddMassTransitHostedService();
 
             //Dependecy Injections
             services.AddTransient<IInspectionRepository, InspectionRepository>();

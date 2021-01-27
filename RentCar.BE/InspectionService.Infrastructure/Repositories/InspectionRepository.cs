@@ -108,5 +108,24 @@ namespace InspectionService.Infrastructure.Repositories
                 return 0;
             }
         }
+
+        public async Task<int> UpdateByClient(int clientID, string clientName)
+        {
+            var sql = $"UPDATE Inspections SET ClientID = {clientID}, Client = '{clientName}' WHERE ClientID = {clientID};";
+
+            try
+            {
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("InspectionConnection")))
+                {
+                    connection.Open();
+                    var affectedRows = await connection.ExecuteAsync(sql);
+                    return affectedRows;
+                }
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
     }
 }
