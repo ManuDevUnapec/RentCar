@@ -54,7 +54,7 @@ namespace ClientService.Controllers
             var response = await _repository.Update(client);
             if (response != 0)
             {
-                //Sending the object to the queqe
+                //Sending the object to the client exchange
                 await _publishEndpoint.Publish<Client>(client);
 
                 return Ok("Updated successfully");

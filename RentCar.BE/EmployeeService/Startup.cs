@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using EmployeeService.Core.Interfaces;
 using EmployeeService.Infrastructure;
 using EmployeeService.Infrastructure.Repositories;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -35,6 +36,16 @@ namespace EmployeeService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EmployeeService", Version = "v1" });
             });
+
+            //MassTransit
+            services.AddMassTransit(config => {
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host(Configuration["Queues:RabbitMQ:DefaultHost:Host"]);
+                });
+            });
+
+            services.AddMassTransitHostedService();
 
             //Dependecy Injections
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();

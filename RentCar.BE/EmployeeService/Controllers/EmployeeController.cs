@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using EmployeeService.Core.Entities;
 using EmployeeService.Core.Interfaces;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EmployeeService.Controllers
@@ -12,10 +13,12 @@ namespace EmployeeService.Controllers
     {
      
         private readonly IEmployeeRepository _repository;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public EmployeeController(IEmployeeRepository repository)
+        public EmployeeController(IEmployeeRepository repository, IPublishEndpoint publishEndpoint)
         {
             _repository = repository;
+            _publishEndpoint = publishEndpoint;
         }
 
         [HttpGet]
@@ -52,6 +55,9 @@ namespace EmployeeService.Controllers
             var response = await _repository.Update(employee);
             if (response != 0)
             {
+                //Sending the object to the employee exchange
+                await _publishEndpoint.Publish<Employee>(employee);
+
                 return Ok("Updated successfully");
             }
             else

@@ -41,13 +41,19 @@ namespace RentService
             //MassTransit
             services.AddMassTransit(config => {
                 config.AddConsumer<ClientConsumer>();
+                config.AddConsumer<EmployeeConsumer>();
 
                 config.UsingRabbitMq((ctx, cfg) =>
                 {
                     cfg.Host(Configuration["Queues:RabbitMQ:DefaultHost:Host"]);
 
-                    cfg.ReceiveEndpoint(Configuration["Queues:RabbitMQ:DefaultHost:ClientQueue"], c => {
+                    cfg.ReceiveEndpoint(Configuration["Queues:RabbitMQ:DefaultHost:ClientQueue"], c =>
+                    {
                         c.ConfigureConsumer<ClientConsumer>(ctx);
+                    });
+
+                    cfg.ReceiveEndpoint(Configuration["Queues:RabbitMQ:DefaultHost:EmployeeQueue"], c => {
+                        c.ConfigureConsumer<EmployeeConsumer>(ctx);
                     });
                 });
             });

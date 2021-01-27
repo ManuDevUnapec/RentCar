@@ -123,5 +123,24 @@ namespace RentService.Infrastructure.Repositories
                 return 0;
             }
         }
+
+        public async Task<int> UpdateByEmployee(int employeeID, string employeeName)
+        {
+            var sql = $"UPDATE Rents SET EmployeeID = {employeeID}, Employee = '{employeeName}' WHERE EmployeeID = {employeeID};";
+
+            try
+            {
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("RentConnection")))
+                {
+                    connection.Open();
+                    var affectedRows = await connection.ExecuteAsync(sql);
+                    return affectedRows;
+                }
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
     }
 }
