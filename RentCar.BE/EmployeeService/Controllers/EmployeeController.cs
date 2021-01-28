@@ -28,7 +28,7 @@ namespace EmployeeService.Controllers
             return Ok(employees);
         }
 
-        [HttpGet("GetByID/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             var employee = await _repository.Get(id);
@@ -66,7 +66,7 @@ namespace EmployeeService.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var response = await _repository.Delete(id);

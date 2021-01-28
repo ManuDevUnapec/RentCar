@@ -24,7 +24,7 @@ namespace CarService.Controllers
             return Ok(brands);
         }
 
-        [HttpGet("GetByID/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             var brand = await _repository.Get(id);
@@ -59,7 +59,7 @@ namespace CarService.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var response = await _repository.Delete(id);
