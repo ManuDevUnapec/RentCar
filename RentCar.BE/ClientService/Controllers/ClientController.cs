@@ -27,7 +27,7 @@ namespace ClientService.Controllers
             return Ok(clients);
         }
 
-        [HttpGet("GetByID/{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
             var client = await _repository.Get(id);
@@ -65,7 +65,7 @@ namespace ClientService.Controllers
             }
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             var response = await _repository.Delete(id);
