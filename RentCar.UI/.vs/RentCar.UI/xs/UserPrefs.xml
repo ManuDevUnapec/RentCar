@@ -1,0 +1,30 @@
+﻿<Properties StartupConfiguration="{8A265033-2DA1-4791-81F6-3526F5BB7E11}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RentCar.UI/Pages/_Host.cshtml">
+    <Files>
+      <File FileName="RentCar.UI/Shared/NavMenu.razor" Line="17" Column="39" />
+      <File FileName="RentCar.UI/Shared/MainLayout.razor" Line="1" Column="1" />
+      <File FileName="RentCar.UI/Pages/_Host.cshtml" Line="15" Column="47" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="RentCar.UI" expanded="True">
+            <Node name="RentCar.UI" expanded="True">
+              <Node name="Pages" expanded="True">
+                <Node name="_Host.cshtml" selected="True" />
+              </Node>
+              <Node name="Shared" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.RentCar.UI PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
