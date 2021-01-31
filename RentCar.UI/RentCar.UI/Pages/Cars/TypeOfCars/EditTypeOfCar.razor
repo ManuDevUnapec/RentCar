@@ -1,0 +1,61 @@
+﻿@page "/edit_type_of_car/{id:int}"
+
+@using RentCar.UI.Data.Cars.TypeOfCars.Models;
+@using RentCar.UI.Data.Cars.TypeOfCars.Services;
+
+@inject TypeOfCarService TypeOfCarService
+@inject NavigationManager NavigationManager
+
+<EditForm Model="@typeOfCar" OnValidSubmit="@HandleValidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <input @bind-value="typeOfCar.ID" type="hidden" />
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <InputText id="description" class="form-control" @bind-Value="typeOfCar.Description" />
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status</label>
+            <InputSelect @bind-Value="typeOfCar.Status" id="status" class="form-control valid">
+                @foreach (var status in Enum.GetValues(typeof(TypeOfCarStauts)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </InputSelect>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+
+    private TypeOfCar typeOfCar = new TypeOfCar();
+
+    protected override async Task OnInitializedAsync()
+    {
+        typeOfCar = await TypeOfCarService.GetByID(ID);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            await TypeOfCarService.Put(typeOfCar);
+            NavigationManager.NavigateTo("type_of_cars");
+
+        }
+        catch (Exception e)
+        {
+            //Redirectionate to error page
+            //NavigationManager.NavigateTo("error");
+        }
+    }
+}

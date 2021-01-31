@@ -1,0 +1,32 @@
+﻿<Properties StartupConfiguration="{8A265033-2DA1-4791-81F6-3526F5BB7E11}|Default">
+  <MonoDevelop.Ide.Workbench>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="RentCar.UI" expanded="True">
+            <Node name="RentCar.UI" expanded="True">
+              <Node name="Data" expanded="True">
+                <Node name="Cars" expanded="True">
+                  <Node name="TypeOfCars" expanded="True">
+                    <Node name="Models" expanded="True" />
+                    <Node name="Services" expanded="True" />
+                  </Node>
+                </Node>
+              </Node>
+              <Node name="Pages" expanded="True">
+                <Node name="Cars" expanded="True" />
+              </Node>
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.ItemProperties.RentCar.UI PreferredExecutionTarget="/Applications/Safari.app" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>

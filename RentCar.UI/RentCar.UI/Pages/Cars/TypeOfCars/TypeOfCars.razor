@@ -1,0 +1,72 @@
+﻿@page "/type_of_cars"
+
+@using RentCar.UI.Data.Cars.TypeOfCars.Models;
+@using RentCar.UI.Data.Cars.TypeOfCars.Services;
+@inject TypeOfCarService TypeOfCarService
+
+<h1>Type of cars!</h1>
+
+Manage the type of cars...!
+
+<div style="font-size: 25px; display: flex; justify-content: flex-end;">
+    <NavLink href="create_type_of_cars">
+        <span class="fas fa-plus-circle" aria-hidden="true" style="font-size: 25px;"></span>
+    </NavLink>
+</div>
+
+@if (typeOfCars == null)
+{
+<p><em>Loading...</em></p>
+}
+else
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th scope="col" class="d-flex justify-content-center">Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var typeOfCar in typeOfCars)
+        {
+            <tr>
+                <td>@typeOfCar.ID</td>
+                <td>@typeOfCar.Description</td>
+                <td>@typeOfCar.Status</td>
+                <td>
+                    <div class="d-flex flex-wrap justify-content-between">
+                        <a href="edit_type_of_car/@typeOfCar.ID" style="cursor: pointer; color: black;"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                        <a href="type_of_car/@typeOfCar.ID" style="cursor: pointer; color: black;"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a @onclick="() => Delete(typeOfCar.ID)" style="cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+}
+
+
+@code {
+    private List<TypeOfCar> typeOfCars;
+
+    protected override async Task OnInitializedAsync()
+    {
+        typeOfCars = await GetAll();
+    }
+
+    private async Task<List<TypeOfCar>> GetAll()
+    {
+        return typeOfCars = await TypeOfCarService.GetAll();
+    }
+
+    private async Task Delete(int id)
+    {
+        await TypeOfCarService.Delete(id);
+        typeOfCars = await GetAll();
+    }
+}
