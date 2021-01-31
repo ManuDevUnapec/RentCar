@@ -1,0 +1,45 @@
+﻿@page "/type_of_car/{id:int}"
+
+@using RentCar.UI.Data.Cars.TypeOfCars.Models;
+@using RentCar.UI.Data.Cars.TypeOfCars.Services;
+
+@inject TypeOfCarService TypeOfCarService
+
+
+<EditForm Model="@typeOfCar">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+
+        <div class="form-group">
+            <label for="description">Description</label>
+            <InputText id="description" class="form-control" @bind-Value="typeOfCar.Description" disabled />
+        </div>
+
+        <div class="form-group">
+            <label for="status">Status</label>
+            <InputSelect @bind-Value="typeOfCar.Status" id="status" class="form-control valid" disabled>
+                @foreach (var status in Enum.GetValues(typeof(TypeOfCarStauts)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </InputSelect>
+        </div>
+
+    </div>
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+
+    private TypeOfCar typeOfCar = new TypeOfCar();
+
+    protected override async Task OnInitializedAsync()
+    {
+        typeOfCar = await TypeOfCarService.GetByID(ID);
+    }
+}

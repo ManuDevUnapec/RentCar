@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RentCar.UI.Data;
+using RentCar.UI.Data.Cars.TypeOfCars.Services;
 
 namespace RentCar.UI
 {
@@ -28,6 +29,14 @@ namespace RentCar.UI
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
+
+            //Http client Factory
+            services.AddHttpClient();
+            services.AddHttpClient("Cars", config => {
+                config.BaseAddress = new Uri(Configuration["ApiGateway:RentCar:Cars"]);
+            });
+
+            services.AddSingleton<TypeOfCarService>();
             services.AddSingleton<WeatherForecastService>();
         }
 

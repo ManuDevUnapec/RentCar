@@ -1,19 +1,21 @@
 ﻿<Properties StartupConfiguration="{8A265033-2DA1-4791-81F6-3526F5BB7E11}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="RentCar.UI/Pages/_Host.cshtml">
-    <Files>
-      <File FileName="RentCar.UI/Shared/NavMenu.razor" Line="17" Column="39" />
-      <File FileName="RentCar.UI/Shared/MainLayout.razor" Line="1" Column="1" />
-      <File FileName="RentCar.UI/Pages/_Host.cshtml" Line="15" Column="47" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.UI" expanded="True">
             <Node name="RentCar.UI" expanded="True">
-              <Node name="Pages" expanded="True">
-                <Node name="_Host.cshtml" selected="True" />
+              <Node name="Data" expanded="True">
+                <Node name="Cars" expanded="True">
+                  <Node name="TypeOfCars" expanded="True">
+                    <Node name="Models" expanded="True" />
+                    <Node name="Services" expanded="True" />
+                  </Node>
+                </Node>
               </Node>
-              <Node name="Shared" expanded="True" />
+              <Node name="Pages" expanded="True">
+                <Node name="Cars" expanded="True" />
+              </Node>
             </Node>
           </Node>
         </State>

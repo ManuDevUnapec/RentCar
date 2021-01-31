@@ -9,7 +9,7 @@
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/api/rentcar_car/{everything}",
+      "UpstreamPathTemplate": "/api_gateway/rentcar_car/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     },
 
@@ -22,7 +22,7 @@
           "Port": 44231
         }
       ],
-      "UpstreamPathTemplate": "/api/rentcar_client/{everything}",
+      "UpstreamPathTemplate": "/api_gateway/rentcar_client/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     },
 
@@ -35,7 +35,7 @@
           "Port": 20090
         }
       ],
-      "UpstreamPathTemplate": "/api/rentcar_employee/{everything}",
+      "UpstreamPathTemplate": "/api_gateway/rentcar_employee/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     },
 
@@ -48,7 +48,7 @@
           "Port": 56694
         }
       ],
-      "UpstreamPathTemplate": "/api/rentcar_inspection/{everything}",
+      "UpstreamPathTemplate": "/api_gateway/rentcar_inspection/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     },
 
@@ -61,7 +61,7 @@
           "Port": 56327
         }
       ],
-      "UpstreamPathTemplate": "/api/rentcar_rent/{everything}",
+      "UpstreamPathTemplate": "/api_gateway/rentcar_rent/{everything}",
       "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ]
     }
   ],
