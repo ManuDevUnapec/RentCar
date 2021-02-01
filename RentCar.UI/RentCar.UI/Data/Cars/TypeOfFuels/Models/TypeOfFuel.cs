@@ -1,15 +1,15 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace RentCar.UI.Data.Cars.TypeOfCars.Models
+namespace RentCar.UI.Data.Cars.TypeOfFuels.Models
 {
-    public enum TypeOfCarStauts
+    public enum TypeOfFuelStauts
     {
-        Nuevo,
-        Viejo
+        Premium,
+        Regular
     }
 
-    public class TypeOfCar
+    public class TypeOfFuel
     {
         public int ID { get; set; }
         [Required]

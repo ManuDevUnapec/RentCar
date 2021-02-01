@@ -1,0 +1,72 @@
+﻿@page "/type_of_fuels"
+
+@using RentCar.UI.Data.Cars.TypeOfFuels.Models;
+@using RentCar.UI.Data.Cars.TypeOfFuels.Services;
+@inject TypeOfFuelService TypeOfFuelService
+
+<h1>Type of fuels!</h1>
+
+Manage the type of fuels...!
+
+<div style="font-size: 25px; display: flex; justify-content: flex-end;">
+    <NavLink href="create_type_of_fuels">
+        <span class="fas fa-plus-circle" aria-hidden="true" style="font-size: 25px;"></span>
+    </NavLink>
+</div>
+
+@if (typeOfFuels == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th scope="col" class="d-flex justify-content-center">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var typeOfFuel in typeOfFuels)
+            {
+                <tr>
+                    <td>@typeOfFuel.ID</td>
+                    <td>@typeOfFuel.Description</td>
+                    <td>@typeOfFuel.Status</td>
+                    <td>
+                        <div class="d-flex flex-wrap justify-content-between">
+                            <a href="edit_type_of_fuel/@typeOfFuel.ID" style="cursor: pointer; color: black;"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                            <a href="type_of_fuel/@typeOfFuel.ID" style="cursor: pointer; color: black;"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a @onclick="() => Delete(typeOfFuel.ID)" style="cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
+@code {
+    private List<TypeOfFuel> typeOfFuels;
+
+    protected override async Task OnInitializedAsync()
+    {
+        typeOfFuels = await GetAll();
+    }
+
+    private async Task<List<TypeOfFuel>> GetAll()
+    {
+        return typeOfFuels = await TypeOfFuelService.GetAll();
+    }
+
+    private async Task Delete(int id)
+    {
+        await TypeOfFuelService.Delete(id);
+        typeOfFuels = await GetAll();
+    }
+}
