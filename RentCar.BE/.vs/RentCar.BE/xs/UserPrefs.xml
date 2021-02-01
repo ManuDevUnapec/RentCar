@@ -3,8 +3,8 @@
   <MonoDevelop.Ide.Workbench ActiveDocument="ClientService/Program.cs">
     <Files>
       <File FileName="RentService/Properties/launchSettings.json" Line="26" Column="48" />
-      <File FileName="CarService/Controllers/TypeOfCarController.cs" Line="17" Column="38" />
-      <File FileName="ClientService/Program.cs" Line="16" Column="1" />
+      <File FileName="CarService/Controllers/TypeOfCarController.cs" />
+      <File FileName="ClientService/Program.cs" Line="13" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">

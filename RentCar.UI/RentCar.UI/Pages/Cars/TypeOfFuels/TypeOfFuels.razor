@@ -61,7 +61,7 @@ else
 
     private async Task<List<TypeOfFuel>> GetAll()
     {
-        return typeOfFuels = await TypeOfFuelService.GetAll();
+        return await TypeOfFuelService.GetAll();
     }
 
     private async Task Delete(int id)

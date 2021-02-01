@@ -1,0 +1,66 @@
+﻿@page "/edit_brand/{id:int}"
+
+@using RentCar.UI.Data.Cars.Brands.Models;
+@using RentCar.UI.Data.Cars.Brands.Services;
+
+@inject BrandService BrandService
+@inject NavigationManager NavigationManager
+
+<h1>Brands !</h1>
+<strong style="display: inline;">Edit:</strong> <p style="display: inline;">@brand.Description</p>
+
+<hr />
+
+<EditForm Model="@brand" OnValidSubmit="@HandleValidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <input @bind-value="brand.ID" type="hidden" />
+
+        <div class="form-group">
+            <label for="brand-description">Description</label>
+            <InputText id="brand-description" class="form-control" @bind-Value="brand.Description" />
+        </div>
+
+        <div class="form-group">
+            <label for="brand-status">Status</label>
+            <InputSelect @bind-Value="brand.Status" id="brand-status" class="form-control valid">
+                @foreach (var status in Enum.GetValues(typeof(BrandStatus)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </InputSelect>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+
+    private Brand brand = new Brand();
+
+    protected override async Task OnInitializedAsync()
+    {
+        brand = await BrandService.GetByID(ID);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            await BrandService.Put(brand);
+            NavigationManager.NavigateTo("brands");
+
+        }
+        catch (Exception e)
+        {
+            //Redirectionate to error page
+            //NavigationManager.NavigateTo("error");
+        }
+    }
+}

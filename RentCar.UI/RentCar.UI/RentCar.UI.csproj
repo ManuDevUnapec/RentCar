@@ -15,5 +15,9 @@
     <Folder Include="Data\Cars\TypeOfFuels\" />
     <Folder Include="Data\Cars\TypeOfFuels\Models\" />
     <Folder Include="Data\Cars\TypeOfFuels\Services\" />
+    <Folder Include="Data\Cars\Brands\" />
+    <Folder Include="Data\Cars\Brands\Models\" />
+    <Folder Include="Data\Cars\Brands\Services\" />
+    <Folder Include="Pages\Cars\Brands\" />
   </ItemGroup>
 </Project>

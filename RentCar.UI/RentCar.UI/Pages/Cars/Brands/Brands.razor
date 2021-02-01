@@ -1,0 +1,72 @@
+﻿@page "/brands"
+
+@using RentCar.UI.Data.Cars.Brands.Models;
+@using RentCar.UI.Data.Cars.Brands.Services;
+@inject BrandService BrandService
+
+<h1>Brands!</h1>
+
+Manage the brands...!
+
+<div style="font-size: 25px; display: flex; justify-content: flex-end;">
+    <NavLink href="create_brand">
+        <span class="fas fa-plus-circle" aria-hidden="true" style="font-size: 25px;"></span>
+    </NavLink>
+</div>
+
+@if (brands == null)
+{
+<p><em>Loading...</em></p>
+}
+else
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th scope="col" class="d-flex justify-content-center">Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var brand in brands)
+        {
+            <tr>
+                <td>@brand.ID</td>
+                <td>@brand.Description</td>
+                <td>@brand.Status</td>
+                <td>
+                    <div class="d-flex flex-wrap justify-content-between">
+                        <a href="edit_brand/@brand.ID" style="cursor: pointer; color: black;"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                        <a href="brand/@brand.ID" style="cursor: pointer; color: black;"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a @onclick="() => Delete(brand.ID)" style="cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+}
+
+
+@code {
+    private List<Brand> brands;
+
+    protected override async Task OnInitializedAsync()
+    {
+        brands = await GetAll();
+    }
+
+    private async Task<List<Brand>> GetAll()
+    {
+        return await BrandService.GetAll();
+    }
+
+    private async Task Delete(int id)
+    {
+        await BrandService.Delete(id);
+        brands = await GetAll();
+    }
+}
