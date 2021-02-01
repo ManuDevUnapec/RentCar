@@ -1,0 +1,66 @@
+﻿@page "/edit_type_of_fuel/{id:int}"
+
+@using RentCar.UI.Data.Cars.TypeOfFuels.Models;
+@using RentCar.UI.Data.Cars.TypeOfFuels.Services;
+
+@inject TypeOfFuelService TypeOfFuelService
+@inject NavigationManager NavigationManager
+
+<h1>Type of fuels!</h1>
+<strong style="display: inline;">Edit:</strong> <p style="display: inline;">@typeOfFuel.Description</p>
+
+<hr />
+
+<EditForm Model="@typeOfFuel" OnValidSubmit="@HandleValidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <input @bind-value="typeOfFuel.ID" type="hidden" />
+
+        <div class="form-group">
+            <label for="fuel-description">Description</label>
+            <InputText id="fuel-description" class="form-control" @bind-Value="typeOfFuel.Description" />
+        </div>
+
+        <div class="form-group">
+            <label for="fuel-status">Status</label>
+            <InputSelect @bind-Value="typeOfFuel.Status" id="fuel-status" class="form-control valid">
+                @foreach (var status in Enum.GetValues(typeof(TypeOfFuelStauts)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </InputSelect>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+
+    private TypeOfFuel typeOfFuel = new TypeOfFuel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        typeOfFuel = await TypeOfFuelService.GetByID(ID);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            await TypeOfFuelService.Put(typeOfFuel);
+            NavigationManager.NavigateTo("type_of_fuels");
+
+        }
+        catch (Exception e)
+        {
+            //Redirectionate to error page
+            //NavigationManager.NavigateTo("error");
+        }
+    }
+}

@@ -6,6 +6,8 @@
 @inject TypeOfCarService TypeOfCarService
 @inject NavigationManager NavigationManager
 
+<h1>Create a Type of car!</h1>
+
 <EditForm Model="@typeOfCar" OnValidSubmit="@HandleValidSubmit">
 
     <DataAnnotationsValidator />
@@ -14,13 +16,13 @@
     <div class="form-group">
 
         <div class="form-group">
-            <label for="description">Description</label>
-            <InputText id="description" class="form-control" @bind-Value="typeOfCar.Description" />
+            <label for="fuel-description">Description</label>
+            <InputText id="fuel-description" class="form-control" @bind-Value="typeOfCar.Description" />
         </div>
 
         <div class="form-group">
-            <label for="status">Status</label>
-            <InputSelect @bind-Value="typeOfCar.Status" id="status" class="form-control valid">
+            <label for="fuel-status">Status</label>
+            <InputSelect @bind-Value="typeOfCar.Status" id="fuel-status" class="form-control valid">
                 <option>Select</option>
                 @foreach (var status in Enum.GetValues(typeof(TypeOfCarStauts)))
                 {

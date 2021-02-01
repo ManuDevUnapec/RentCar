@@ -1,0 +1,50 @@
+﻿@page "/type_of_fuel/{id:int}"
+
+@using RentCar.UI.Data.Cars.TypeOfFuels.Models;
+@using RentCar.UI.Data.Cars.TypeOfFuels.Services;
+
+@inject TypeOfFuelService TypeOfFuelService
+
+<h1>Type of fuels!</h1>
+<strong style="display: inline;">View:</strong> <p style="display: inline;">@typeOfFuel.Description</p>
+
+<hr />
+
+
+<EditForm Model="@typeOfFuel">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+
+        <div class="form-group">
+            <label for="fuel-description">Description</label>
+            <InputText id="fuel-description" class="form-control" @bind-Value="typeOfFuel.Description" disabled />
+        </div>
+
+        <div class="form-group">
+            <label for="fuel-status">Status</label>
+            <InputSelect @bind-Value="typeOfFuel.Status" id="fuel-status" class="form-control valid" disabled>
+                @foreach (var status in Enum.GetValues(typeof(TypeOfFuelStauts)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </InputSelect>
+        </div>
+
+    </div>
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+
+    private TypeOfFuel typeOfFuel = new TypeOfFuel();
+
+    protected override async Task OnInitializedAsync()
+    {
+        typeOfFuel = await TypeOfFuelService.GetByID(ID);
+    }
+}
