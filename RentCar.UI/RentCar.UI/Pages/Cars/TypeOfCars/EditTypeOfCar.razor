@@ -6,6 +6,11 @@
 @inject TypeOfCarService TypeOfCarService
 @inject NavigationManager NavigationManager
 
+<h1>Type of cars!</h1>
+<strong style="display: inline;">Edit:</strong> <p style="display: inline;">@typeOfCar.Description</p>
+
+<hr />
+
 <EditForm Model="@typeOfCar" OnValidSubmit="@HandleValidSubmit">
 
     <DataAnnotationsValidator />
