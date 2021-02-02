@@ -1,0 +1,85 @@
+﻿@page "/edit_model/{id:int}"
+
+@using RentCar.UI.Data.Cars.Brands.Models;
+@using RentCar.UI.Data.Cars.Models.Models;
+@using RentCar.UI.Data.Cars.Models.Services;
+@using RentCar.UI.Data.Cars.Brands.Services;
+
+@inject ModelService ModelService
+@inject BrandService BrandService
+@inject NavigationManager NavigationManager
+
+<h1>Models !</h1>
+<strong style="display: inline;">Edit:</strong> <p style="display: inline;">@model.Description</p>
+
+<hr />
+
+<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+        <input @bind-value="model.ID" type="hidden" />
+
+        <div class="form-group">
+            <label for="model-description">Description</label>
+            <InputText id="model-description" class="form-control" @bind-Value="model.Description" />
+        </div>
+
+        <div class="form-group">
+            <label for="model-brand">Brand</label>
+            <InputSelect @bind-Value="model.BrandID" id="model-brand" class="form-control valid">
+                @if (Brands is not null)
+                {
+                    <option>Select</option>
+                    @foreach (var brand in Brands)
+                    {
+                        <option value="@brand.ID">@brand.Description</option>
+                    }
+                }
+            </InputSelect>
+        </div>
+
+        <div class="form-group">
+            <label for="model-status">Status</label>
+            <InputSelect @bind-Value="model.Status" id="model-status" class="form-control valid">
+                @foreach (var status in Enum.GetValues(typeof(ModelStatus)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </InputSelect>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+
+    public List<Brand> Brands { get; set; }
+    private Model model = new Model();
+
+    protected override async Task OnInitializedAsync()
+    {
+        model = await ModelService.GetByID(ID);
+        Brands = await BrandService.GetAll();
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            await ModelService.Put(model);
+            NavigationManager.NavigateTo("models");
+
+        }
+        catch (Exception e)
+        {
+            //Redirectionate to error page
+            //NavigationManager.NavigateTo("error");
+        }
+    }
+}

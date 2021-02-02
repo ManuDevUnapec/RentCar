@@ -1,0 +1,74 @@
+﻿@page "/models"
+
+@using RentCar.UI.Data.Cars.Models.Models;
+@using RentCar.UI.Data.Cars.Models.Services;
+@inject ModelService ModelService
+
+<h1>Models!</h1>
+
+Manage the models...!
+
+<div style="font-size: 25px; display: flex; justify-content: flex-end;">
+    <NavLink href="create_model">
+        <span class="fas fa-plus-circle" aria-hidden="true" style="font-size: 25px;"></span>
+    </NavLink>
+</div>
+
+@if (models == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Brand</th>
+                <th>Status</th>
+                <th scope="col" class="d-flex justify-content-center">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var model in models)
+            {
+                <tr>
+                    <td>@model.ID</td>
+                    <td>@model.Description</td>
+                    <td>@model.Brand</td>
+                    <td>@model.Status</td>
+                    <td>
+                        <div class="d-flex flex-wrap justify-content-between">
+                            <a href="edit_model/@model.ID" style="cursor: pointer; color: black;"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                            <a href="model/@model.ID" style="cursor: pointer; color: black;"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a @onclick="() => Delete(model.ID)" style="cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
+@code {
+    private List<Model> models;
+
+    protected override async Task OnInitializedAsync()
+    {
+        models = await GetAll();
+    }
+
+    private async Task<List<Model>> GetAll()
+    {
+        return await ModelService.GetAll();
+    }
+
+    private async Task Delete(int id)
+    {
+        await ModelService.Delete(id);
+        models = await GetAll();
+    }
+}

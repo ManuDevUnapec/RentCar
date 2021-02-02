@@ -53,7 +53,8 @@ namespace CarService.Infrastructure.Repositories
 
         public async Task<Model> Get(int id)
         {
-            var sql = "SELECT * FROM Model WHERE ID = @ID;";
+            var sql = "SELECT M.ID, m.[Description], m.[Status], b.[Description] as Brand, b.ID as BrandID " +
+                    "from Model m INNER JOIN Brand b on m.BrandID = b.ID WHERE m.ID = @ID;";
             using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
             {
                 connection.Open();
@@ -66,7 +67,8 @@ namespace CarService.Infrastructure.Repositories
         {
             try
             {
-                var sql = "SELECT * FROM Model;";
+                var sql = "SELECT M.ID, m.[Description], m.[Status], b.[Description] as Brand, b.ID as BrandID " +
+                    "from Model m INNER JOIN Brand b on m.BrandID = b.ID;";
                 using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
                 {
                     connection.Open();
