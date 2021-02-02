@@ -42,6 +42,7 @@ namespace RentService
             services.AddMassTransit(config => {
                 config.AddConsumer<ClientConsumer>();
                 config.AddConsumer<EmployeeConsumer>();
+                config.AddConsumer<CarConsumer>();
 
                 config.UsingRabbitMq((ctx, cfg) =>
                 {
@@ -54,6 +55,10 @@ namespace RentService
 
                     cfg.ReceiveEndpoint(Configuration["Queues:RabbitMQ:DefaultHost:EmployeeQueue"], c => {
                         c.ConfigureConsumer<EmployeeConsumer>(ctx);
+                    });
+
+                    cfg.ReceiveEndpoint(Configuration["Queues:RabbitMQ:DefaultHost:CarQueue"], c => {
+                        c.ConfigureConsumer<CarConsumer>(ctx);
                     });
                 });
             });
