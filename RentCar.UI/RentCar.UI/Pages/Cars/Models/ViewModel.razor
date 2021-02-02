@@ -1,0 +1,55 @@
+﻿@page "/model/{id:int}"
+
+@using RentCar.UI.Data.Cars.Models.Models;
+@using RentCar.UI.Data.Cars.Models.Services;
+
+@inject ModelService ModelService
+
+<h1>Models !</h1>
+<strong style="display: inline;">View:</strong> <p style="display: inline;">@model.Description</p>
+
+<hr />
+
+<EditForm Model="@model">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+
+        <div class="form-group">
+            <label for="model-description">Description</label>
+            <InputText id="model-description" class="form-control" @bind-Value="model.Description" disabled />
+        </div>
+
+        <div class="form-group">
+            <label for="model-brand">Brand</label>
+            <InputText id="model-brand" class="form-control" @bind-Value="model.Brand" disabled />
+        </div>
+
+        <div class="form-group">
+            <label for="model-status">Status</label>
+            <InputSelect @bind-Value="model.Status" id="model-status" class="form-control" disabled>
+                @foreach (var status in Enum.GetValues(typeof(ModelStatus)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </InputSelect>
+        </div>
+
+    </div>
+
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+
+    private Model model = new Model();
+
+    protected override async Task OnInitializedAsync()
+    {
+        model = await ModelService.GetByID(ID);
+    }
+}
