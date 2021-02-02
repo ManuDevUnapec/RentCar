@@ -1,6 +1,7 @@
 using CarService.Core.Interfaces;
 using CarService.Infrastructure;
 using CarService.Infrastructure.Repositories;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,6 +28,16 @@ namespace CarService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CarService", Version = "v1" });
             });
+
+            //MassTransit
+            services.AddMassTransit(config => {
+                config.UsingRabbitMq((ctx, cfg) =>
+                {
+                    cfg.Host(Configuration["Queues:RabbitMQ:DefaultHost:Host"]);
+                });
+            });
+
+            services.AddMassTransitHostedService();
 
             //Dependecy Injections
             services.AddTransient<ICarRepository, CarRepository>();
