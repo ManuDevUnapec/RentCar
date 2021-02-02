@@ -8,5 +8,6 @@ namespace InspectionService.Core.Interfaces
     {
         Task<int> UpdateByClient(int clientID, string clientName);
         Task<int> UpdateByEmployee(int employeeID, string employeeName);
+        Task<int> UpdateByCar(int carID, string carName);
     }
 }

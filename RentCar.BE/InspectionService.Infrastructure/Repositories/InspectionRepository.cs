@@ -146,5 +146,24 @@ namespace InspectionService.Infrastructure.Repositories
                 return 0;
             }
         }
+
+        public async Task<int> UpdateByCar(int carID, string carName)
+        {
+            var sql = $"UPDATE Inspections SET CarID = {carID}, Car = '{carName}' WHERE CarID = {carID};";
+
+            try
+            {
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("InspectionConnection")))
+                {
+                    connection.Open();
+                    var affectedRows = await connection.ExecuteAsync(sql);
+                    return affectedRows;
+                }
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
+        }
     }
 }

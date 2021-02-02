@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CarService.Core.Entities;
 using CarService.Core.Interfaces;
+using MassTransit;
 
 namespace CarService.Controllers
 {
@@ -12,10 +13,12 @@ namespace CarService.Controllers
     public class CarController : ControllerBase
     {
         private readonly ICarRepository _repository;
+        private readonly IPublishEndpoint _publishEndpoint;
 
-        public CarController(ICarRepository repository)
+        public CarController(ICarRepository repository, IPublishEndpoint publishEndpoint)
         {
             _repository = repository;
+            _publishEndpoint = publishEndpoint;
         }
 
         [HttpGet]
@@ -52,6 +55,9 @@ namespace CarService.Controllers
             var response = await _repository.Update(car);
             if (response != 0)
             {
+                //Sending the object to the client exchange
+                await _publishEndpoint.Publish<Car>(car);
+
                 return Ok("Updated successfully");
             }
             else
