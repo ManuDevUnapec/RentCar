@@ -7,5 +7,6 @@ namespace CarService.Core.Entities
         public string Description { get; set; }
         public string Status { get; set; }
         public int BrandID { get; set; }
+        public string Brand { get; set; }
     }
 }
