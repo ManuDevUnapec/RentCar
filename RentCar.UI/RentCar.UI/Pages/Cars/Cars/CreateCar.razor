@@ -1,0 +1,151 @@
+﻿@page "/create_car"
+
+@using RentCar.UI.Data.Cars.Models.Models;
+@using RentCar.UI.Data.Cars.Brands.Models;
+@using RentCar.UI.Data.Cars.TypeOfCars.Models;
+@using RentCar.UI.Data.Cars.TypeOfFuels.Models;
+@using RentCar.UI.Data.Cars.Cars.Models;
+@using RentCar.UI.Data.Cars.Models.Services;
+@using RentCar.UI.Data.Cars.Brands.Services;
+@using RentCar.UI.Data.Cars.TypeOfCars.Services;
+@using RentCar.UI.Data.Cars.TypeOfFuels.Services;
+@using RentCar.UI.Data.Cars.Cars.Services;
+
+@inject ModelService ModelService
+@inject BrandService BrandService
+@inject TypeOfCarService TypeOfCarService
+@inject TypeOfFuelService TypeOfFuelService
+@inject CarService CarService
+@inject NavigationManager NavigationManager
+
+<h1>Create a Car!</h1>
+
+<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="car-description">Description</label>
+            <InputText id="car-description" class="form-control" @bind-Value="model.Description" />
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="car-status">Status</label>
+            <InputSelect @bind-Value="model.Status" id="car-status" class="form-control valid">
+                <option>Select</option>
+                @foreach (var status in Enum.GetValues(typeof(CarStatus)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="car-model">Model</label>
+            <InputSelect @bind-Value="model.ModelID" id="car-brand" class="form-control valid">
+                @if (Models is not null)
+                {
+                    <option>Select</option>
+                    @foreach (var model in Models)
+                    {
+                        <option value="@model.ID">@model.Description</option>
+                    }
+                }
+             </InputSelect>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="car-brand">Brand</label>
+            <InputSelect @bind-Value="model.BrandID" id="car-brand" class="form-control valid">
+                @if (Brands is not null)
+                {
+                    <option>Select</option>
+                    @foreach (var brand in Brands)
+                    {
+                        <option value="@brand.ID">@brand.Description</option>
+                    }
+                }
+            </InputSelect>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="car-type-of-car">Type Of Car</label>
+            <InputSelect @bind-Value="model.TypeOfCarID" id="car-type-of-car" class="form-control valid">
+                @if (TypeOfCars is not null)
+                {
+                    <option>Select</option>
+                    @foreach (var typeOfCar in TypeOfCars)
+                    {
+                        <option value="@typeOfCar.ID">@typeOfCar.Description</option>
+                    }
+                }
+            </InputSelect>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="car-type-of-fuel">Type Of Fuels</label>
+            <InputSelect @bind-Value="model.TypeOfFuelID" id="car-type-of-fuel" class="form-control valid">
+                @if (TypeOfFuels is not null)
+                {
+                    <option>Select</option>
+                    @foreach (var typeOfFuel in TypeOfFuels)
+                    {
+                        <option value="@typeOfFuel.ID">@typeOfFuel.Description</option>
+                    }
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="car-chassis">Chassis Number</label>
+            <InputText id="car-chassis" class="form-control" @bind-Value="model.ChassisNumber" />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="car-engine">Engine Number</label>
+            <InputText id="car-engine" class="form-control" @bind-Value="model.EngineNumber" />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="car-plate">Plate Number</label>
+            <InputText id="car-plate" class="form-control" @bind-Value="model.PlateNumber" />
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</EditForm>
+
+
+@code {
+    public List<Brand> Brands { get; set; }
+    public List<Model> Models { get; set; }
+    public List<TypeOfCar> TypeOfCars { get; set; }
+    public List<TypeOfFuel> TypeOfFuels { get; set; }
+    private Car model = new Car();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Models = await ModelService.GetAll();
+        TypeOfFuels = await TypeOfFuelService.GetAll();
+        TypeOfCars = await TypeOfCarService.GetAll();
+        Brands = await BrandService.GetAll();
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            await CarService.Create(model);
+            NavigationManager.NavigateTo("/");
+
+        }
+        catch (Exception e)
+        {
+            //Redirectionate to error page
+            //NavigationManager.NavigateTo("error");
+        }
+    }
+}

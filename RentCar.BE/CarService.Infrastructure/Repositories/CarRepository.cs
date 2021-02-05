@@ -55,7 +55,10 @@ namespace CarService.Infrastructure.Repositories
 
         public async Task<Car> Get(int id)
         {
-            var sql = "SELECT * FROM Cars WHERE ID = @ID;";
+            var sql = "SELECT ca.ID, ca.Description, ca.ChassisNumber, ca.EngineNumber, ca.PlateNumber," +
+                    "ca.Status, ca.TypeOfFuelID, ca.TypeOfCarID, ca.BrandID, ca.ModelID, " +
+                    "br.Description as Brand, mo.Description as Model, tc.Description as TypeOfCar, tf.Description as TypeOfFuel FROM Cars ca " +
+                    "INNER JOIN Brand br on ca.BrandID = br.ID INNER JOIN Model mo on ca.ModelID = mo.ID INNER JOIN TypeOfCars tc on ca.TypeOfCarID = tc.ID INNER JOIN TypeOfFuels tf on ca.TypeOfFuelID = tf.ID WHERE ca.ID = @ID";
             using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
             {
                 connection.Open();
@@ -68,7 +71,12 @@ namespace CarService.Infrastructure.Repositories
         {
             try
             {
-                var sql = "SELECT * FROM Cars;";
+                var sql = "SELECT ca.ID, ca.Description, ca.ChassisNumber, ca.EngineNumber, ca.PlateNumber," +
+                    "ca.Status, ca.TypeOfFuelID, ca.TypeOfCarID, ca.BrandID, ca.ModelID, " +
+                    "br.Description as Brand, mo.Description as Model, tc.Description as TypeOfCar, tf.Description as TypeOfFuel FROM Cars ca " +
+                    "INNER JOIN Brand br on ca.BrandID = br.ID INNER JOIN Model mo on ca.ModelID = mo.ID INNER JOIN TypeOfCars tc on ca.TypeOfCarID = tc.ID INNER JOIN TypeOfFuels tf on ca.TypeOfFuelID = tf.ID";
+
+
                 using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
                 {
                     connection.Open();

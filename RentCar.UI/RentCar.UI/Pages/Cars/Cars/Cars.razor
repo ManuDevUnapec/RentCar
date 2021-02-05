@@ -1,0 +1,86 @@
+﻿@page "/"
+
+@using RentCar.UI.Data.Cars.Cars.Models;
+@using RentCar.UI.Data.Cars.Cars.Services;
+@inject CarService  CarService
+
+<h1>Cars!</h1>
+
+Manage the cars...!
+
+<div style="font-size: 25px; display: flex; justify-content: flex-end;">
+    <NavLink href="create_car">
+        <span class="fas fa-plus-circle" aria-hidden="true" style="font-size: 25px;"></span>
+    </NavLink>
+</div>
+
+@if (cars == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Description</th>
+                <th>Model</th>
+                <th>Brand</th>
+                <th>TypeOfCar</th>
+                <th>TypeOfFuel</th>
+                <th>Status</th>
+                <th>ChassisNumber</th>
+                <th>EngineNumber</th>
+                <th>PlateNumber</th>
+                <th scope="col" class="d-flex justify-content-center">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var car in cars)
+            {
+                <tr>
+                    <td>@car.ID</td>
+                    <td>@car.Description</td>
+                    <td>@car.Model</td>
+                    <td>@car.Brand</td>
+                    <td>@car.TypeOfCar</td>
+                    <td>@car.TypeOfFuel</td>
+                    <td>@car.Status</td>
+                    <td>@car.ChassisNumber</td>
+                    <td>@car.EngineNumber</td>
+                    <td>@car.PlateNumber</td>
+                    <td>
+                        <div class="d-flex flex-wrap justify-content-between">
+                            <a href="edit_car/@car.ID" style="cursor: pointer; color: black;"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                            <a href="car/@car.ID" style="cursor: pointer; color: black;"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a @onclick="() => Delete(car.ID)" style="cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
+@code {
+    private List<Car> cars;
+
+    protected override async Task OnInitializedAsync()
+    {
+        cars = await GetAll();
+    }
+
+    private async Task<List<Car>> GetAll()
+    {
+        return await CarService.GetAll();
+    }
+
+    private async Task Delete(int id)
+    {
+        await CarService.Delete(id);
+        cars = await GetAll();
+    }
+}

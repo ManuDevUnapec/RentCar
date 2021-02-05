@@ -1,0 +1,84 @@
+﻿@page "/car/{id:int}"
+
+@using RentCar.UI.Data.Cars.Cars.Models;
+@using RentCar.UI.Data.Cars.Cars.Services;
+
+@inject CarService CarService
+
+<h1>Cars !</h1>
+<strong style="display: inline;">View:</strong> <p style="display: inline;">@model.Description</p>
+
+<hr />
+
+<EditForm Model="@model">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="car-description">Description</label>
+            <InputText id="car-description" class="form-control" @bind-Value="model.Description" disabled />
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="car-status">Status</label>
+            <InputSelect @bind-Value="model.Status" id="car-status" class="form-control valid" disabled>
+                <option>Select</option>
+                @foreach (var status in Enum.GetValues(typeof(CarStatus)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="car-model">Model</label>
+            <InputText id="car-description" class="form-control" @bind-Value="model.Model" disabled/>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="car-brand">Brand</label>
+            <InputText id="car-description" class="form-control" @bind-Value="model.Brand" disabled/>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="car-type-of-car">Type Of Car</label>
+            <InputText id="car-description" class="form-control" @bind-Value="model.TypeOfCar" disabled/>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="car-type-of-fuel">Type Of Fuels</label>
+            <InputText id="car-description" class="form-control" @bind-Value="model.TypeOfFuel" disabled/>
+        </div>
+    </div>
+
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="car-chassis">Chassis Number</label>
+            <InputText id="car-chassis" class="form-control" @bind-Value="model.ChassisNumber" disabled/>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="car-engine">Engine Number</label>
+            <InputText id="car-engine" class="form-control" @bind-Value="model.EngineNumber" disabled/>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="car-plate">Plate Number</label>
+            <InputText id="car-plate" class="form-control" @bind-Value="model.PlateNumber" disabled/>
+        </div>
+    </div>
+
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+
+    private Car model = new Car();
+
+    protected override async Task OnInitializedAsync()
+    {
+        model = await CarService.GetByID(ID);
+    }
+}
