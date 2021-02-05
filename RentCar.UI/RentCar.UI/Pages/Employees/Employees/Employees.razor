@@ -1,0 +1,79 @@
+﻿@page "/employees"
+
+@using RentCar.UI.Data.Employees.Employees.Models;
+@using RentCar.UI.Data.Employees.Employees.Services;
+@inject EmployeeService EmployeeService
+
+<h1>Employees!</h1>
+
+Manage the employees...!
+
+<div style="font-size: 25px; display: flex; justify-content: flex-end;">
+    <NavLink href="create_employee">
+        <span class="fas fa-plus-circle" aria-hidden="true" style="font-size: 25px;"></span>
+    </NavLink>
+</div>
+
+@if (employees == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Identification Card</th>
+                <th>Commision Percent</th>
+                <th>Hour Hand</th>
+                <th>Status</th>
+                <th>Created</th>
+                <th scope="col" class="d-flex justify-content-center">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in employees)
+            {
+                <tr>
+                    <td>@employee.ID</td>
+                    <td>@employee.Name</td>
+                    <td>@employee.IdentificationCard</td>
+                    <td>@employee.CommisionPercent</td>
+                    <td>@employee.HourHand</td>
+                    <td>@employee.Status</td>
+                    <td>@employee.Created</td>
+                    <td>
+                        <div class="d-flex flex-wrap justify-content-between">
+                            <a href="edit_employee/@employee.ID" style="cursor: pointer; color: black;"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                            <a href="employee/@employee.ID" style="cursor: pointer; color: black;"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a @onclick="() => Delete(employee.ID)" style="cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private List<Employee> employees;
+
+    protected override async Task OnInitializedAsync()
+    {
+        employees = await GetAll();
+    }
+
+    private async Task<List<Employee>> GetAll()
+    {
+        return await EmployeeService.GetAll();
+    }
+
+    private async Task Delete(int id)
+    {
+        await EmployeeService.Delete(id);
+        employees = await GetAll();
+    }
+}
