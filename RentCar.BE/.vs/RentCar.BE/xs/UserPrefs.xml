@@ -1,20 +1,16 @@
 ﻿<Properties StartupConfiguration="RentCar.BE">
   <MonoDevelop.Ide.ItemProperties.InspectionService PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="RentService/Queues/CarConsumer.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CarService.Infrastructure/Repositories/CarRepository.cs">
     <Files>
-      <File FileName="InspectionService/Queues/CarConsumer.cs" Line="23" Column="2" />
-      <File FileName="RentService/Queues/CarConsumer.cs" Line="20" Column="46" />
+      <File FileName="CarService.Infrastructure/Repositories/CarRepository.cs" Line="32" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
-            <Node name="InspectionService" expanded="True">
-              <Node name="Queues" expanded="True" />
-            </Node>
-            <Node name="RentService" expanded="True">
-              <Node name="Queues" expanded="True">
-                <Node name="CarConsumer.cs" selected="True" />
+            <Node name="CarService.Infrastructure" expanded="True">
+              <Node name="Repositories" expanded="True">
+                <Node name="CarRepository.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -28,7 +24,9 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Infrastructure/Repositories/ModelRepository.cs" relfile="CarService.Infrastructure/Repositories/ModelRepository.cs" line="82" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.CarService PreferredExecutionTarget="/Applications/Safari.app" />
   <MultiItemStartupConfigurations>

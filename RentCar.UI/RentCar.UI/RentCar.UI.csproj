@@ -23,5 +23,9 @@
     <Folder Include="Data\Cars\Models\Models\" />
     <Folder Include="Data\Cars\Models\Services\" />
     <Folder Include="Pages\Cars\Models\" />
+    <Folder Include="Data\Cars\Cars\" />
+    <Folder Include="Data\Cars\Cars\Models\" />
+    <Folder Include="Data\Cars\Cars\Services\" />
+    <Folder Include="Pages\Cars\Cars\" />
   </ItemGroup>
 </Project>

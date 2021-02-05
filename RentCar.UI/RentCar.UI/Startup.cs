@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RentCar.UI.Data;
 using RentCar.UI.Data.Cars.Brands.Services;
+using RentCar.UI.Data.Cars.Cars.Services;
 using RentCar.UI.Data.Cars.Models.Services;
 using RentCar.UI.Data.Cars.TypeOfCars.Services;
 using RentCar.UI.Data.Cars.TypeOfFuels.Services;
@@ -43,6 +44,7 @@ namespace RentCar.UI
             services.AddSingleton<TypeOfFuelService>();
             services.AddSingleton<BrandService>();
             services.AddSingleton<ModelService>();
+            services.AddSingleton<CarService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
