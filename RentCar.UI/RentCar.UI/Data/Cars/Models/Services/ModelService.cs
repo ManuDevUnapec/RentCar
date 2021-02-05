@@ -9,18 +9,18 @@ namespace RentCar.UI.Data.Cars.Models.Services
 {
     public class ModelService
     {
-        IHttpClientFactory _clientFactory { get; set; }
+        IHttpClientFactory _carFactory { get; set; }
 
-        public ModelService(IHttpClientFactory clientFactory)
+        public ModelService(IHttpClientFactory carFactory)
         {
-            _clientFactory = clientFactory;
+            _carFactory = carFactory;
         }
 
         public async Task<List<Model>> GetAll()
         {
             try
             {
-                var client = _clientFactory.CreateClient("Cars");
+                var client = _carFactory.CreateClient("Cars");
                 var models = await client.GetFromJsonAsync<List<Model>>("Model");
                 return models;
             }
@@ -35,7 +35,7 @@ namespace RentCar.UI.Data.Cars.Models.Services
         {
             try
             {
-                var client = _clientFactory.CreateClient("Cars");
+                var client = _carFactory.CreateClient("Cars");
                 var model = await client.GetFromJsonAsync<Model>($"Model/{id}");
                 return model;
             }
@@ -50,7 +50,7 @@ namespace RentCar.UI.Data.Cars.Models.Services
         {
             try
             {
-                var client = _clientFactory.CreateClient("Cars");
+                var client = _carFactory.CreateClient("Cars");
                 var response = await client.PostAsJsonAsync<Model>("Model", model);
                 return response;
             }
@@ -65,7 +65,7 @@ namespace RentCar.UI.Data.Cars.Models.Services
         {
             try
             {
-                var client = _clientFactory.CreateClient("Cars");
+                var client = _carFactory.CreateClient("Cars");
                 var response = await client.PutAsJsonAsync<Model>("Model", model);
                 return response;
             }
@@ -80,7 +80,7 @@ namespace RentCar.UI.Data.Cars.Models.Services
         {
             try
             {
-                var client = _clientFactory.CreateClient("Cars");
+                var client = _carFactory.CreateClient("Cars");
                 var response = await client.DeleteAsync($"Model/{id}");
                 return response;
             }

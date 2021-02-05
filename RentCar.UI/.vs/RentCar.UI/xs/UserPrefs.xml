@@ -4,7 +4,25 @@
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.UI" expanded="True">
-            <Node name="RentCar.UI" expanded="True" />
+            <Node name="RentCar.UI" expanded="True">
+              <Node name="Data" expanded="True">
+                <Node name="Clients" expanded="True">
+                  <Node name="Clients" expanded="True">
+                    <Node name="Services" expanded="True" />
+                  </Node>
+                </Node>
+              </Node>
+              <Node name="Pages" expanded="True">
+                <Node name="Cars" expanded="True">
+                  <Node name="Brands" expanded="True">
+                    <Node name="Brands.razor" selected="True" />
+                  </Node>
+                </Node>
+                <Node name="Clients" expanded="True">
+                  <Node name="Clients" expanded="True" />
+                </Node>
+              </Node>
+            </Node>
           </Node>
         </State>
       </Pad>

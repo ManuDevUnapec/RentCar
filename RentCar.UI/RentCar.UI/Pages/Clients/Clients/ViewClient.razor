@@ -1,0 +1,77 @@
+﻿@page "/client/{id:int}"
+
+@using RentCar.UI.Data.Clients.Clients.Models;
+@using RentCar.UI.Data.Clients.Clients.Services;
+
+@inject ClientService ClientService
+
+<h1>Clients !</h1>
+<strong style="display: inline;">View:</strong> <p style="display: inline;">@client.Name</p>
+
+<hr />
+
+<EditForm Model="@client">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+
+        <div class="form-group">
+            <label for="client-name">Description</label>
+            <InputText id="client-name" class="form-control" @bind-Value="client.Name" disabled/>
+        </div>
+
+        <div class="form-group">
+            <label for="client-id-card">Identification Card</label>
+            <InputText id="client-id-card" class="form-control" @bind-Value="client.IdentificationCard" disabled/>
+        </div>
+
+        <div class="form-group">
+            <label for="client-card-number">Card Number</label>
+            <InputText id="client-card-number" class="form-control" @bind-Value="client.CardNumber" disabled/>
+        </div>
+
+        <div class="form-group">
+            <label for="client-credit-limit">Credit Limit</label>
+            <InputNumber id="client-credit-limit" class="form-control" @bind-Value="client.CreditLimit" disabled/>
+        </div>
+
+        <div class="form-group">
+            <label for="client-person-type">Person Type</label>
+            <InputSelect @bind-Value="client.PersonType" id="client-person-type" class="form-control valid" disabled>
+                <option>Select</option>
+                @foreach (var type in Enum.GetValues(typeof(ClientPersonType)))
+                {
+                    <option value="@type">@type</option>
+                }
+            </InputSelect>
+        </div>
+
+        <div class="form-group">
+            <label for="client-status">Status</label>
+            <InputSelect @bind-Value="client.Status" id="client-status" class="form-control valid" disabled>
+                <option>Select</option>
+                @foreach (var status in Enum.GetValues(typeof(ClientStatus)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </InputSelect>
+        </div>
+
+    </div>
+
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+
+    private Client client = new Client();
+
+    protected override async Task OnInitializedAsync()
+    {
+        client = await ClientService.GetByID(ID);
+    }
+}

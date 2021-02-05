@@ -10,18 +10,18 @@ namespace RentCar.UI.Data.Cars.TypeOfCars.Services
 {
     public class TypeOfCarService
     {
-        IHttpClientFactory _clientFactory { get; set; }
+        IHttpClientFactory _carFactory { get; set; }
 
-        public TypeOfCarService(IHttpClientFactory clientFactory)
+        public TypeOfCarService(IHttpClientFactory carFactory)
         {
-            _clientFactory = clientFactory;
+            _carFactory = carFactory;
         }
 
         public async Task<List<TypeOfCar>> GetAll()
         {
             try
             {
-                var client = _clientFactory.CreateClient("Cars");
+                var client = _carFactory.CreateClient("Cars");
                 var typeOfCars = await client.GetFromJsonAsync<List<TypeOfCar>>("TypeOfCar");
                 return typeOfCars;
             }catch(Exception e)
@@ -35,7 +35,7 @@ namespace RentCar.UI.Data.Cars.TypeOfCars.Services
         {
             try
             {
-                var client = _clientFactory.CreateClient("Cars");
+                var client = _carFactory.CreateClient("Cars");
                 var typeOfCar = await client.GetFromJsonAsync<TypeOfCar>($"TypeOfCar/{id}");
                 return typeOfCar;
             }
@@ -50,7 +50,7 @@ namespace RentCar.UI.Data.Cars.TypeOfCars.Services
         {
             try
             {
-                var client = _clientFactory.CreateClient("Cars");
+                var client = _carFactory.CreateClient("Cars");
                 var response = await client.PostAsJsonAsync<TypeOfCar>("TypeOfCar", typeOfCar);
                 return response;
             }
@@ -65,7 +65,7 @@ namespace RentCar.UI.Data.Cars.TypeOfCars.Services
         {
             try
             {
-                var client = _clientFactory.CreateClient("Cars");
+                var client = _carFactory.CreateClient("Cars");
                 var response = await client.PutAsJsonAsync<TypeOfCar>("TypeOfCar", typeOfCar);
                 return response;
             }
@@ -80,7 +80,7 @@ namespace RentCar.UI.Data.Cars.TypeOfCars.Services
         {
             try
             {
-                var client = _clientFactory.CreateClient("Cars");
+                var client = _carFactory.CreateClient("Cars");
                 var response = await client.DeleteAsync($"TypeOfCar/{id}");
                 return response;
             }
