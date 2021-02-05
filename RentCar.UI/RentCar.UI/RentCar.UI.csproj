@@ -27,5 +27,11 @@
     <Folder Include="Data\Cars\Cars\Models\" />
     <Folder Include="Data\Cars\Cars\Services\" />
     <Folder Include="Pages\Cars\Cars\" />
+    <Folder Include="Data\Clients\" />
+    <Folder Include="Data\Clients\Clients\" />
+    <Folder Include="Data\Clients\Clients\Models\" />
+    <Folder Include="Data\Clients\Clients\Services\" />
+    <Folder Include="Pages\Clients\" />
+    <Folder Include="Pages\Clients\Clients\" />
   </ItemGroup>
 </Project>

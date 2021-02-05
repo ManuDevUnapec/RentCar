@@ -15,6 +15,7 @@ using RentCar.UI.Data.Cars.Cars.Services;
 using RentCar.UI.Data.Cars.Models.Services;
 using RentCar.UI.Data.Cars.TypeOfCars.Services;
 using RentCar.UI.Data.Cars.TypeOfFuels.Services;
+using RentCar.UI.Data.Clients.Clients.Services;
 
 namespace RentCar.UI
 {
@@ -39,12 +40,19 @@ namespace RentCar.UI
             services.AddHttpClient("Cars", config => {
                 config.BaseAddress = new Uri(Configuration["ApiGateway:RentCar:Cars"]);
             });
+            services.AddHttpClient("Clients", config => {
+                config.BaseAddress = new Uri(Configuration["ApiGateway:RentCar:Clients"]);
+            });
 
+            //Cars
             services.AddSingleton<TypeOfCarService>();
             services.AddSingleton<TypeOfFuelService>();
             services.AddSingleton<BrandService>();
             services.AddSingleton<ModelService>();
             services.AddSingleton<CarService>();
+
+            //Clients
+            services.AddSingleton<ClientService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

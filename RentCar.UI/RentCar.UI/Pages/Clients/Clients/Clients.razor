@@ -1,0 +1,80 @@
+﻿@page "/clients"
+
+@using RentCar.UI.Data.Clients.Clients.Models;
+@using RentCar.UI.Data.Clients.Clients.Services;
+@inject ClientService ClientService
+
+<h1>Clients!</h1>
+
+Manage the clients...!
+
+<div style="font-size: 25px; display: flex; justify-content: flex-end;">
+    <NavLink href="create_client">
+        <span class="fas fa-plus-circle" aria-hidden="true" style="font-size: 25px;"></span>
+    </NavLink>
+</div>
+
+@if (clients == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>IdentificationCard</th>
+                <th>CardNumber</th>
+                <th>CreditLimit</th>
+                <th>PersonType</th>
+                <th>Status</th>
+                <th scope="col" class="d-flex justify-content-center">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var client in clients)
+            {
+                <tr>
+                    <td>@client.ID</td>
+                    <td>@client.Name</td>
+                    <td>@client.IdentificationCard</td>
+                    <td>@client.CardNumber</td>
+                    <td>@client.CreditLimit</td>
+                    <td>@client.PersonType</td>
+                    <td>@client.Status</td>
+                    <td>
+                        <div class="d-flex flex-wrap justify-content-between">
+                            <a href="edit_client/@client.ID" style="cursor: pointer; color: black;"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                            <a href="client/@client.ID" style="cursor: pointer; color: black;"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a @onclick="() => Delete(client.ID)" style="cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+
+
+@code {
+    private List<Client> clients;
+
+    protected override async Task OnInitializedAsync()
+    {
+        clients = await GetAll();
+    }
+
+    private async Task<List<Client>> GetAll()
+    {
+        return await ClientService.GetAll();
+    }
+
+    private async Task Delete(int id)
+    {
+        await ClientService.Delete(id);
+        clients = await GetAll();
+    }
+}

@@ -9,18 +9,18 @@ namespace RentCar.UI.Data.Cars.TypeOfFuels.Services
 {
     public class TypeOfFuelService
     {
-        IHttpClientFactory _clientFactory { get; set; }
+        IHttpClientFactory _carFactory { get; set; }
 
-        public TypeOfFuelService(IHttpClientFactory clientFactory)
+        public TypeOfFuelService(IHttpClientFactory carFactory)
         {
-            _clientFactory = clientFactory;
+            _carFactory = carFactory;
         }
 
         public async Task<List<TypeOfFuel>> GetAll()
         {
             try
             {
-                var client = _clientFactory.CreateClient("Cars");
+                var client = _carFactory.CreateClient("Cars");
                 var typeOfFuels = await client.GetFromJsonAsync<List<TypeOfFuel>>("TypeOfFuel");
                 return typeOfFuels;
             }
@@ -35,7 +35,7 @@ namespace RentCar.UI.Data.Cars.TypeOfFuels.Services
         {
             try
             {
-                var client = _clientFactory.CreateClient("Cars");
+                var client = _carFactory.CreateClient("Cars");
                 var typeOfFuel = await client.GetFromJsonAsync<TypeOfFuel>($"TypeOfFuel/{id}");
                 return typeOfFuel;
             }
@@ -50,7 +50,7 @@ namespace RentCar.UI.Data.Cars.TypeOfFuels.Services
         {
             try
             {
-                var client = _clientFactory.CreateClient("Cars");
+                var client = _carFactory.CreateClient("Cars");
                 var response = await client.PostAsJsonAsync<TypeOfFuel>("TypeOfFuel", typeOfFuel);
                 return response;
             }
@@ -65,7 +65,7 @@ namespace RentCar.UI.Data.Cars.TypeOfFuels.Services
         {
             try
             {
-                var client = _clientFactory.CreateClient("Cars");
+                var client = _carFactory.CreateClient("Cars");
                 var response = await client.PutAsJsonAsync<TypeOfFuel>("TypeOfFuel", typeOfFuel);
                 return response;
             }
@@ -80,7 +80,7 @@ namespace RentCar.UI.Data.Cars.TypeOfFuels.Services
         {
             try
             {
-                var client = _clientFactory.CreateClient("Cars");
+                var client = _carFactory.CreateClient("Cars");
                 var response = await client.DeleteAsync($"TypeOfFuel/{id}");
                 return response;
             }

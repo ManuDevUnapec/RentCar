@@ -1,0 +1,93 @@
+﻿@page "/edit_client/{id:int}"
+
+@using RentCar.UI.Data.Clients.Clients.Models;
+@using RentCar.UI.Data.Clients.Clients.Services;
+
+@inject ClientService ClientService
+@inject NavigationManager NavigationManager
+
+<h1>Clients !</h1>
+<strong style="display: inline;">Edit:</strong> <p style="display: inline;">@client.Name</p>
+
+<hr />
+
+<EditForm Model="@client" OnValidSubmit="@HandleValidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-group">
+
+        <div class="form-group">
+            <label for="client-name">Name</label>
+            <InputText id="client-name" class="form-control" @bind-Value="client.Name" />
+        </div>
+
+        <div class="form-group">
+            <label for="client-id-card">Identification Card</label>
+            <InputText id="client-id-card" class="form-control" @bind-Value="client.IdentificationCard" />
+        </div>
+
+        <div class="form-group">
+            <label for="client-card-number">Card Number</label>
+            <InputText id="client-card-number" class="form-control" @bind-Value="client.CardNumber" />
+        </div>
+
+        <div class="form-group">
+            <label for="client-credit-limit">Credit Limit</label>
+            <InputNumber id="client-credit-limit" class="form-control" @bind-Value="client.CreditLimit" />
+        </div>
+
+        <div class="form-group">
+            <label for="client-person-type">Person Type</label>
+            <InputSelect @bind-Value="client.PersonType" id="client-person-type" class="form-control valid">
+                <option>Select</option>
+                @foreach (var type in Enum.GetValues(typeof(ClientPersonType)))
+                {
+                    <option value="@type">@type</option>
+                }
+            </InputSelect>
+        </div>
+
+        <div class="form-group">
+            <label for="client-status">Status</label>
+            <InputSelect @bind-Value="client.Status" id="client-status" class="form-control valid">
+                <option>Select</option>
+                @foreach (var status in Enum.GetValues(typeof(ClientStatus)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </InputSelect>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+
+    private Client client = new Client();
+
+    protected override async Task OnInitializedAsync()
+    {
+        client = await ClientService.GetByID(ID);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            await ClientService.Put(client);
+            NavigationManager.NavigateTo("/clients");
+
+        }
+        catch (Exception e)
+        {
+            //Redirectionate to error page
+            //NavigationManager.NavigateTo("error");
+        }
+    }
+}
