@@ -86,6 +86,11 @@ namespace RentService.Infrastructure.Repositories
 
         public async Task<int> Update(Rent entity)
         {
+            if(entity.Status == RentStatus.Returned.ToString())
+            {
+                entity.ReturnDate = DateTime.Now;
+            }
+
             var sql = "UPDATE Rents SET ReturnDate = @ReturnDate, AmountForDays = @AmountForDays, NumberOfDays = @NumberOfDays," +
                 "Status = @Status, Comment = @Comment, EmployeeID = @EmployeeID, Employee = @Employee, " +
                 "ClientID = @ClientID, Client = @Client, CarID = @CarID, Car = @Car WHERE ID = @ID;";

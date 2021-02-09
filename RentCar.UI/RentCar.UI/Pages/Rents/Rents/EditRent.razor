@@ -1,0 +1,162 @@
+﻿@page "/edit_rent/{id:int}"
+
+@using System;
+@using RentCar.UI.Data.Rents.Models;
+@using RentCar.UI.Data.Cars.Cars.Models;
+@using RentCar.UI.Data.Clients.Clients.Models;
+@using RentCar.UI.Data.Employees.Employees.Models;
+@using RentCar.UI.Data.Clients.Clients.Services;
+@using RentCar.UI.Data.Employees.Employees.Services;
+@using RentCar.UI.Data.Cars.Cars.Services;
+@using RentCar.UI.Data.Rents.Services;
+
+@inject CarService CarService
+@inject ClientService ClientService
+@inject EmployeeService EmployeeService
+@inject RentService RentService
+@inject NavigationManager NavigationManager
+
+<h1>Rents !</h1>
+<strong style="display: inline;">Edit:</strong> <p style="display: inline;">@model.ID</p>
+
+<hr />
+
+@if (model.ID == 0)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+
+<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    @if (LocalErrorMessage)
+    {
+        <strong style="color: red;">You cannot select this car because is already rented</strong>
+    }
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="rent-client">Client</label>
+            <InputSelect @bind-Value="model.ClientID" id="rent-client" class="form-control valid">
+                @if (Clients is not null)
+                    {
+                    <option>Select</option>
+                    @foreach (var model in Clients)
+                        {
+                        <option value="@model.ID">@model.Name</option>
+                        }
+                    }
+            </InputSelect>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="rent-employee">Employee</label>
+            <InputSelect @bind-Value="model.EmployeeID" id="rent-employee" class="form-control valid">
+                @if (Employees is not null)
+                    {
+                    <option>Select</option>
+                    @foreach (var model in Employees)
+                        {
+                        <option value="@model.ID">@model.Name</option>
+                        }
+                    }
+            </InputSelect>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="rent-car">Car</label>
+            <InputSelect @bind-Value="model.CarID" id="rent-car" class="form-control valid">
+                @if (Clients is not null)
+                    {
+                    <option>Select</option>
+                    @foreach (var model in Cars)
+                        {
+                        <option value="@model.ID">@model.Description</option>
+                        }
+                    }
+            </InputSelect>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="rent-number-of-days">Number of Days</label>
+            <InputNumber id="rent-number-of-days" class="form-control" @bind-Value="model.NumberOfDays" />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="rent-amound-per-days">Amount per Days</label>
+            <InputNumber id="rent-amound-per-days" class="form-control" @bind-Value="model.AmountForDays" />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="rent-status">Status</label>
+            <InputSelect @bind-Value="model.Status" id="rent-status" class="form-control valid">
+                <option>Select</option>
+                @foreach (var status in Enum.GetValues(typeof(RentStatus)))
+                    {
+                    <option value="@status">@status</option>
+                    }
+            </InputSelect>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="rent-comment">Comment</label>
+            <InputTextArea id="rent-comment" class="form-control" @bind-Value="model.Comment" />
+        </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+</EditForm>
+}
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+
+    public List<Client> Clients { get; set; }
+    public List<Employee> Employees { get; set; }
+    public List<Car> Cars { get; set; }
+    public List<Rent> Rents { get; set; }
+    public bool LocalErrorMessage { get; set; }
+    public int? DefaultCarID { get; set; }
+    private Rent model = new Rent();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Clients = await ClientService.GetAll();
+        Employees = await EmployeeService.GetAll();
+        Cars = await CarService.GetAll();
+        model = await RentService.GetByID(ID);
+        Rents = await RentService.GetAll();
+        DefaultCarID = model.CarID;
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            if (Rents.Any(m => m.CarID == model.CarID && m.CarID != DefaultCarID && m.Status == RentStatus.Rented.ToString()))
+            {
+
+                LocalErrorMessage = true;
+            }
+            else
+            {
+                LocalErrorMessage = false;
+                await RentService.Put(model);
+                NavigationManager.NavigateTo("/rents");
+            }
+
+        }
+        catch (Exception e)
+        {
+            //Redirectionate to error page
+            //NavigationManager.NavigateTo("error");
+        }
+    }
+}

@@ -39,7 +39,6 @@ namespace EmployeeService.Infrastructure.Repositories
             {
                 return 0;
             }
-
         }
 
         public async Task<int> Delete(int id)
