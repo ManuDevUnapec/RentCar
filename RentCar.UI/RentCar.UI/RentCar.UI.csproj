@@ -37,5 +37,10 @@
     <Folder Include="Data\Employees\Employees\" />
     <Folder Include="Pages\Employees\" />
     <Folder Include="Pages\Employees\Employees\" />
+    <Folder Include="Data\Rents\" />
+    <Folder Include="Data\Rents\Models\" />
+    <Folder Include="Data\Rents\Services\" />
+    <Folder Include="Pages\Rents\" />
+    <Folder Include="Pages\Rents\Rents\" />
   </ItemGroup>
 </Project>

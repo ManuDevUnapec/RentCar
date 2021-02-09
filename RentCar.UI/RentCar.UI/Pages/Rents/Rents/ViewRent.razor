@@ -1,0 +1,79 @@
+﻿@page "/rent/{id:int}"
+
+@using RentCar.UI.Data.Rents.Models;
+@using RentCar.UI.Data.Rents.Services;
+
+@inject RentService RentService
+
+<h1>Rents !</h1>
+<strong style="display: inline;">View:</strong> <p style="display: inline;">@model.ID</p>
+
+<hr />
+
+<EditForm Model="@model">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="rent-client">Model</label>
+            <InputText id="rent-client" class="form-control" @bind-Value="model.Client" disabled />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="rent-employee">Employee</label>
+            <InputText id="rent-employee" class="form-control" @bind-Value="model.Employee" disabled />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="rent-car">Car</label>
+            <InputText id="rent-car" class="form-control" @bind-Value="model.Car" disabled />
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="rent-numberofdays">Number of Days</label>
+            <InputNumber id="rent-numberofdays" class="form-control" @bind-Value="model.NumberOfDays" disabled />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="rent-amount-per-days">Amount per days</label>
+            <InputNumber id="rent-amount-per-days" class="form-control" @bind-Value="model.AmountForDays" disabled />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="rent-car">Status</label>
+            <InputText id="rent-status" class="form-control" @bind-Value="model.Status" disabled />
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="rent-date">Retal Date</label>
+            <InputDate id="rent-number-of-days" class="form-control" @bind-Value="model.RentalDate" disabled />
+        </div>
+        <div class="form-group col-md-6">
+            <label for="rent-return-date">Return Date</label>
+            <InputDate id="rent-return-date" class="form-control" @bind-Value="model.ReturnDate" disabled />
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="rent-comment">Retal Date</label>
+            <InputTextArea id="rent-comment" class="form-control" @bind-Value="model.Comment" disabled />
+        </div>
+    </div>
+
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+
+    private Rent model = new Rent();
+
+    protected override async Task OnInitializedAsync()
+    {
+        model = await RentService.GetByID(ID);
+    }
+}

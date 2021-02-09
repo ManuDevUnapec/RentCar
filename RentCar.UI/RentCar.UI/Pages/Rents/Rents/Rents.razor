@@ -1,0 +1,90 @@
+﻿@page "/rents"
+
+@using RentCar.UI.Data.Rents.Models;
+@using RentCar.UI.Data.Rents.Services;
+@inject RentService RentService
+
+<h1>Rents!</h1>
+
+Manage the rents...!
+
+<div style="font-size: 25px; display: flex; justify-content: flex-end;">
+    <NavLink href="create_rent">
+        <span class="fas fa-plus-circle" aria-hidden="true" style="font-size: 25px;"></span>
+    </NavLink>
+</div>
+
+@if (rents == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Client</th>
+                <th>CarID</th>
+                <th>Car</th>
+                <th>NumOfDay</th>
+                <th>AmoPerDay</th>
+                <th>RentalDate</th>
+                <th>ReturnDate</th>
+                <th>Status</th>
+                <th scope="col" class="d-flex justify-content-center">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var rent in rents)
+            {
+            <tr>
+                <td>@rent.ID</td>
+                <td>@rent.Client</td>
+                <td>@rent.CarID</td>
+                <td>@rent.Car</td>
+                <td>@rent.NumberOfDays</td>
+                <td>@rent.AmountForDays</td>
+                <td>@rent.RentalDate</td>
+                <td>@rent.ReturnDate</td>
+                <td>@rent.Status</td>
+                <td>
+                    <div class="d-flex flex-wrap justify-content-between">
+                        @if (rent.ReturnDate is null)
+                        {
+                            <a href="edit_rent/@rent.ID" style="cursor: pointer; color: black;"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                        }
+                        else
+                        {
+                            <a style="opacity: 0.5;" disabled><i class="fas fa-edit" aria-hidden="true"></i></a>
+                        }
+                        <a href="rent/@rent.ID" style="cursor: pointer; color: black;"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                        <a @onclick="() => Delete(rent.ID)" style="cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </div>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private List<Rent> rents;
+
+    protected override async Task OnInitializedAsync()
+    {
+        rents = await GetAll();
+    }
+
+    private async Task<List<Rent>> GetAll()
+    {
+        return await RentService.GetAll();
+    }
+
+    private async Task Delete(int id)
+    {
+        await RentService.Delete(id);
+        rents = await GetAll();
+    }
+}
