@@ -82,10 +82,31 @@ namespace ClientService.Infrastructure.Repositories
             }
         }
 
-        public Task<IEnumerable<Client>> GetReport(int? id, string name, string identificationCard,
+        public async Task<IEnumerable<Client>> GetReport(int? id, string name, string identificationCard,
             string cardNumber, int? creditLimit, string personType, string status)
         {
-            
+            var sql = "SELECT * FROM Clients WHERE ID = ISNULL(@ID, ID)" +
+               "AND Name = ISNULL(@Name, Name)" +
+               "AND IdentificationCard = ISNULL(@IdentificationCard, IdentificationCard)" +
+               "AND CardNumber = ISNULL(@CardNumber, CardNumber)" +
+               "AND CreditLimit = ISNULL(@CreditLimit, CreditLimit)" +
+               "AND PersonType = ISNULL(@PersonType, PersonType)" +
+               "AND Status = ISNULL(@Status, Status)";
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("ClientConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<Client>(sql, new
+                {
+                    ID = id,
+                    Name = name,
+                    IdentificationCard = identificationCard,
+                    CardNumber = cardNumber,
+                    CreditLimit = creditLimit,
+                    PersonType = personType,
+                    Status = status
+                });
+                return result;
+            }
         }
 
         public async Task<int> Update(Client entity)

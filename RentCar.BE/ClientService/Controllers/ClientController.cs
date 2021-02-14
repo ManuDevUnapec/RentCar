@@ -34,6 +34,16 @@ namespace ClientService.Controllers
             return Ok(client);
         }
 
+        [HttpGet("GetReport/{id?}/{name?}/{identificationCard?}/{cardNumber?}/{creditLimit?}/{personType?}/" +
+            "{status?}")]
+        public async Task<IActionResult> GetReport(int? id = null, string name = null, string identificationCard = null,
+            string cardNumber = null, int? creditLimit = null, string personType = null, string status = null)
+        {
+            var cars = await _repository.GetReport(id, name, identificationCard, cardNumber, creditLimit, personType,
+                status);
+            return Ok(cars);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(Client client)
         {
