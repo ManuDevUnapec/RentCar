@@ -82,6 +82,33 @@ namespace EmployeeService.Infrastructure.Repositories
             }
         }
 
+        public async Task<IEnumerable<Employee>> GetReport(int? id, string name, string identificationCard, string hourHand,
+            string commisionPercent, DateTime? created, string status)
+        {
+            var sql = "SELECT * FROM Employees WHERE ID = ISNULL(@ID, ID)" +
+               "AND Name = ISNULL(@Name, Name)" +
+               "AND IdentificationCard = ISNULL(@IdentificationCard, IdentificationCard)" +
+               "AND HourHand = ISNULL(@HourHand, HourHand)" +
+               "AND CommisionPercent = ISNULL(@CommisionPercent, CommisionPercent)" +
+               "AND Created = ISNULL(@Created, Created)" +
+               "AND Status = ISNULL(@Status, Status)";
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("EmployeeConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<Employee>(sql, new
+                {
+                    ID = id,
+                    Name = name,
+                    IdentificationCard = identificationCard,
+                    HourHand = hourHand,
+                    CommisionPercent = commisionPercent,
+                    Created = created,
+                    Status = status
+                });
+                return result;
+            }
+        }
+
         public async Task<int> Update(Employee entity)
         {
             var sql = "UPDATE Employees SET Name = @Name, IdentificationCard = @IdentificationCard, HourHand = @HourHand," +
