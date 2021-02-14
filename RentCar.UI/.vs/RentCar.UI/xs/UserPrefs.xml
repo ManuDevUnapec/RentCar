@@ -3,17 +3,8 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="RentCar.UI" expanded="True">
-            <Node name="RentCar.UI" expanded="True">
-              <Node name="Pages" expanded="True">
-                <Node name="Inspections" expanded="True">
-                  <Node name="EditInspection.razor" selected="True" />
-                </Node>
-                <Node name="Rents" expanded="True">
-                  <Node name="Rents" expanded="True" />
-                </Node>
-              </Node>
-            </Node>
+          <Node name="RentCar.UI" expanded="True" selected="True">
+            <Node name="RentCar.UI" expanded="True" />
           </Node>
         </State>
       </Pad>
