@@ -166,5 +166,37 @@ namespace RentService.Infrastructure.Repositories
                 return 0;
             }
         }
+
+        public async Task<IEnumerable<Rent>> GetReport(int? id, DateTime? rentalDate, DateTime? returnDate,
+            int? amountForDays, int? numberOfDays, string status, int? employeeID,
+            int? clientID, int? carID)
+        {
+            var sql = "SELECT * FROM Rents WHERE ID = ISNULL(@ID, ID)" +
+               "AND RentalDate = ISNULL(@RentalDate, RentalDate)" +
+               "AND ReturnDate = ISNULL(@ReturnDate, ReturnDate)" +
+               "AND AmountForDays = ISNULL(@AmountForDays, AmountForDays)" +
+               "AND NumberOfDays = ISNULL(@NumberOfDays, NumberOfDays)" +
+               "AND Status = ISNULL(@Status, Status)" +
+               "AND EmployeeID = ISNULL(@EmployeeID, EmployeeID)" +
+               "AND ClientID = ISNULL(@ClientID, ClientID)" +
+               "AND CarID = ISNULL(@CarID, CarID)";
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("RentConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<Rent>(sql, new
+                {
+                    ID = id,
+                    RentalDate = rentalDate,
+                    ReturnDate = returnDate,
+                    AmountForDays = amountForDays,
+                    NumberOfDays = numberOfDays,
+                    Status = status,
+                    EmployeeID = employeeID,
+                    ClientID = clientID,
+                    CarID = carID
+                });
+                return result;
+            }
+        }
     }
 }
