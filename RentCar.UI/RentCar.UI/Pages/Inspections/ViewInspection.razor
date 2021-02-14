@@ -1,0 +1,114 @@
+﻿@page "/inspection/{id:int}"
+
+@using RentCar.UI.Data.Inspections.Models;
+@using RentCar.UI.Data.Inspections.Services;
+
+@inject InspectionService InspectionService
+
+<h1>Inspections !</h1>
+<strong style="display: inline;">View:</strong> <p style="display: inline;">@model.ID</p>
+
+<hr />
+
+<EditForm Model="@model">
+
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="inspection-client">Client</label>
+            <InputText @bind-Value="model.Client" class="form-control valid" disabled />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inspection-employee">Employee</label>
+            <InputText @bind-Value="model.Employee" class="form-control valid" disabled />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="inspection-car">Car</label>
+            <InputText @bind-Value="model.Car" class="form-control valid" disabled />
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="rent-amount-of-fuel">Amount Of Fuel</label>
+            <InputText @bind-Value="model.AmountOfFuel" class="form-control valid" disabled />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="rent-status">Status</label>
+            <InputText @bind-Value="model.Status" class="form-control valid" disabled />
+        </div>
+    </div>
+
+    <div class="form-check">
+        <InputCheckbox class="form-check-input" id="inspection-glass-break" @bind-Value="model.GlassBreak" disabled/>
+        <label class="form-check-label" for="inspection-glass-break">
+            Glass Break
+        </label>
+    </div>
+
+    <div class="form-check">
+        <InputCheckbox class="form-check-input" id="inspection-cat" @bind-Value="model.Cat" disabled/>
+        <label class="form-check-label" for="inspection-cat">
+            Cat
+        </label>
+    </div>
+
+    <div class="form-check">
+        <InputCheckbox class="form-check-input" id="inspection-rubber-back" @bind-Value="model.RubberBack" disabled/>
+        <label class="form-check-label" for="inspection-rubber-back">
+            Rubber Back
+        </label>
+    </div>
+
+    <div class="form-check">
+        <InputCheckbox class="form-check-input" id="inspection-grated" @bind-Value="model.Grated" disabled/>
+        <label class="form-check-label" for="inspection-grated">
+            Grated
+        </label>
+    </div>
+
+    <div class="form-check">
+        <InputCheckbox class="form-check-input" id="inspection-rubber-state-one" @bind-Value="model.RubberStateOne" disabled/>
+        <label class="form-check-label" for="inspection-rubber-state-one">
+            Rubber State One
+        </label>
+    </div>
+
+    <div class="form-check">
+        <InputCheckbox class="form-check-input" id="inspection-rubber-state-two" @bind-Value="model.RubberStateTwo" disabled/>
+        <label class="form-check-label" for="inspection-rubber-state-two">
+            Rubber State Two
+        </label>
+    </div>
+
+
+    <div class="form-check">
+        <InputCheckbox class="form-check-input" id="inspection-rubber-state-three" @bind-Value="model.RubberStateThree" disabled/>
+        <label class="form-check-label" for="inspection-rubber-state-three">
+            Rubber State Three
+        </label>
+    </div>
+
+    <div class="form-check">
+        <InputCheckbox class="form-check-input" id="inspection-rubber-state-four" @bind-Value="model.RubberStateFour" disabled/>
+        <label class="form-check-label" for="inspection-rubber-state-four">
+            Rubber State Four
+        </label>
+    </div>
+
+</EditForm>
+
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+
+    private Inspection model = new Inspection();
+
+    protected override async Task OnInitializedAsync()
+    {
+        model = await InspectionService.GetByID(ID);
+    }
+}
