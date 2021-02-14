@@ -42,5 +42,9 @@
     <Folder Include="Data\Rents\Services\" />
     <Folder Include="Pages\Rents\" />
     <Folder Include="Pages\Rents\Rents\" />
+    <Folder Include="Data\Inspections\" />
+    <Folder Include="Data\Inspections\Models\" />
+    <Folder Include="Data\Inspections\Services\" />
+    <Folder Include="Pages\Inspections\" />
   </ItemGroup>
 </Project>

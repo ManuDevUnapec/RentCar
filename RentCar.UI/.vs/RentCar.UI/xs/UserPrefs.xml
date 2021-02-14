@@ -6,13 +6,11 @@
           <Node name="RentCar.UI" expanded="True">
             <Node name="RentCar.UI" expanded="True">
               <Node name="Pages" expanded="True">
-                <Node name="Cars" expanded="True">
-                  <Node name="Cars" expanded="True" />
+                <Node name="Inspections" expanded="True">
+                  <Node name="EditInspection.razor" selected="True" />
                 </Node>
                 <Node name="Rents" expanded="True">
-                  <Node name="Rents" expanded="True">
-                    <Node name="CreateRent.razor" selected="True" />
-                  </Node>
+                  <Node name="Rents" expanded="True" />
                 </Node>
               </Node>
             </Node>
