@@ -33,7 +33,7 @@ else
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    @if (LocalErrorMessage)
+    @if (CarRentedErrorMessage)
     {
         <strong style="color: red;">You cannot select this car because is already rented</strong>
     }
@@ -122,7 +122,7 @@ else
     public List<Employee> Employees { get; set; }
     public List<Car> Cars { get; set; }
     public List<Rent> Rents { get; set; }
-    public bool LocalErrorMessage { get; set; }
+    public bool CarRentedErrorMessage { get; set; }
     public int? DefaultCarID { get; set; }
     private Rent model = new Rent();
 
@@ -143,11 +143,11 @@ else
             if (Rents.Any(m => m.CarID == model.CarID && m.CarID != DefaultCarID && m.Status == RentStatus.Rented.ToString()))
             {
 
-                LocalErrorMessage = true;
+                CarRentedErrorMessage = true;
             }
             else
             {
-                LocalErrorMessage = false;
+                CarRentedErrorMessage = false;
                 await RentService.Put(model);
                 NavigationManager.NavigateTo("/rents");
             }

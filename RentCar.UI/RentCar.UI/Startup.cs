@@ -17,6 +17,7 @@ using RentCar.UI.Data.Cars.TypeOfCars.Services;
 using RentCar.UI.Data.Cars.TypeOfFuels.Services;
 using RentCar.UI.Data.Clients.Clients.Services;
 using RentCar.UI.Data.Employees.Employees.Services;
+using RentCar.UI.Data.Inspections.Services;
 using RentCar.UI.Data.Rents.Services;
 
 namespace RentCar.UI
@@ -54,7 +55,11 @@ namespace RentCar.UI
                 config.BaseAddress = new Uri(Configuration["ApiGateway:RentCar:Rents"]);
             });
 
-            //Cars
+            services.AddHttpClient("Inspections", config => {
+                config.BaseAddress = new Uri(Configuration["ApiGateway:RentCar:Inspections"]);
+            });
+
+            //Services
             services.AddSingleton<TypeOfCarService>();
             services.AddSingleton<TypeOfFuelService>();
             services.AddSingleton<BrandService>();
@@ -62,8 +67,7 @@ namespace RentCar.UI
             services.AddSingleton<CarService>();
             services.AddSingleton<EmployeeService>();
             services.AddSingleton<RentService>();
-
-            //Clients
+            services.AddSingleton<InspectionService>();
             services.AddSingleton<ClientService>();
         }
 

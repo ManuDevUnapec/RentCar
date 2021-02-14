@@ -1,0 +1,87 @@
+﻿@page "/inspections"
+
+@using RentCar.UI.Data.Inspections.Models;
+@using RentCar.UI.Data.Inspections.Services;
+@inject InspectionService InspectionService
+
+<h1>Inspections!</h1>
+
+Manage the inspections...!
+
+<div style="font-size: 25px; display: flex; justify-content: flex-end;">
+    <NavLink href="create_inspection">
+        <span class="fas fa-plus-circle" aria-hidden="true" style="font-size: 25px;"></span>
+    </NavLink>
+</div>
+
+@if (inspections == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Client</th>
+                <th>CarID</th>
+                <th>Car</th>
+                <th>AmountOfFuel</th>
+                <th>GlassBreak</th>
+                <th>RubberBack</th>
+                <th>Cat</th>
+                <th>Grated</th>
+                <th>Status</th>
+                <th>InspectionDate</th>
+                <th scope="col" class="d-flex justify-content-center">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var inspection in inspections)
+            {
+                <tr>
+                    <td>@inspection.ID</td>
+                    <td>@inspection.Client</td>
+                    <td>@inspection.CarID</td>
+                    <td>@inspection.Car</td>
+                    <td>@inspection.AmountOfFuel</td>
+                    <td>@inspection.GlassBreak</td>
+                    <td>@inspection.RubberBack</td>
+                    <td>@inspection.Cat</td>
+                    <td>@inspection.Grated</td>
+                    <td>@inspection.Status</td>
+                    <td>@inspection.InspectionDate</td>
+                    <td>
+                        <div class="d-flex flex-wrap justify-content-between">
+                            <a href="edit_inspection/@inspection.ID" style="cursor: pointer; color: black;"><i class="fas fa-edit" aria-hidden="true"></i></a>
+                            <a href="inspection/@inspection.ID" style="cursor: pointer; color: black;"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                            <a @onclick="() => Delete(inspection.ID)" style="cursor: pointer;"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+@code {
+    private List<Inspection> inspections;
+
+    protected override async Task OnInitializedAsync()
+    {
+        inspections = await GetAll();
+    }
+
+    private async Task<List<Inspection>> GetAll()
+    {
+        return await InspectionService.GetAll();
+    }
+
+    private async Task Delete(int id)
+    {
+        await InspectionService.Delete(id);
+        inspections = await GetAll();
+    }
+}

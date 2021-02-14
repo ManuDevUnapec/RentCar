@@ -1,0 +1,215 @@
+﻿@page "/edit_inspection/{id:int}"
+
+@using System;
+@using RentCar.UI.Data.Inspections.Models;
+@using RentCar.UI.Data.Cars.Cars.Models;
+@using RentCar.UI.Data.Rents.Models;
+@using RentCar.UI.Data.Clients.Clients.Models;
+@using RentCar.UI.Data.Employees.Employees.Models;
+@using RentCar.UI.Data.Clients.Clients.Services;
+@using RentCar.UI.Data.Employees.Employees.Services;
+@using RentCar.UI.Data.Cars.Cars.Services;
+@using RentCar.UI.Data.Inspections.Services;
+@using RentCar.UI.Data.Rents.Services;
+
+
+@inject CarService CarService
+@inject ClientService ClientService
+@inject EmployeeService EmployeeService
+@inject RentService RentService
+@inject InspectionService InspectionService
+
+@inject NavigationManager NavigationManager
+
+<h1>Inspections !</h1>
+<strong style="display: inline;">Edit:</strong> <p style="display: inline;">@model.ID</p>
+
+<hr />
+
+@if (model.ID == 0)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+
+    <EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
+
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        @if (CarRentedErrorMessage)
+        {
+            <strong style="color: red;">You cannot inspection a car that is rented</strong>
+        }
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="inspection-client">Client</label>
+                <InputSelect @bind-Value="model.ClientID" id="inspection-client" class="form-control valid">
+                    @if (Clients is not null)
+                        {
+                        <option>Select</option>
+                        @foreach (var model in Clients)
+                            {
+                            <option value="@model.ID">@model.Name</option>
+                            }
+                        }
+                </InputSelect>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inspection-employee">Employee</label>
+                <InputSelect @bind-Value="model.EmployeeID" id="inspection-employee" class="form-control valid">
+                    @if (Employees is not null)
+                        {
+                        <option>Select</option>
+                        @foreach (var model in Employees)
+                            {
+                            <option value="@model.ID">@model.Name</option>
+                            }
+                        }
+                </InputSelect>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="inspection-car">Car</label>
+                <InputSelect @bind-Value="model.CarID" id="inspection-car" class="form-control valid">
+                    @if (Clients is not null)
+                        {
+                        <option>Select</option>
+                        @foreach (var model in Cars)
+                            {
+                            <option value="@model.ID">@model.Description</option>
+                            }
+                        }
+                </InputSelect>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="rent-amount-of-fuel">Amount Of Fuel</label>
+                <InputSelect @bind-Value="model.AmountOfFuel" id="rent-amount-of-fuel" class="form-control valid">
+                    <option>Select</option>
+                    @foreach (var amountOfFuel in Enum.GetValues(typeof(InspectionAmountOfFuel)))
+                        {
+                        <option value="@amountOfFuel">@amountOfFuel</option>
+                        }
+                </InputSelect>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="rent-status">Status</label>
+                <InputSelect @bind-Value="model.Status" id="rent-status" class="form-control valid">
+                    <option>Select</option>
+                    @foreach (var status in Enum.GetValues(typeof(InspectionStatus)))
+                        {
+                        <option value="@status">@status</option>
+                        }
+                </InputSelect>
+            </div>
+        </div>
+
+        <div class="form-check">
+            <InputCheckbox class="form-check-input" id="inspection-glass-break" @bind-Value="model.GlassBreak" />
+            <label class="form-check-label" for="inspection-glass-break">
+                Glass Break
+            </label>
+        </div>
+
+        <div class="form-check">
+            <InputCheckbox class="form-check-input" id="inspection-cat" @bind-Value="model.Cat" />
+            <label class="form-check-label" for="inspection-cat">
+                Cat
+            </label>
+        </div>
+
+        <div class="form-check">
+            <InputCheckbox class="form-check-input" id="inspection-rubber-back" @bind-Value="model.RubberBack" />
+            <label class="form-check-label" for="inspection-rubber-back">
+                Rubber Back
+            </label>
+        </div>
+
+        <div class="form-check">
+            <InputCheckbox class="form-check-input" id="inspection-grated" @bind-Value="model.Grated" />
+            <label class="form-check-label" for="inspection-grated">
+                Grated
+            </label>
+        </div>
+
+        <div class="form-check">
+            <InputCheckbox class="form-check-input" id="inspection-rubber-state-one" @bind-Value="model.RubberStateOne" />
+            <label class="form-check-label" for="inspection-rubber-state-one">
+                Rubber State One
+            </label>
+        </div>
+
+        <div class="form-check">
+            <InputCheckbox class="form-check-input" id="inspection-rubber-state-two" @bind-Value="model.RubberStateTwo" />
+            <label class="form-check-label" for="inspection-rubber-state-two">
+                Rubber State Two
+            </label>
+        </div>
+
+
+        <div class="form-check">
+            <InputCheckbox class="form-check-input" id="inspection-rubber-state-three" @bind-Value="model.RubberStateThree" />
+            <label class="form-check-label" for="inspection-rubber-state-three">
+                Rubber State Three
+            </label>
+        </div>
+
+        <div class="form-check">
+            <InputCheckbox class="form-check-input" id="inspection-rubber-state-four" @bind-Value="model.RubberStateFour" />
+            <label class="form-check-label" for="inspection-rubber-state-four">
+                Rubber State Four
+            </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public int ID { get; set; }
+
+    public List<Client> Clients { get; set; }
+    public List<Employee> Employees { get; set; }
+    public List<Car> Cars { get; set; }
+    public List<Rent> Rents { get; set; }
+    public bool CarRentedErrorMessage { get; set; }
+    private Inspection model = new Inspection();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Clients = await ClientService.GetAll();
+        Employees = await EmployeeService.GetAll();
+        Cars = await CarService.GetAll();
+        Rents = await RentService.GetAll();
+        model = await InspectionService.GetByID(ID);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        try
+        {
+            if (Rents.Any(m => m.CarID == model.CarID && m.Status == RentStatus.Rented.ToString()))
+            {
+
+                CarRentedErrorMessage = true;
+            }
+            else
+            {
+                CarRentedErrorMessage = false;
+                await InspectionService.Put(model);
+                NavigationManager.NavigateTo("/inspections");
+            }
+        }
+        catch (Exception e)
+        {
+            //Redirectionate to error page
+            //NavigationManager.NavigateTo("error");
+        }
+    }
+}
