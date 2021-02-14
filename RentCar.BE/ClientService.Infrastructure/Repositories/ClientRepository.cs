@@ -82,6 +82,12 @@ namespace ClientService.Infrastructure.Repositories
             }
         }
 
+        public Task<IEnumerable<Client>> GetReport(int? id, string name, string identificationCard,
+            string cardNumber, int? creditLimit, string personType, string status)
+        {
+            
+        }
+
         public async Task<int> Update(Client entity)
         {
             var sql = "UPDATE Clients SET Name = @Name, IdentificationCard = @IdentificationCard, CardNumber = @CardNumber," +

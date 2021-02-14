@@ -90,6 +90,40 @@ namespace CarService.Infrastructure.Repositories
             }
         }
 
+        public async Task<IEnumerable<Car>> GetReport(int? id, string description, string status,
+            int? brandID, int? modelID, int? typeOfCarID, int? typeOfFuelID, string plateNumber,
+            string engineNumber, string chassisNumber)
+        {
+            var sql = "SELECT * FROM Cars WHERE ID = ISNULL(@ID, ID)" +
+               "AND Description = ISNULL(@Description, Description)" +
+               "AND Status = ISNULL(@Status, Status)" +
+               "AND BrandID = ISNULL(@BrandID, BrandID)" +
+               "AND ModelID = ISNULL(@ModelID, ModelID)" +
+               "AND TypeOfCarID = ISNULL(@TypeOfCarID, TypeOfCarID)" +
+               "AND TypeOfFuelID = ISNULL(@TypeOfFuelID, TypeOfFuelID)" +
+               "AND PlateNumber = ISNULL(@PlateNumber, PlateNumber)" +
+               "AND EngineNumber = ISNULL(@EngineNumber, EngineNumber)" +
+               "AND ChassisNumber = ISNULL(@ChassisNumber, ChassisNumber);";
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<Car>(sql, new
+                {
+                    ID = id,
+                    Description = description,
+                    Status = status,
+                    BrandID = brandID,
+                    ModelID = modelID,
+                    TypeOfCarID = typeOfCarID,
+                    TypeOfFuelID = typeOfFuelID,
+                    PlateNumber = plateNumber,
+                    EngineNumber = engineNumber,
+                    ChassisNumber = chassisNumber
+                });
+                return result;
+            }
+        }
+
         public async Task<int> Update(Car entity)
         {
             var sql = "UPDATE Cars SET Description = @Description, ChassisNumber = @ChassisNumber, EngineNumber = @EngineNumber," +

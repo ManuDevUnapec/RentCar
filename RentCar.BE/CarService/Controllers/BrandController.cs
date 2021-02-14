@@ -31,11 +31,11 @@ namespace CarService.Controllers
             return Ok(brand);
         }
 
-        [HttpGet("GetReport/{id?}/{description?}/{status:?}")]
+        [HttpGet("GetReport/{id?}/{description?}/{status?}")]
         public async Task<IActionResult> GetReport(int? id = null, string description = null, string status = null)
         {
-            var brand = await _repository.GetReport(id, description, status);
-            return Ok(brand);
+            var brands = await _repository.GetReport(id, description, status);
+            return Ok(brands);
         }
 
         [HttpPost]
