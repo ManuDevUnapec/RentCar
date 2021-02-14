@@ -31,6 +31,21 @@ namespace InspectionService.Controllers
             return Ok(inspection);
         }
 
+        [HttpGet("GetReport/{id?}/{inspectionDate?}/{grated?}/{cat?}/{rubberBack?}/{glassBreak?}/" +
+            "{rubberStateOne?}/{rubberStateTwo?}/{rubberStateThree?}/{rubberStateFourth?}/{amountOfFuel?}/" +
+            "{status?}/{employeeID?}/{clientID?}/{carID?}")]
+        public async Task<IActionResult> GetReport(int? id = null, DateTime? inspectionDate = null,
+            bool? grated = null, bool? cat = null, bool? rubberBack = null, bool? glassBreak = null,
+            bool? rubberStateOne = null, bool? rubberStateTwo = null, bool? rubberStateThree = null,
+            bool? rubberStateFourth = null, string amountOfFuel = null, string status = null, int? employeeID = null,
+            int? clientID = null, int? carID = null)
+        {
+            var cars = await _repository.GetReport(id, inspectionDate, grated, cat, rubberBack, glassBreak,
+                rubberStateOne, rubberStateTwo, rubberStateThree, rubberStateFourth, amountOfFuel, status,
+                employeeID, clientID, carID);
+            return Ok(cars);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(Inspection inspection)
         {

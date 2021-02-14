@@ -165,5 +165,49 @@ namespace InspectionService.Infrastructure.Repositories
                 return 0;
             }
         }
+
+        public async Task<IEnumerable<Inspection>> GetReport(int? id, DateTime? inspectionDate, bool? grated, bool? cat,
+            bool? rubberBack, bool? glassBreak, bool? rubberStateOne, bool? rubberStateTwo, bool? rubberStateThree,
+            bool? rubberStateFour, string amountOfFuel, string status, int? employeeid, int? clientID, int? carID)
+        {
+            var sql = "SELECT * FROM Inspections WHERE ID = ISNULL(@ID, ID)" +
+               "AND InspectionDate = ISNULL(@InspectionDate, InspectionDate)" +
+               "AND Grated = ISNULL(@Grated, Grated)" +
+               "AND Cat = ISNULL(@Cat, Cat)" +
+               "AND RubberBack = ISNULL(@RubberBack, RubberBack)" +
+               "AND GlassBreak = ISNULL(@GlassBreak, GlassBreak)" +
+               "AND RubberStateOne = ISNULL(@RubberStateOne, RubberStateOne)" +
+               "AND RubberStateTwo = ISNULL(@RubberStateTwo, RubberStateTwo)" +
+               "AND RubberStateThree = ISNULL(@RubberStateThree, RubberStateThree)" +
+               "AND RubberStateFour = ISNULL(@RubberStateFour, RubberStateFour)" +
+               "AND AmountOfFuel = ISNULL(@AmountOfFuel, AmountOfFuel)" +
+               "AND Status = ISNULL(@Status, Status)" +
+               "AND EmployeeID = ISNULL(@EmployeeID, EmployeeID)" +
+               "AND ClientID = ISNULL(@ClientID, ClientID)" +
+               "AND CarID = ISNULL(@CarID, CarID)";
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("InspectionConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<Inspection>(sql, new
+                {
+                    ID = id,
+                    InspectionDate = inspectionDate,
+                    Grated = grated,
+                    Cat = cat,
+                    RubberBack = rubberBack,
+                    GlassBreak = glassBreak,
+                    RubberStateOne = rubberStateOne,
+                    RubberStateTwo = rubberStateTwo,
+                    RubberStateThree = rubberStateThree,
+                    RubberStateFour = rubberStateFour,
+                    AmountOfFuel = amountOfFuel,
+                    Status = status,
+                    EmployeeID = employeeid,
+                    ClientID = clientID,
+                    CarID = carID,
+                });
+                return result;
+            }
+        }
     }
 }
