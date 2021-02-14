@@ -57,8 +57,11 @@ namespace CarService.Infrastructure.Repositories
         {
             var sql = "SELECT ca.ID, ca.Description, ca.ChassisNumber, ca.EngineNumber, ca.PlateNumber," +
                     "ca.Status, ca.TypeOfFuelID, ca.TypeOfCarID, ca.BrandID, ca.ModelID, " +
-                    "br.Description as Brand, mo.Description as Model, tc.Description as TypeOfCar, tf.Description as TypeOfFuel FROM Cars ca " +
-                    "INNER JOIN Brand br on ca.BrandID = br.ID INNER JOIN Model mo on ca.ModelID = mo.ID INNER JOIN TypeOfCars tc on ca.TypeOfCarID = tc.ID INNER JOIN TypeOfFuels tf on ca.TypeOfFuelID = tf.ID WHERE ca.ID = @ID";
+                    "br.Description as Brand, mo.Description as Model, tc.Description as TypeOfCar, " +
+                    "tf.Description as TypeOfFuel FROM Cars ca " +
+                    "INNER JOIN Brand br on ca.BrandID = br.ID INNER JOIN Model mo on ca.ModelID = mo.ID " +
+                    "INNER JOIN TypeOfCars tc on ca.TypeOfCarID = tc.ID " +
+                    "INNER JOIN TypeOfFuels tf on ca.TypeOfFuelID = tf.ID WHERE ca.ID = @ID";
             using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
             {
                 connection.Open();
@@ -94,34 +97,48 @@ namespace CarService.Infrastructure.Repositories
             int? brandID, int? modelID, int? typeOfCarID, int? typeOfFuelID, string plateNumber,
             string engineNumber, string chassisNumber)
         {
-            var sql = "SELECT * FROM Cars WHERE ID = ISNULL(@ID, ID)" +
-               "AND Description = ISNULL(@Description, Description)" +
-               "AND Status = ISNULL(@Status, Status)" +
-               "AND BrandID = ISNULL(@BrandID, BrandID)" +
-               "AND ModelID = ISNULL(@ModelID, ModelID)" +
-               "AND TypeOfCarID = ISNULL(@TypeOfCarID, TypeOfCarID)" +
-               "AND TypeOfFuelID = ISNULL(@TypeOfFuelID, TypeOfFuelID)" +
-               "AND PlateNumber = ISNULL(@PlateNumber, PlateNumber)" +
-               "AND EngineNumber = ISNULL(@EngineNumber, EngineNumber)" +
-               "AND ChassisNumber = ISNULL(@ChassisNumber, ChassisNumber);";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+            try
             {
-                connection.Open();
-                var result = await connection.QueryAsync<Car>(sql, new
+                var sql = "SELECT ca.ID, ca.Description, ca.ChassisNumber, ca.EngineNumber, ca.PlateNumber," +
+                    "ca.Status, ca.TypeOfFuelID, ca.TypeOfCarID, ca.BrandID, ca.ModelID, " +
+                    "br.Description as Brand, mo.Description as Model, tc.Description as TypeOfCar, " +
+                    "tf.Description as TypeOfFuel FROM Cars ca " +
+                    "INNER JOIN Brand br on ca.BrandID = br.ID INNER JOIN Model mo on ca.ModelID = mo.ID " +
+                    "INNER JOIN TypeOfCars tc on ca.TypeOfCarID = tc.ID " +
+                    "INNER JOIN TypeOfFuels tf on ca.TypeOfFuelID = tf.ID " +
+                    "WHERE ca.ID = ISNULL(@ID, ca.ID) " +
+                   "AND ca.Status = ISNULL(@Status, ca.Status) " +
+                   "AND ca.BrandID = ISNULL(@BrandID, ca.BrandID) " +
+                   "AND ca.ModelID = ISNULL(@ModelID, ca.ModelID) " +
+                   "AND ca.TypeOfCarID = ISNULL(@TypeOfCarID, ca.TypeOfCarID) " +
+                   "AND ca.TypeOfFuelID = ISNULL(@TypeOfFuelID, ca.TypeOfFuelID) " +
+                   "AND ca.PlateNumber = ISNULL(@PlateNumber, ca.PlateNumber) " +
+                   "AND ca.EngineNumber = ISNULL(@EngineNumber, ca.EngineNumber) " +
+                   "AND ca.ChassisNumber = ISNULL(@ChassisNumber, ca.ChassisNumber);";
+
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
                 {
-                    ID = id,
-                    Description = description,
-                    Status = status,
-                    BrandID = brandID,
-                    ModelID = modelID,
-                    TypeOfCarID = typeOfCarID,
-                    TypeOfFuelID = typeOfFuelID,
-                    PlateNumber = plateNumber,
-                    EngineNumber = engineNumber,
-                    ChassisNumber = chassisNumber
-                });
-                return result;
+                    connection.Open();
+                    var result = await connection.QueryAsync<Car>(sql, new
+                    {
+                        ID = id,
+                        Status = status,
+                        BrandID = brandID,
+                        ModelID = modelID,
+                        TypeOfCarID = typeOfCarID,
+                        TypeOfFuelID = typeOfFuelID,
+                        PlateNumber = plateNumber,
+                        EngineNumber = engineNumber,
+                        ChassisNumber = chassisNumber
+                    });
+                    return result;
+                }
             }
+            catch(Exception e)
+            {
+                return new List<Car>();
+            }
+            
         }
 
         public async Task<int> Update(Car entity)

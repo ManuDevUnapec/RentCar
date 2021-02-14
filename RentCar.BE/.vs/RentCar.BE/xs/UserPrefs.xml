@@ -1,18 +1,11 @@
 ﻿<Properties StartupConfiguration="RentCar.BE">
   <MonoDevelop.Ide.ItemProperties.InspectionService PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="CarService.Infrastructure/Repositories/ModelRepository.cs">
-    <Files>
-      <File FileName="CarService.Infrastructure/Repositories/ModelRepository.cs" Line="1" Column="1" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
-            <Node name="CarService.Infrastructure" expanded="True">
-              <Node name="Repositories" expanded="True">
-                <Node name="ModelRepository.cs" selected="True" />
-              </Node>
-            </Node>
+            <Node name="CarService" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -24,7 +17,9 @@
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Infrastructure/Repositories/CarRepository.cs" relfile="CarService.Infrastructure/Repositories/CarRepository.cs" line="138" column="13" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.ItemProperties.CarService PreferredExecutionTarget="/Applications/Safari.app" />
   <MultiItemStartupConfigurations>
