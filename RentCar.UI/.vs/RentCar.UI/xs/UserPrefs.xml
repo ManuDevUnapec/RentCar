@@ -1,10 +1,33 @@
 ﻿<Properties StartupConfiguration="{8A265033-2DA1-4791-81F6-3526F5BB7E11}|Default">
-  <MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workbench ActiveDocument="RentCar.UI/Data/Common/ExcelService.cs">
+    <Files>
+      <File FileName="RentCar.UI/Pages/Cars/Brands/BrandReport.razor" Line="86" Column="45" />
+      <File FileName="RentCar.UI/Data/Common/ExcelService.cs" Line="11" Column="52" />
+    </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
-          <Node name="RentCar.UI" expanded="True" selected="True">
-            <Node name="RentCar.UI" expanded="True" />
+          <Node name="RentCar.UI" expanded="True">
+            <Node name="RentCar.UI" expanded="True">
+              <Node name="Data" expanded="True">
+                <Node name="Cars" expanded="True">
+                  <Node name="Brands" expanded="True">
+                    <Node name="Services" expanded="True" />
+                  </Node>
+                </Node>
+                <Node name="Common" expanded="True">
+                  <Node name="ExcelService.cs" selected="True" />
+                </Node>
+              </Node>
+              <Node name="Pages" expanded="True">
+                <Node name="Cars" expanded="True">
+                  <Node name="Brands" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="wwwroot" expanded="True">
+                <Node name="js" expanded="True" />
+              </Node>
+            </Node>
           </Node>
         </State>
       </Pad>

@@ -31,7 +31,7 @@ namespace CarService.Controllers
             return Ok(brand);
         }
 
-        [HttpGet("GetReport/{id?}/{description?}/{status?}")]
+        [HttpGet("GetReport")]
         public async Task<IActionResult> GetReport(int? id = null, string description = null, string status = null)
         {
             var brands = await _repository.GetReport(id, description, status);
