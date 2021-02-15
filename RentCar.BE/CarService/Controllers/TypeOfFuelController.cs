@@ -31,7 +31,7 @@ namespace CarService.Controllers
             return Ok(typeOfFuel);
         }
 
-        [HttpGet("GetReport/{id?}/{description?}/{status:?}")]
+        [HttpGet("GetReport")]
         public async Task<IActionResult> GetReport(int? id = null, string description = null, string status = null)
         {
             var typeOfFuels = await _repository.GetReport(id, description, status);

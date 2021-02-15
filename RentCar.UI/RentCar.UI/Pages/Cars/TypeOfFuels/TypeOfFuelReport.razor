@@ -1,0 +1,95 @@
+﻿@page "/type_of_fuel_report"
+
+@using RentCar.UI.Data.Cars.TypeOfFuels.Models;
+@using RentCar.UI.Data.Cars.TypeOfFuels.Services;
+@using RentCar.UI.Data.Common;
+
+@inject TypeOfFuelService TypeOfFuelService
+@inject IJSRuntime JS
+
+<h1>Type Of Fuels Report!</h1>
+
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+
+    <div style="font-size: 30px; display: flex; justify-content: flex-end; cursor:pointer;">
+        <span @onclick="ExportExcel" class="fas fa-file-excel mr-3" aria-hidden="true" style="font-size: 25px; color: #31be7d;"></span>
+        <span @onclick="Search" class="fas fa-search" aria-hidden="true" style="font-size: 25px; color: #e90b5a;"></span>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="brand-id">ID</label>
+            <input id="brand-id" class="form-control" @bind="id" />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="brand-description">Description</label>
+            <input id="brand-description" class="form-control" @bind="description" />
+        </div>
+        <div class="form-group col-md-4">
+            <label for="brand-status">Status</label>
+            <select @bind="status" id="brand-status" class="form-control valid">
+                <option value="null">Select</option>
+                @foreach (var status in Enum.GetValues(typeof(TypeOfFuelStauts)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+        </div>
+    </div>
+
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (typeOfFuels == null)
+        {
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var typeOfCar in typeOfFuels)
+            {
+                <tr>
+                    <td>@typeOfCar.ID</td>
+                    <td>@typeOfCar.Description</td>
+                    <td>@typeOfCar.Status</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<TypeOfFuel> typeOfFuels;
+    private int? id;
+    private string description;
+    private string status;
+
+    private async Task Search()
+    {
+        typeOfFuels = await GetReport(id, description, status);
+    }
+
+    private async Task ExportExcel()
+    {
+        typeOfFuels = await GetReport(id, description, status);
+        var excelBytes = ExcelService.GenerateExcelWorkbook<TypeOfFuel>(typeOfFuels);
+        await JS.InvokeVoidAsync("saveAsFile", $"type_of_fuel_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.xlsx", Convert.ToBase64String(excelBytes));
+    }
+
+    private async Task<List<TypeOfFuel>> GetReport(int? id, string description, string status)
+    {
+        return await TypeOfFuelService.GetReport(id, description, status);
+    }
+}

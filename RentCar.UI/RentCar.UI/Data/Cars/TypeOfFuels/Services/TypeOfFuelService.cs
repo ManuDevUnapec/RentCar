@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.WebUtilities;
 using RentCar.UI.Data.Cars.TypeOfFuels.Models;
 
 namespace RentCar.UI.Data.Cars.TypeOfFuels.Services
@@ -43,6 +44,26 @@ namespace RentCar.UI.Data.Cars.TypeOfFuels.Services
             {
                 //Log error
                 return new TypeOfFuel();
+            }
+        }
+
+        public async Task<List<TypeOfFuel>> GetReport(int? id, string description, string status)
+        {
+            try
+            {
+                var client = _carFactory.CreateClient("Cars");
+                var parameters = new Dictionary<string, string>();
+                parameters.Add("id", id.ToString());
+                parameters.Add("description", description);
+                parameters.Add("status", status);
+                var url = new Uri(QueryHelpers.AddQueryString($"{client.BaseAddress}TypeOfFuel/GetReport", parameters));
+                var typeOfCars = await client.GetFromJsonAsync<List<TypeOfFuel>>(url);
+                return typeOfCars;
+            }
+            catch (Exception e)
+            {
+                //Log error
+                return new List<TypeOfFuel>();
             }
         }
 
