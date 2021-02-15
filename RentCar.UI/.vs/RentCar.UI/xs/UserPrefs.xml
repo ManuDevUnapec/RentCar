@@ -1,8 +1,8 @@
 ﻿<Properties StartupConfiguration="{8A265033-2DA1-4791-81F6-3526F5BB7E11}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="RentCar.UI/Data/Common/ExcelService.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RentCar.UI/Data/Cars/TypeOfCars/Services/TypeOfCarService.cs">
     <Files>
-      <File FileName="RentCar.UI/Pages/Cars/Brands/BrandReport.razor" Line="86" Column="45" />
-      <File FileName="RentCar.UI/Data/Common/ExcelService.cs" Line="11" Column="52" />
+      <File FileName="RentCar.UI/Pages/Cars/TypeOfCars/TypeOfCarReport.razor" Line="93" Column="48" />
+      <File FileName="RentCar.UI/Data/Cars/TypeOfCars/Services/TypeOfCarService.cs" Line="54" Column="63" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,21 +11,17 @@
             <Node name="RentCar.UI" expanded="True">
               <Node name="Data" expanded="True">
                 <Node name="Cars" expanded="True">
-                  <Node name="Brands" expanded="True">
-                    <Node name="Services" expanded="True" />
+                  <Node name="TypeOfCars" expanded="True">
+                    <Node name="Services" expanded="True">
+                      <Node name="TypeOfCarService.cs" selected="True" />
+                    </Node>
                   </Node>
-                </Node>
-                <Node name="Common" expanded="True">
-                  <Node name="ExcelService.cs" selected="True" />
                 </Node>
               </Node>
               <Node name="Pages" expanded="True">
                 <Node name="Cars" expanded="True">
-                  <Node name="Brands" expanded="True" />
+                  <Node name="TypeOfCars" expanded="True" />
                 </Node>
-              </Node>
-              <Node name="wwwroot" expanded="True">
-                <Node name="js" expanded="True" />
               </Node>
             </Node>
           </Node>
@@ -37,7 +33,10 @@
   <MonoDevelop.Ide.ItemProperties.RentCar.UI PreferredExecutionTarget="/Applications/Safari.app" />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
-    <BreakpointStore />
+    <BreakpointStore>
+      <Breakpoint file="/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.UI/RentCar.UI/Pages/Cars/TypeOfCars/TypeOfCarReport.razor" relfile="RentCar.UI/Pages/Cars/TypeOfCars/TypeOfCarReport.razor" line="93" column="1" />
+      <Breakpoint file="/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.UI/RentCar.UI/Data/Cars/TypeOfCars/Services/TypeOfCarService.cs" relfile="RentCar.UI/Data/Cars/TypeOfCars/Services/TypeOfCarService.cs" line="54" column="1" />
+    </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MultiItemStartupConfigurations />
 </Properties>
