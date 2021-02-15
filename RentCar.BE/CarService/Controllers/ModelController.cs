@@ -31,7 +31,7 @@ namespace CarService.Controllers
             return Ok(model);
         }
 
-        [HttpGet("GetReport/{id?}/{description?}/{status?}/{brandID?}")]
+        [HttpGet("GetReport")]
         public async Task<IActionResult> GetReport(int? id = null, string description = null, string status = null,
             int? brandID = null)
         {

@@ -7,7 +7,7 @@
           <Node name="RentCar.BE" expanded="True">
             <Node name="CarService" expanded="True">
               <Node name="Controllers" expanded="True">
-                <Node name="TypeOfCarController.cs" selected="True" />
+                <Node name="ModelController.cs" selected="True" />
               </Node>
             </Node>
           </Node>
