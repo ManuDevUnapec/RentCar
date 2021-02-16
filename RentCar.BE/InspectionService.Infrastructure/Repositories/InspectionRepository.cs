@@ -166,12 +166,11 @@ namespace InspectionService.Infrastructure.Repositories
             }
         }
 
-        public async Task<IEnumerable<Inspection>> GetReport(int? id, DateTime? inspectionDate, bool? grated, bool? cat,
+        public async Task<IEnumerable<Inspection>> GetReport(int? id, bool? grated, bool? cat,
             bool? rubberBack, bool? glassBreak, bool? rubberStateOne, bool? rubberStateTwo, bool? rubberStateThree,
             bool? rubberStateFour, string amountOfFuel, string status, int? employeeid, int? clientID, int? carID)
         {
             var sql = "SELECT * FROM Inspections WHERE ID = ISNULL(@ID, ID)" +
-               "AND InspectionDate = ISNULL(@InspectionDate, InspectionDate)" +
                "AND Grated = ISNULL(@Grated, Grated)" +
                "AND Cat = ISNULL(@Cat, Cat)" +
                "AND RubberBack = ISNULL(@RubberBack, RubberBack)" +
@@ -191,7 +190,6 @@ namespace InspectionService.Infrastructure.Repositories
                 var result = await connection.QueryAsync<Inspection>(sql, new
                 {
                     ID = id,
-                    InspectionDate = inspectionDate,
                     Grated = grated,
                     Cat = cat,
                     RubberBack = rubberBack,

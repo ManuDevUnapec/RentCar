@@ -32,13 +32,13 @@ namespace InspectionService.Controllers
         }
 
         [HttpGet("GetReport")]
-        public async Task<IActionResult> GetReport(int? id = null, DateTime? inspectionDate = null,
-            bool? grated = null, bool? cat = null, bool? rubberBack = null, bool? glassBreak = null,
-            bool? rubberStateOne = null, bool? rubberStateTwo = null, bool? rubberStateThree = null,
-            bool? rubberStateFourth = null, string amountOfFuel = null, string status = null, int? employeeID = null,
-            int? clientID = null, int? carID = null)
+        public async Task<IActionResult> GetReport(int? id = null, bool? grated = null, bool? cat = null,
+            bool? rubberBack = null, bool? glassBreak = null, bool? rubberStateOne = null,
+            bool? rubberStateTwo = null, bool? rubberStateThree = null, bool? rubberStateFourth = null,
+            string amountOfFuel = null, string status = null, int? employeeID = null, int? clientID = null,
+            int? carID = null)
         {
-            var cars = await _repository.GetReport(id, inspectionDate, grated, cat, rubberBack, glassBreak,
+            var cars = await _repository.GetReport(id, grated, cat, rubberBack, glassBreak,
                 rubberStateOne, rubberStateTwo, rubberStateThree, rubberStateFourth, amountOfFuel, status,
                 employeeID, clientID, carID);
             return Ok(cars);
