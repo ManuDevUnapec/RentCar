@@ -82,6 +82,20 @@ namespace CarService.Infrastructure.Repositories
             }
         }
 
+        public async Task<IEnumerable<Brand>> GetReport(int? id, string description, string status)
+        {
+            var sql = "SELECT * FROM Brand WHERE ID = ISNULL(@ID, ID)" +
+                "AND Description = ISNULL(@Description, Description)" +
+                "AND Status = ISNULL(@Status, Status);";
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<Brand>(sql, new { ID = id, Description = description,
+                Status = status});
+                return result;
+            }
+        }
+
         public async Task<int> Update(Brand entity)
         {
             var sql = "UPDATE Brand SET Description = @Description, Status = @Status WHERE ID = @ID;";

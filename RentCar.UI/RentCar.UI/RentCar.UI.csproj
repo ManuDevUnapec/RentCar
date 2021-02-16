@@ -46,5 +46,10 @@
     <Folder Include="Data\Inspections\Models\" />
     <Folder Include="Data\Inspections\Services\" />
     <Folder Include="Pages\Inspections\" />
+    <Folder Include="Data\Common\" />
+    <Folder Include="wwwroot\js\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="5.5.3" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,123 @@
+﻿@page "/model_report"
+
+@using RentCar.UI.Data.Cars.Models.Models;
+@using RentCar.UI.Data.Cars.Brands.Models;
+@using RentCar.UI.Data.Cars.Models.Services;
+@using RentCar.UI.Data.Cars.Brands.Services;
+@using RentCar.UI.Data.Common;
+
+@inject ModelService ModelService
+@inject BrandService BrandService
+@inject IJSRuntime JS
+
+<h1>Models Report!</h1>
+
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+
+    <div style="font-size: 30px; display: flex; justify-content: flex-end; cursor:pointer;">
+        <span @onclick="ExportExcel" class="fas fa-file-excel mr-3" aria-hidden="true" style="font-size: 25px; color: #31be7d;"></span>
+        <span @onclick="Search" class="fas fa-search" aria-hidden="true" style="font-size: 25px; color: #e90b5a;"></span>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="model-report-id">ID</label>
+            <input id="model-report-id" class="form-control" @bind="id" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="model-report-description">Description</label>
+            <input id="model-report-description" class="form-control" @bind="description" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="model-report-brand">Brand</label>
+            <select @bind="brandID" id="model-report-brand" class="form-control valid">
+                @if (Brands is not null)
+                {
+                    <option value="null">Select</option>
+                    @foreach (var brand in Brands)
+                    {
+                        <option value="@brand.ID">@brand.Description</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="model-report-status">Status</label>
+            <select @bind="status" id="model-report-status" class="form-control valid">
+                <option value="null">Select</option>
+                @foreach (var status in Enum.GetValues(typeof(ModelStatus)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+        </div>
+    </div>
+
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Brand</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (models == null)
+        {
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var model in models)
+            {
+                <tr>
+                    <td>@model.ID</td>
+                    <td>@model.Description</td>
+                    <td>@model.Brand</td>
+                    <td>@model.Status</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<Model> models;
+    private int? id;
+    private string description;
+    private string status;
+    private int? brandID;
+
+    public List<Brand> Brands { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        Brands = await BrandService.GetAll();
+    }
+
+    private async Task Search()
+    {
+        models = await GetReport(id, description, status);
+    }
+
+    private async Task ExportExcel()
+    {
+        models = await GetReport(id, description, status);
+        var excelBytes = ExcelService.GenerateExcelWorkbook<Model>(models);
+        await JS.InvokeVoidAsync("saveAsFile", $"model_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.xlsx", Convert.ToBase64String(excelBytes));
+    }
+
+    private async Task<List<Model>> GetReport(int? id, string description, string status)
+    {
+        return await ModelService.GetReport(id, description, status, brandID);
+    }
+}

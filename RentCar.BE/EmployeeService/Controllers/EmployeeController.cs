@@ -35,6 +35,15 @@ namespace EmployeeService.Controllers
             return Ok(employee);
         }
 
+        [HttpGet("GetReport")]
+        public async Task<IActionResult> GetReport(int? id = null, string name = null, string identificationCard = null,
+            string hourHand = null, string commisionPercent = null, string status = null)
+        {
+            var employees = await _repository.GetReport(id, name, identificationCard, hourHand, commisionPercent,
+                status);
+            return Ok(employees);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(Employee employee)
         {

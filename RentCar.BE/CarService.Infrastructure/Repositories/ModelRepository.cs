@@ -83,6 +83,28 @@ namespace CarService.Infrastructure.Repositories
             }
         }
 
+        public async Task<IEnumerable<Model>> GetReport(int? id, string description, string status, int? brandID)
+        {
+            var sql = "SELECT m.ID as ID, m.Description as Description, m.Status as Status," +
+                "m.BrandID as BrandID, b.Description as Brand " +
+                "FROM Model m INNER JOIN Brand b on m.BrandID = b.ID WHERE m.ID = ISNULL(@ID, m.ID)" +
+                "AND m.Description = ISNULL(@Description, m.Description)" +
+                "AND m.Status = ISNULL(@Status, m.Status)" +
+                "AND m.BrandID = ISNULL(@BrandID, m.BrandID);";
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<Model>(sql, new
+                {
+                    ID = id,
+                    Description = description,
+                    Status = status,
+                    BrandID = brandID
+                });
+                return result;
+            }
+        }
+
         public async Task<int> Update(Model entity)
         {
             var sql = "UPDATE Model SET Description = @Description, Status = @Status, BrandID = @BrandID WHERE ID = @ID;";

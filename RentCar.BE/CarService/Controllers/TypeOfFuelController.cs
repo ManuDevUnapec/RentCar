@@ -31,6 +31,13 @@ namespace CarService.Controllers
             return Ok(typeOfFuel);
         }
 
+        [HttpGet("GetReport")]
+        public async Task<IActionResult> GetReport(int? id = null, string description = null, string status = null)
+        {
+            var typeOfFuels = await _repository.GetReport(id, description, status);
+            return Ok(typeOfFuels);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(TypeOfFuel typeOfFuel)
         {

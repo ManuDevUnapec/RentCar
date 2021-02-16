@@ -1,0 +1,137 @@
+﻿@page "/client_report"
+
+@using RentCar.UI.Data.Clients.Clients.Models;
+@using RentCar.UI.Data.Clients.Clients.Services;
+@using RentCar.UI.Data.Common;
+
+@inject ClientService ClientService
+@inject IJSRuntime JS
+
+<h1>Client Report!</h1>
+
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+
+    <div style="font-size: 30px; display: flex; justify-content: flex-end; cursor:pointer;">
+        <span @onclick="ExportExcel" class="fas fa-file-excel mr-3" aria-hidden="true" style="font-size: 25px; color: #31be7d;"></span>
+        <span @onclick="Search" class="fas fa-search" aria-hidden="true" style="font-size: 25px; color: #e90b5a;"></span>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="client-id">ID</label>
+            <input id="client-id" class="form-control" @bind="id" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="client-name">Name</label>
+            <input id="client-name" class="form-control" @bind="name" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="client-identification-card">Identification Card</label>
+            <input id="client-identification-card" class="form-control" @bind="identificationCard" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="client-card-number">Card Number</label>
+            <input id="client-card-number" class="form-control" @bind="cardNumber" />
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="client-credit-limit">Credit Limit</label>
+            <input id="client-credit-limit" class="form-control" @bind="creditLimit" />
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="client-person-type">Person Type</label>
+            <select @bind="personType" id="client-person-type" class="form-control valid">
+                <option value="null">Select</option>
+                @foreach (var personTy in Enum.GetValues(typeof(ClientPersonType)))
+                {
+                    <option value="@personTy">@personTy</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="client-status">Status</label>
+            <select @bind="status" id="client-status" class="form-control valid">
+                <option value="null">Select</option>
+                @foreach (var status in Enum.GetValues(typeof(ClientStatus)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Identification Card</th>
+                <th>Card Number</th>
+                <th>Credit Limit</th>
+                <th>Person Type</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (clients == null)
+            {
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            }
+            else
+            {
+                @foreach (var brand in clients)
+                {
+                    <tr>
+                        <td>@brand.ID</td>
+                        <td>@brand.Name</td>
+                        <td>@brand.IdentificationCard</td>
+                        <td>@brand.CardNumber</td>
+                        <td>@brand.CreditLimit</td>
+                        <td>@brand.PersonType</td>
+                        <td>@brand.Status</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+
+    @code {
+        private List<Client> clients;
+        private int? id;
+        private string name;
+        private string identificationCard;
+        private string cardNumber;
+        private int? creditLimit;
+        private string personType;
+        private string status;
+
+        private async Task Search()
+        {
+            clients = await GetReport();
+        }
+
+        private async Task ExportExcel()
+        {
+            clients = await GetReport();
+            var excelBytes = ExcelService.GenerateExcelWorkbook<Client>(clients);
+            await JS.InvokeVoidAsync("saveAsFile", $"client_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.xlsx", Convert.ToBase64String(excelBytes));
+        }
+
+        private async Task<List<Client>> GetReport()
+        {
+            return await ClientService.GetReport(id, name, identificationCard, cardNumber, creditLimit, personType,
+                status);
+        }
+    }

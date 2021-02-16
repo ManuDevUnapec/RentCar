@@ -57,8 +57,11 @@ namespace CarService.Infrastructure.Repositories
         {
             var sql = "SELECT ca.ID, ca.Description, ca.ChassisNumber, ca.EngineNumber, ca.PlateNumber," +
                     "ca.Status, ca.TypeOfFuelID, ca.TypeOfCarID, ca.BrandID, ca.ModelID, " +
-                    "br.Description as Brand, mo.Description as Model, tc.Description as TypeOfCar, tf.Description as TypeOfFuel FROM Cars ca " +
-                    "INNER JOIN Brand br on ca.BrandID = br.ID INNER JOIN Model mo on ca.ModelID = mo.ID INNER JOIN TypeOfCars tc on ca.TypeOfCarID = tc.ID INNER JOIN TypeOfFuels tf on ca.TypeOfFuelID = tf.ID WHERE ca.ID = @ID";
+                    "br.Description as Brand, mo.Description as Model, tc.Description as TypeOfCar, " +
+                    "tf.Description as TypeOfFuel FROM Cars ca " +
+                    "INNER JOIN Brand br on ca.BrandID = br.ID INNER JOIN Model mo on ca.ModelID = mo.ID " +
+                    "INNER JOIN TypeOfCars tc on ca.TypeOfCarID = tc.ID " +
+                    "INNER JOIN TypeOfFuels tf on ca.TypeOfFuelID = tf.ID WHERE ca.ID = @ID";
             using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
             {
                 connection.Open();
@@ -88,6 +91,56 @@ namespace CarService.Infrastructure.Repositories
                 //Log Error
                 return new List<Car>();
             }
+        }
+
+        public async Task<IEnumerable<Car>> GetReport(int? id, string description, string status,
+            int? brandID, int? modelID, int? typeOfCarID, int? typeOfFuelID, string plateNumber,
+            string engineNumber, string chassisNumber)
+        {
+            try
+            {
+                var sql = "SELECT ca.ID, ca.Description, ca.ChassisNumber, ca.EngineNumber, ca.PlateNumber," +
+                    "ca.Status, ca.TypeOfFuelID, ca.TypeOfCarID, ca.BrandID, ca.ModelID, " +
+                    "br.Description as Brand, mo.Description as Model, tc.Description as TypeOfCar, " +
+                    "tf.Description as TypeOfFuel FROM Cars ca " +
+                    "INNER JOIN Brand br on ca.BrandID = br.ID INNER JOIN Model mo on ca.ModelID = mo.ID " +
+                    "INNER JOIN TypeOfCars tc on ca.TypeOfCarID = tc.ID " +
+                    "INNER JOIN TypeOfFuels tf on ca.TypeOfFuelID = tf.ID " +
+                    "WHERE ca.ID = ISNULL(@ID, ca.ID) " +
+                   "AND ca.Status = ISNULL(@Status, ca.Status) " +
+                   "AND ca.Description = ISNULL(@Description, ca.Description) " +
+                   "AND ca.BrandID = ISNULL(@BrandID, ca.BrandID) " +
+                   "AND ca.ModelID = ISNULL(@ModelID, ca.ModelID) " +
+                   "AND ca.TypeOfCarID = ISNULL(@TypeOfCarID, ca.TypeOfCarID) " +
+                   "AND ca.TypeOfFuelID = ISNULL(@TypeOfFuelID, ca.TypeOfFuelID) " +
+                   "AND ca.PlateNumber = ISNULL(@PlateNumber, ca.PlateNumber) " +
+                   "AND ca.EngineNumber = ISNULL(@EngineNumber, ca.EngineNumber) " +
+                   "AND ca.ChassisNumber = ISNULL(@ChassisNumber, ca.ChassisNumber);";
+
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.QueryAsync<Car>(sql, new
+                    {
+                        ID = id,
+                        Status = status,
+                        BrandID = brandID,
+                        ModelID = modelID,
+                        TypeOfCarID = typeOfCarID,
+                        TypeOfFuelID = typeOfFuelID,
+                        PlateNumber = plateNumber,
+                        EngineNumber = engineNumber,
+                        ChassisNumber = chassisNumber,
+                        Description = description
+                    });
+                    return result;
+                }
+            }
+            catch(Exception e)
+            {
+                return new List<Car>();
+            }
+            
         }
 
         public async Task<int> Update(Car entity)

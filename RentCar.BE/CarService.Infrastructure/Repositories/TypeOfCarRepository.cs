@@ -81,6 +81,24 @@ namespace CarService.Infrastructure.Repositories
             }
         }
 
+        public async Task<IEnumerable<TypeOfCar>> GetReport(int? id, string description, string status)
+        {
+            var sql = "SELECT * FROM TypeOfCars WHERE ID = ISNULL(@ID, ID)" +
+                "AND Description = ISNULL(@Description, Description)" +
+                "AND Status = ISNULL(@Status, Status);";
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<TypeOfCar>(sql, new
+                {
+                    ID = id,
+                    Description = description,
+                    Status = status
+                });
+                return result;
+            }
+        }
+
         public async Task<int> Update(TypeOfCar entity)
         {
             var sql = "UPDATE TypeOfCars SET Description = @Description, Status = @Status WHERE ID = @ID;";

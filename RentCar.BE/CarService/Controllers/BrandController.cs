@@ -31,6 +31,13 @@ namespace CarService.Controllers
             return Ok(brand);
         }
 
+        [HttpGet("GetReport")]
+        public async Task<IActionResult> GetReport(int? id = null, string description = null, string status = null)
+        {
+            var brands = await _repository.GetReport(id, description, status);
+            return Ok(brands);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(Brand brand)
         {

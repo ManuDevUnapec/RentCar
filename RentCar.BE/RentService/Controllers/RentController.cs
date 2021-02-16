@@ -31,6 +31,16 @@ namespace RentService.Controllers
             return Ok(rent);
         }
 
+        [HttpGet("GetReport")]
+        public async Task<IActionResult> GetReport(int? id = null, int? amountForDays = null, 
+            int? numberOfDays = null, string status = null, int? employeeID = null, int? clientID = null,
+            int? carID = null)
+        {
+            var cars = await _repository.GetReport(id, amountForDays, numberOfDays,
+                status, employeeID, clientID, carID);
+            return Ok(cars);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Post(Rent rent)
         {

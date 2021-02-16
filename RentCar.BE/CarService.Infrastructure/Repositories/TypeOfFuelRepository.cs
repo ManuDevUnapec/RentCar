@@ -81,6 +81,24 @@ namespace CarService.Infrastructure.Repositories
             }
         }
 
+        public async Task<IEnumerable<TypeOfFuel>> GetReport(int? id, string description, string status)
+        {
+            var sql = "SELECT * FROM TypeOfFuels WHERE ID = ISNULL(@ID, ID)" +
+                "AND Description = ISNULL(@Description, Description)" +
+                "AND Status = ISNULL(@Status, Status);";
+            using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+            {
+                connection.Open();
+                var result = await connection.QueryAsync<TypeOfFuel>(sql, new
+                {
+                    ID = id,
+                    Description = description,
+                    Status = status
+                });
+                return result;
+            }
+        }
+
         public async Task<int> Update(TypeOfFuel entity)
         {
             var sql = "UPDATE TypeOfFuels SET Description = @Description, Status = @Status WHERE ID = @ID;";
