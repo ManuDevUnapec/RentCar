@@ -37,10 +37,10 @@ namespace EmployeeService.Controllers
 
         [HttpGet("GetReport")]
         public async Task<IActionResult> GetReport(int? id = null, string name = null, string identificationCard = null,
-            string hourHand = null, string commisionPercent = null, DateTime? created = null, string status = null)
+            string hourHand = null, string commisionPercent = null, string status = null)
         {
             var employees = await _repository.GetReport(id, name, identificationCard, hourHand, commisionPercent,
-                created, status);
+                status);
             return Ok(employees);
         }
 

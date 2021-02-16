@@ -1,0 +1,128 @@
+﻿@page "/employee_report"
+
+@using RentCar.UI.Data.Employees.Employees.Models;
+@using RentCar.UI.Data.Employees.Employees.Services;
+@using RentCar.UI.Data.Common;
+
+@inject EmployeeService EmployeeService
+@inject IJSRuntime JS
+
+<h1>Employee Report!</h1>
+
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+
+    <div style="font-size: 30px; display: flex; justify-content: flex-end; cursor:pointer;">
+        <span @onclick="ExportExcel" class="fas fa-file-excel mr-3" aria-hidden="true" style="font-size: 25px; color: #31be7d;"></span>
+        <span @onclick="Search" class="fas fa-search" aria-hidden="true" style="font-size: 25px; color: #e90b5a;"></span>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="client-id">ID</label>
+            <input id="client-id" class="form-control" @bind="id" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="client-name">Name</label>
+            <input id="client-name" class="form-control" @bind="name" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="client-identification-card">Identification Card</label>
+            <input id="client-identification-card" class="form-control" @bind="identificationCard" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="employee-commision">Commision Percent</label>
+            <input id="employee-commision" class="form-control" @bind="commisionPercent" />
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="employee-hour-hand">Hour Hand</label>
+            <select @bind="hourHand" id="employee-hour-hand" class="form-control valid">
+                <option value="null">Select</option>
+                @foreach (var hourHa in Enum.GetValues(typeof(EmployeeHourHand)))
+                {
+                    <option value="@hourHa">@hourHa</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="client-status">Status</label>
+            <select @bind="status" id="client-status" class="form-control valid">
+                <option value="null">Select</option>
+                @foreach (var status in Enum.GetValues(typeof(EmployeeStatus)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Identification Card</th>
+            <th>Hour Hand</th>
+            <th>Commision Percent</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (employees == null)
+        {
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var brand in employees)
+            {
+                <tr>
+                    <td>@brand.ID</td>
+                    <td>@brand.Name</td>
+                    <td>@brand.IdentificationCard</td>
+                    <td>@brand.HourHand</td>
+                    <td>@brand.CommisionPercent</td>
+                    <td>@brand.Status</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<Employee> employees;
+    private int? id;
+    private string name;
+    private string identificationCard;
+    private string hourHand;
+    private string commisionPercent;
+    private string status;
+
+    private async Task Search()
+    {
+        employees = await GetReport();
+    }
+
+    private async Task ExportExcel()
+    {
+        employees = await GetReport();
+        var excelBytes = ExcelService.GenerateExcelWorkbook<Employee>(employees);
+        await JS.InvokeVoidAsync("saveAsFile", $"employee_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.xlsx", Convert.ToBase64String(excelBytes));
+    }
+
+    private async Task<List<Employee>> GetReport()
+    {
+        return await EmployeeService.GetReport(id, name, identificationCard, hourHand, commisionPercent,
+            status);
+    }
+}

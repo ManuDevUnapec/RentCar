@@ -1,16 +1,16 @@
 ﻿<Properties StartupConfiguration="RentCar.BE">
   <MonoDevelop.Ide.ItemProperties.InspectionService PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="ClientService/Controllers/ClientController.cs">
-    <Files>
-      <File FileName="ClientService/Controllers/ClientController.cs" Line="39" Column="110" />
-    </Files>
+  <MonoDevelop.Ide.Workbench>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
-            <Node name="ClientService" expanded="True">
-              <Node name="Controllers" expanded="True">
-                <Node name="ClientController.cs" selected="True" />
+            <Node name="EmployeeService" expanded="True">
+              <Node name="Controllers" expanded="True" />
+            </Node>
+            <Node name="EmployeeService.Infrastructure" expanded="True">
+              <Node name="Repositories" expanded="True">
+                <Node name="EmployeeRepository.cs" selected="True" />
               </Node>
             </Node>
           </Node>
