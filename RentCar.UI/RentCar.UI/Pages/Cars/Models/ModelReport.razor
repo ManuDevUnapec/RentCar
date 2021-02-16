@@ -65,7 +65,7 @@
         </tr>
     </thead>
     <tbody>
-        @if (typeOfFuels == null)
+        @if (models == null)
         {
             <tr>
                 <td></td>
@@ -76,13 +76,13 @@
         }
         else
         {
-            @foreach (var typeOfCar in typeOfFuels)
+            @foreach (var model in models)
             {
                 <tr>
-                    <td>@typeOfCar.ID</td>
-                    <td>@typeOfCar.Description</td>
-                    <td>@typeOfCar.Brand</td>
-                    <td>@typeOfCar.Status</td>
+                    <td>@model.ID</td>
+                    <td>@model.Description</td>
+                    <td>@model.Brand</td>
+                    <td>@model.Status</td>
                 </tr>
             }
         }
@@ -90,7 +90,7 @@
 </table>
 
 @code {
-    private List<Model> typeOfFuels;
+    private List<Model> models;
     private int? id;
     private string description;
     private string status;
@@ -106,13 +106,13 @@
 
     private async Task Search()
     {
-        typeOfFuels = await GetReport(id, description, status);
+        models = await GetReport(id, description, status);
     }
 
     private async Task ExportExcel()
     {
-        typeOfFuels = await GetReport(id, description, status);
-        var excelBytes = ExcelService.GenerateExcelWorkbook<Model>(typeOfFuels);
+        models = await GetReport(id, description, status);
+        var excelBytes = ExcelService.GenerateExcelWorkbook<Model>(models);
         await JS.InvokeVoidAsync("saveAsFile", $"model_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.xlsx", Convert.ToBase64String(excelBytes));
     }
 

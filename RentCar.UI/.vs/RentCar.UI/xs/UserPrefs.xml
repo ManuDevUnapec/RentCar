@@ -1,8 +1,7 @@
 ﻿<Properties StartupConfiguration="{8A265033-2DA1-4791-81F6-3526F5BB7E11}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="RentCar.UI/Pages/Cars/Models/ModelReport.razor">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RentCar.UI/Pages/Cars/Cars/CarReport.razor">
     <Files>
-      <File FileName="RentCar.UI/Pages/Cars/Models/ModelReport.razor" Line="74" Column="22" />
-      <File FileName="RentCar.UI/Data/Cars/Models/Services/ModelService.cs" Line="59" Column="63" />
+      <File FileName="RentCar.UI/Pages/Cars/Cars/CarReport.razor" Line="196" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,17 +10,20 @@
             <Node name="RentCar.UI" expanded="True">
               <Node name="Data" expanded="True">
                 <Node name="Cars" expanded="True">
-                  <Node name="Models" expanded="True">
+                  <Node name="Cars" expanded="True">
+                    <Node name="Services" expanded="True" />
+                  </Node>
+                  <Node name="TypeOfFuels" expanded="True">
                     <Node name="Services" expanded="True" />
                   </Node>
                 </Node>
               </Node>
               <Node name="Pages" expanded="True">
                 <Node name="Cars" expanded="True">
-                  <Node name="Models" expanded="True">
-                    <Node name="ModelReport.razor" selected="True" />
+                  <Node name="Cars" expanded="True">
+                    <Node name="CarReport.razor" selected="True" />
                   </Node>
-                  <Node name="TypeOfFuels" expanded="True" />
+                  <Node name="Models" expanded="True" />
                 </Node>
               </Node>
             </Node>

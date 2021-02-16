@@ -1,0 +1,217 @@
+﻿@page "/car_report"
+
+@using RentCar.UI.Data.Cars.Models.Models;
+@using RentCar.UI.Data.Cars.Brands.Models;
+@using RentCar.UI.Data.Cars.TypeOfCars.Models;
+@using RentCar.UI.Data.Cars.TypeOfFuels.Models;
+@using RentCar.UI.Data.Cars.Cars.Models;
+@using RentCar.UI.Data.Cars.Models.Services;
+@using RentCar.UI.Data.Cars.Brands.Services;
+@using RentCar.UI.Data.Cars.TypeOfCars.Services;
+@using RentCar.UI.Data.Cars.TypeOfFuels.Services;
+@using RentCar.UI.Data.Cars.Cars.Services;
+@using RentCar.UI.Data.Common;
+
+@inject ModelService ModelService
+@inject BrandService BrandService
+@inject TypeOfCarService TypeOfCarService
+@inject TypeOfFuelService TypeOfFuelService
+@inject CarService CarService
+@inject NavigationManager NavigationManager
+@inject IJSRuntime JS
+
+<h1>Car Report!</h1>
+
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+
+    <div style="font-size: 30px; display: flex; justify-content: flex-end; cursor:pointer;">
+        <span @onclick="ExportExcel" class="fas fa-file-excel mr-3" aria-hidden="true" style="font-size: 25px; color: #31be7d;"></span>
+        <span @onclick="Search" class="fas fa-search" aria-hidden="true" style="font-size: 25px; color: #e90b5a;"></span>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="model-report-id">ID</label>
+            <input id="model-report-id" class="form-control" @bind="id" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="model-report-description">Description</label>
+            <input id="model-report-description" class="form-control" @bind="description" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="car-report-plate-number">Plate Number</label>
+            <input id="car-report-plate-number" class="form-control" @bind="plateNumber" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="car-chassis--number">Chassis Number</label>
+            <input id="car-chassis-number" class="form-control" @bind="chassisNumber" />
+        </div>
+        
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="car-report-model">Model</label>
+            <select @bind="modelID" id="car-report-model" class="form-control valid">
+                @if (Brands is not null)
+                {
+                    <option value="null">Select</option>
+                    @foreach (var model in Models)
+                    {
+                        <option value="@model.ID">@model.Description</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="model-report-brand">Brand</label>
+            <select @bind="brandID" id="model-report-brand" class="form-control valid">
+                @if (Brands is not null)
+                {
+                    <option value="null">Select</option>
+                    @foreach (var brand in Brands)
+                    {
+                        <option value="@brand.ID">@brand.Description</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="car-report-type-of-car">Type of Cars</label>
+            <select @bind="typeOfCarID" id="car-report-type-of-car" class="form-control valid">
+                @if (TypeOfCars is not null)
+                {
+                    <option value="null">Select</option>
+                    @foreach (var typeOfCar in TypeOfCars)
+                    {
+                        <option value="@typeOfCar.ID">@typeOfCar.Description</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="car-report-type-of-fuel">Type of Fuel</label>
+            <select @bind="typeOfFuelID" id="car-report-type-of-fuel" class="form-control valid">
+                @if (TypeOfFuels is not null)
+                {
+                    <option value="null">Select</option>
+                    @foreach (var typeOfFuel in TypeOfFuels)
+                    {
+                        <option value="@typeOfFuel.ID">@typeOfFuel.Description</option>
+                    }
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="car-report-status">Status</label>
+            <select @bind="status" id="car-report-status" class="form-control valid">
+                <option value="null">Select</option>
+                @foreach (var status in Enum.GetValues(typeof(ModelStatus)))
+                {
+                    <option value="@status">@status</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="car-report-engine-number">Engine Number</label>
+            <input id="car-report-engine-number" class="form-control" @bind="engineNumber" />
+        </div>
+    </div>
+
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Model</th>
+            <th>Brand</th>
+            <th>TypeOfCar</th>
+            <th>TypeOfFuel</th>
+            <th>Status</th>
+            <th>ChassisNumber</th>
+            <th>EngineNumber</th>
+            <th>PlateNumber</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (cars == null)
+        {
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+        else
+        {
+            @foreach (var car in cars)
+            {
+                <tr>
+                    <td>@car.ID</td>
+                    <td>@car.Description</td>
+                    <td>@car.Model</td>
+                    <td>@car.Brand</td>
+                    <td>@car.TypeOfCar</td>
+                    <td>@car.TypeOfFuel</td>
+                    <td>@car.Status</td>
+                    <td>@car.ChassisNumber</td>
+                    <td>@car.EngineNumber</td>
+                    <td>@car.PlateNumber</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+@code {
+    private List<Model> typeOfFuels;
+    private int? id;
+    private string description;
+    private string status;
+    private int? brandID;
+    private int? modelID;
+    private int? typeOfCarID;
+    private int? typeOfFuelID;
+    private string plateNumber;
+    private string engineNumber;
+    private string chassisNumber;
+
+    public List<Brand> Brands { get; set; }
+    public List<Model> Models { get; set; }
+    public List<TypeOfCar> TypeOfCars { get; set; }
+    public List<TypeOfFuel> TypeOfFuels { get; set; }
+    private List<Car> cars;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Models = await ModelService.GetAll();
+        TypeOfFuels = await TypeOfFuelService.GetAll();
+        TypeOfCars = await TypeOfCarService.GetAll();
+        Brands = await BrandService.GetAll();
+    }
+
+    private async Task Search()
+    {
+        cars = await GetReport();
+    }
+
+    private async Task ExportExcel()
+    {
+        cars = await GetReport();
+        var excelBytes = ExcelService.GenerateExcelWorkbook<Car>(cars);
+        await JS.InvokeVoidAsync("saveAsFile", $"car_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.xlsx", Convert.ToBase64String(excelBytes));
+    }
+
+    private async Task<List<Car>> GetReport()
+    {
+        return await CarService.GetReport(id, description, status, brandID, modelID, typeOfCarID, typeOfFuelID,
+            plateNumber, engineNumber, chassisNumber);
+    }
+}

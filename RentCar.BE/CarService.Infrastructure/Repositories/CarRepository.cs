@@ -108,6 +108,7 @@ namespace CarService.Infrastructure.Repositories
                     "INNER JOIN TypeOfFuels tf on ca.TypeOfFuelID = tf.ID " +
                     "WHERE ca.ID = ISNULL(@ID, ca.ID) " +
                    "AND ca.Status = ISNULL(@Status, ca.Status) " +
+                   "AND ca.Description = ISNULL(@Description, ca.Description) " +
                    "AND ca.BrandID = ISNULL(@BrandID, ca.BrandID) " +
                    "AND ca.ModelID = ISNULL(@ModelID, ca.ModelID) " +
                    "AND ca.TypeOfCarID = ISNULL(@TypeOfCarID, ca.TypeOfCarID) " +
@@ -129,7 +130,8 @@ namespace CarService.Infrastructure.Repositories
                         TypeOfFuelID = typeOfFuelID,
                         PlateNumber = plateNumber,
                         EngineNumber = engineNumber,
-                        ChassisNumber = chassisNumber
+                        ChassisNumber = chassisNumber,
+                        Description = description
                     });
                     return result;
                 }
