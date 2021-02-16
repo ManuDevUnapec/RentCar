@@ -32,11 +32,11 @@ namespace RentService.Controllers
         }
 
         [HttpGet("GetReport")]
-        public async Task<IActionResult> GetReport(int? id = null, DateTime? rentalDate = null,
-            DateTime? returnDate = null, int? amountForDays = null, int? numberOfDays = null,
-            string status = null, int? employeeID = null, int? clientID = null, int? carID = null)
+        public async Task<IActionResult> GetReport(int? id = null, int? amountForDays = null, 
+            int? numberOfDays = null, string status = null, int? employeeID = null, int? clientID = null,
+            int? carID = null)
         {
-            var cars = await _repository.GetReport(id, rentalDate, returnDate, amountForDays, numberOfDays,
+            var cars = await _repository.GetReport(id, amountForDays, numberOfDays,
                 status, employeeID, clientID, carID);
             return Ok(cars);
         }

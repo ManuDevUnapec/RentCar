@@ -1,0 +1,171 @@
+﻿@page "/rent_report"
+
+@using RentCar.UI.Data.Rents.Models;
+@using RentCar.UI.Data.Cars.Cars.Models;
+@using RentCar.UI.Data.Clients.Clients.Models;
+@using RentCar.UI.Data.Employees.Employees.Models;
+@using RentCar.UI.Data.Clients.Clients.Services;
+@using RentCar.UI.Data.Employees.Employees.Services;
+@using RentCar.UI.Data.Cars.Cars.Services;
+@using RentCar.UI.Data.Rents.Services;
+@using RentCar.UI.Data.Common;
+
+@inject CarService CarService
+@inject ClientService ClientService
+@inject EmployeeService EmployeeService
+@inject RentService RentService
+@inject IJSRuntime JS
+
+<h1>Rent Report!</h1>
+
+@if(Cars is null)
+{
+    <p>Loading....</p>
+}
+else {
+<div class="shadow-sm p-3 mb-5 bg-white rounded">
+
+    <div style="font-size: 30px; display: flex; justify-content: flex-end; cursor:pointer;">
+        <span @onclick="ExportExcel" class="fas fa-file-excel mr-3" aria-hidden="true" style="font-size: 25px; color: #31be7d;"></span>
+        <span @onclick="Search" class="fas fa-search" aria-hidden="true" style="font-size: 25px; color: #e90b5a;"></span>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="rent-id">ID</label>
+            <input id="client-id" class="form-control" @bind="id" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="rent-amount-for-days">Amount for Days</label>
+            <input id="rent-amount-for-days" class="form-control" @bind="amountForDays" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="rent-number-of-days">Number of days</label>
+            <input id="rent-number-of-days" class="form-control" @bind="numberOfDays" />
+        </div>
+        <div class="form-group col-md-3">
+            <label for="rent-status">Status</label>
+            <select @bind="status" id="rent-status" class="form-control valid">
+                <option value="null">Select</option>
+                @foreach (var sta in Enum.GetValues(typeof(RentStatus)))
+                {
+                    <option value="@sta">@sta</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-3">
+            <label for="rent-employee">Employee</label>
+            <select @bind="employeeID" id="rent-employee" class="form-control valid">
+                <option value="null">Select</option>
+                @foreach (var epy in Employees)
+                {
+                    <option value="@epy.ID">@epy.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="rent-client">Client</label>
+            <select @bind="clientID" id="rent-client" class="form-control valid">
+                <option value="null">Select</option>
+                @foreach (var clt in Clients)
+                {
+                    <option value="@clt.ID">@clt.Name</option>
+                }
+            </select>
+        </div>
+        <div class="form-group col-md-3">
+            <label for="rent-car">Car</label>
+            <select @bind="carID" id="rent-car" class="form-control valid">
+                <option value="null">Select</option>
+                @foreach (var ca in Cars)
+                {
+                    <option value="@ca.ID">@ca.Description</option>
+                }
+            </select>
+        </div>
+    </div>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Amount for Days</th>
+            <th>Number of Days</th>
+            <th>Status</th>
+            <th>Employee</th>
+            <th>Client</th>
+            <th>Car</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (rents == null)
+        {
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        }
+        else
+        {
+            @foreach (var rent in rents)
+            {
+                <tr>
+                    <td>@rent.ID</td>
+                    <td>@rent.AmountForDays</td>
+                    <td>@rent.NumberOfDays</td>
+                    <td>@rent.Status</td>
+                    <td>@rent.Employee</td>
+                    <td>@rent.Client</td>
+                    <td>@rent.Car</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+}
+@code {
+    public List<Client> Clients { get; set; }
+    public List<Employee> Employees { get; set; }
+    public List<Car> Cars { get; set; }
+    private List<Rent> rents;
+    private int? id;
+    private int? amountForDays;
+    private int? numberOfDays;
+    private int? employeeID;
+    private int? clientID;
+    private int? carID;
+    private string status;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Clients = await ClientService.GetAll();
+        Employees = await EmployeeService.GetAll();
+        Cars = await CarService.GetAll();
+    }
+
+    private async Task Search()
+    {
+        rents = await GetReport();
+    }
+
+    private async Task ExportExcel()
+    {
+        rents = await GetReport();
+        var excelBytes = ExcelService.GenerateExcelWorkbook<Rent>(rents);
+        await JS.InvokeVoidAsync("saveAsFile", $"rent_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}.xlsx", Convert.ToBase64String(excelBytes));
+    }
+
+    private async Task<List<Rent>> GetReport()
+    {
+        return await RentService.GetReport(id, amountForDays, numberOfDays, status,
+            employeeID, clientID, carID);
+    }
+}
