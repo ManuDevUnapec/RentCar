@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.WebUtilities;
 using RentCar.UI.Data.Clients.Clients.Models;
 
 namespace RentCar.UI.Data.Clients.Clients.Services
@@ -43,6 +44,31 @@ namespace RentCar.UI.Data.Clients.Clients.Services
             {
                 //Log error
                 return new Client();
+            }
+        }
+
+        public async Task<List<Client>> GetReport(int? id, string name, string identificationCard,
+            string cardNumber, int? creditLimit, string personType, string status)
+        {
+            try
+            {
+                var client = _clientFactory.CreateClient("Clients");
+                var parameters = new Dictionary<string, string>();
+                parameters.Add("id", id.ToString());
+                parameters.Add("name", name);
+                parameters.Add("identificationCard", identificationCard);
+                parameters.Add("cardNumber", cardNumber);
+                parameters.Add("creditLimit", creditLimit.ToString());
+                parameters.Add("personType", personType);
+                parameters.Add("status", status);
+                var url = new Uri(QueryHelpers.AddQueryString($"{client.BaseAddress}Client/GetReport", parameters));
+                var clients = await client.GetFromJsonAsync<List<Client>>(url);
+                return clients;
+            }
+            catch (Exception e)
+            {
+                //Log error
+                return new List<Client>();
             }
         }
 

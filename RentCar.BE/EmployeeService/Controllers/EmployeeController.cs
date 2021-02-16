@@ -35,8 +35,7 @@ namespace EmployeeService.Controllers
             return Ok(employee);
         }
 
-        [HttpGet("GetReport/{id?}/{name?}/{identificationCard?}/{hourHand?}/{commisionPercent?}/{created?}/" +
-            "{status?}")]
+        [HttpGet("GetReport")]
         public async Task<IActionResult> GetReport(int? id = null, string name = null, string identificationCard = null,
             string hourHand = null, string commisionPercent = null, DateTime? created = null, string status = null)
         {

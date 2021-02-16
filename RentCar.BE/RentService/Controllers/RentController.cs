@@ -31,8 +31,7 @@ namespace RentService.Controllers
             return Ok(rent);
         }
 
-        [HttpGet("GetReport/{id?}/{rentalDate?}/{returnDate?}/{amountForDays?}/{numberOfDays?}/{status?}/" +
-            "{employeeID?}/{clientID?}/{carID?}")]
+        [HttpGet("GetReport")]
         public async Task<IActionResult> GetReport(int? id = null, DateTime? rentalDate = null,
             DateTime? returnDate = null, int? amountForDays = null, int? numberOfDays = null,
             string status = null, int? employeeID = null, int? clientID = null, int? carID = null)

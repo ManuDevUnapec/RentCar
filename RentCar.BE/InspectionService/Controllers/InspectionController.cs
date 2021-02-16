@@ -31,9 +31,7 @@ namespace InspectionService.Controllers
             return Ok(inspection);
         }
 
-        [HttpGet("GetReport/{id?}/{inspectionDate?}/{grated?}/{cat?}/{rubberBack?}/{glassBreak?}/" +
-            "{rubberStateOne?}/{rubberStateTwo?}/{rubberStateThree?}/{rubberStateFourth?}/{amountOfFuel?}/" +
-            "{status?}/{employeeID?}/{clientID?}/{carID?}")]
+        [HttpGet("GetReport")]
         public async Task<IActionResult> GetReport(int? id = null, DateTime? inspectionDate = null,
             bool? grated = null, bool? cat = null, bool? rubberBack = null, bool? glassBreak = null,
             bool? rubberStateOne = null, bool? rubberStateTwo = null, bool? rubberStateThree = null,
