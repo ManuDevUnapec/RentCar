@@ -34,9 +34,9 @@ namespace ClientService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return 0;
+                throw e;
             }
 
         }
@@ -44,22 +44,34 @@ namespace ClientService.Infrastructure.Repositories
         public async Task<int> Delete(int id)
         {
             var sql = "DELETE FROM Clients WHERE ID = @ID;";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("ClientConnection")))
+            try
             {
-                connection.Open();
-                var affectedRows = await connection.ExecuteAsync(sql, new { ID = id });
-                return affectedRows;
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("ClientConnection")))
+                {
+                    connection.Open();
+                    var affectedRows = await connection.ExecuteAsync(sql, new { ID = id });
+                    return affectedRows;
+                }
+            }catch(Exception e)
+            {
+                throw e;
             }
         }
 
         public async Task<Client> Get(int id)
         {
             var sql = "SELECT * FROM Clients WHERE ID = @ID;";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("ClientConnection")))
+            try
             {
-                connection.Open();
-                var result = await connection.QueryAsync<Client>(sql, new { ID = id });
-                return result.FirstOrDefault();
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("ClientConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.QueryAsync<Client>(sql, new { ID = id });
+                    return result.FirstOrDefault();
+                }
+            }catch(Exception e)
+            {
+                throw e;
             }
         }
 
@@ -77,8 +89,7 @@ namespace ClientService.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                //Log Error
-                return new List<Client>();
+                throw e;
             }
         }
 
@@ -92,20 +103,27 @@ namespace ClientService.Infrastructure.Repositories
                "AND CreditLimit = ISNULL(@CreditLimit, CreditLimit)" +
                "AND PersonType = ISNULL(@PersonType, PersonType)" +
                "AND Status = ISNULL(@Status, Status)";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("ClientConnection")))
+
+            try
             {
-                connection.Open();
-                var result = await connection.QueryAsync<Client>(sql, new
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("ClientConnection")))
                 {
-                    ID = id,
-                    Name = name,
-                    IdentificationCard = identificationCard,
-                    CardNumber = cardNumber,
-                    CreditLimit = creditLimit,
-                    PersonType = personType,
-                    Status = status
-                });
-                return result;
+                    connection.Open();
+                    var result = await connection.QueryAsync<Client>(sql, new
+                    {
+                        ID = id,
+                        Name = name,
+                        IdentificationCard = identificationCard,
+                        CardNumber = cardNumber,
+                        CreditLimit = creditLimit,
+                        PersonType = personType,
+                        Status = status
+                    });
+                    return result;
+                }
+            }catch(Exception e)
+            {
+                throw e;
             }
         }
 
@@ -126,7 +144,7 @@ namespace ClientService.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                return 0;
+                throw e;
             }
         }
     }

@@ -33,9 +33,9 @@ namespace CarService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return 0;
+                throw e;
             }
 
         }
@@ -43,11 +43,17 @@ namespace CarService.Infrastructure.Repositories
         public async Task<int> Delete(int id)
         {
             var sql = "DELETE FROM Model WHERE ID = @ID;";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+            try
             {
-                connection.Open();
-                var affectedRows = await connection.ExecuteAsync(sql, new { ID = id });
-                return affectedRows;
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+                {
+                    connection.Open();
+                    var affectedRows = await connection.ExecuteAsync(sql, new { ID = id });
+                    return affectedRows;
+                }
+            }catch(Exception e)
+            {
+                throw e;
             }
         }
 
@@ -55,11 +61,18 @@ namespace CarService.Infrastructure.Repositories
         {
             var sql = "SELECT M.ID, m.[Description], m.[Status], b.[Description] as Brand, b.ID as BrandID " +
                     "from Model m INNER JOIN Brand b on m.BrandID = b.ID WHERE m.ID = @ID;";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+
+            try
             {
-                connection.Open();
-                var result = await connection.QueryAsync<Model>(sql, new { ID = id });
-                return result.FirstOrDefault();
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.QueryAsync<Model>(sql, new { ID = id });
+                    return result.FirstOrDefault();
+                }
+            }catch(Exception e)
+            {
+                throw e;
             }
         }
 
@@ -78,8 +91,7 @@ namespace CarService.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                //Log Error
-                return new List<Model>();
+                throw e;
             }
         }
 
@@ -91,17 +103,24 @@ namespace CarService.Infrastructure.Repositories
                 "AND m.Description = ISNULL(@Description, m.Description)" +
                 "AND m.Status = ISNULL(@Status, m.Status)" +
                 "AND m.BrandID = ISNULL(@BrandID, m.BrandID);";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+
+            try
             {
-                connection.Open();
-                var result = await connection.QueryAsync<Model>(sql, new
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
                 {
-                    ID = id,
-                    Description = description,
-                    Status = status,
-                    BrandID = brandID
-                });
-                return result;
+                    connection.Open();
+                    var result = await connection.QueryAsync<Model>(sql, new
+                    {
+                        ID = id,
+                        Description = description,
+                        Status = status,
+                        BrandID = brandID
+                    });
+                    return result;
+                }
+            }catch(Exception e)
+            {
+                throw e;
             }
         }
 
@@ -118,9 +137,9 @@ namespace CarService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return 0;
+                throw e;
             }
         }
     }

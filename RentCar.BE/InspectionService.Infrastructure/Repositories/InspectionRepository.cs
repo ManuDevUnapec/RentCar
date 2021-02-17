@@ -40,7 +40,7 @@ namespace InspectionService.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                return 0;
+                throw e;
             }
 
         }
@@ -48,23 +48,37 @@ namespace InspectionService.Infrastructure.Repositories
         public async Task<int> Delete(int id)
         {
             var sql = "DELETE FROM Inspections WHERE ID = @ID;";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("InspectionConnection")))
+            try
             {
-                connection.Open();
-                var affectedRows = await connection.ExecuteAsync(sql, new { ID = id });
-                return affectedRows;
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("InspectionConnection")))
+                {
+                    connection.Open();
+                    var affectedRows = await connection.ExecuteAsync(sql, new { ID = id });
+                    return affectedRows;
+                }
+            }catch(Exception e)
+            {
+                throw e;
             }
         }
 
         public async Task<Inspection> Get(int id)
         {
             var sql = "SELECT * FROM Inspections WHERE ID = @ID;";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("InspectionConnection")))
+            try
             {
-                connection.Open();
-                var result = await connection.QueryAsync<Inspection>(sql, new { ID = id });
-                return result.FirstOrDefault();
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("InspectionConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.QueryAsync<Inspection>(sql, new { ID = id });
+                    return result.FirstOrDefault();
+                }
             }
+            catch(Exception e)
+            {
+                throw e;
+            }
+
         }
 
         public async Task<IEnumerable<Inspection>> GetAll()
@@ -81,8 +95,7 @@ namespace InspectionService.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                //Log Error
-                return new List<Inspection>();
+                throw e;
             }
         }
 
@@ -105,7 +118,7 @@ namespace InspectionService.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                return 0;
+                throw e;
             }
         }
 
@@ -124,7 +137,7 @@ namespace InspectionService.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                return 0;
+                throw e;
             }
         }
 
@@ -143,7 +156,7 @@ namespace InspectionService.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                return 0;
+                throw e;
             }
         }
 
@@ -162,7 +175,7 @@ namespace InspectionService.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                return 0;
+                throw e;
             }
         }
 
@@ -184,27 +197,35 @@ namespace InspectionService.Infrastructure.Repositories
                "AND EmployeeID = ISNULL(@EmployeeID, EmployeeID)" +
                "AND ClientID = ISNULL(@ClientID, ClientID)" +
                "AND CarID = ISNULL(@CarID, CarID)";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("InspectionConnection")))
+
+            try
             {
-                connection.Open();
-                var result = await connection.QueryAsync<Inspection>(sql, new
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("InspectionConnection")))
                 {
-                    ID = id,
-                    Grated = grated,
-                    Cat = cat,
-                    RubberBack = rubberBack,
-                    GlassBreak = glassBreak,
-                    RubberStateOne = rubberStateOne,
-                    RubberStateTwo = rubberStateTwo,
-                    RubberStateThree = rubberStateThree,
-                    RubberStateFour = rubberStateFour,
-                    AmountOfFuel = amountOfFuel,
-                    Status = status,
-                    EmployeeID = employeeid,
-                    ClientID = clientID,
-                    CarID = carID,
-                });
-                return result;
+                    connection.Open();
+                    var result = await connection.QueryAsync<Inspection>(sql, new
+                    {
+                        ID = id,
+                        Grated = grated,
+                        Cat = cat,
+                        RubberBack = rubberBack,
+                        GlassBreak = glassBreak,
+                        RubberStateOne = rubberStateOne,
+                        RubberStateTwo = rubberStateTwo,
+                        RubberStateThree = rubberStateThree,
+                        RubberStateFour = rubberStateFour,
+                        AmountOfFuel = amountOfFuel,
+                        Status = status,
+                        EmployeeID = employeeid,
+                        ClientID = clientID,
+                        CarID = carID,
+                    });
+                    return result;
+                }
+            }
+            catch(Exception e)
+            {
+                throw e;
             }
         }
     }

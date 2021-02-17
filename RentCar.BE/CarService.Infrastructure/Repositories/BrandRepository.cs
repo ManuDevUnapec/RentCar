@@ -34,9 +34,9 @@ namespace CarService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return 0;
+                throw e;
             }
 
         }
@@ -44,22 +44,34 @@ namespace CarService.Infrastructure.Repositories
         public async Task<int> Delete(int id)
         {
             var sql = "DELETE FROM Brand WHERE ID = @ID;";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+            try
             {
-                connection.Open();
-                var affectedRows = await connection.ExecuteAsync(sql, new { ID = id });
-                return affectedRows;
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+                {
+                    connection.Open();
+                    var affectedRows = await connection.ExecuteAsync(sql, new { ID = id });
+                    return affectedRows;
+                }
+            }catch(Exception e)
+            {
+                throw e;
             }
         }
 
         public async Task<Brand> Get(int id)
         {
             var sql = "SELECT * FROM Brand WHERE ID = @ID;";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+            try
             {
-                connection.Open();
-                var result = await connection.QueryAsync<Brand>(sql, new { ID = id });
-                return result.FirstOrDefault();
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.QueryAsync<Brand>(sql, new { ID = id });
+                    return result.FirstOrDefault();
+                }
+            }catch(Exception e)
+            {
+                throw e;
             }
         }
 
@@ -77,8 +89,7 @@ namespace CarService.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                //Log Error
-                return new List<Brand>();
+                throw e;
             }
         }
 
@@ -87,12 +98,19 @@ namespace CarService.Infrastructure.Repositories
             var sql = "SELECT * FROM Brand WHERE ID = ISNULL(@ID, ID)" +
                 "AND Description = ISNULL(@Description, Description)" +
                 "AND Status = ISNULL(@Status, Status);";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+
+            try
             {
-                connection.Open();
-                var result = await connection.QueryAsync<Brand>(sql, new { ID = id, Description = description,
-                Status = status});
-                return result;
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("CarConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.QueryAsync<Brand>(sql, new { ID = id, Description = description,
+                    Status = status});
+                    return result;
+                }
+            }catch(Exception e)
+            {
+                throw e;
             }
         }
 
@@ -109,9 +127,9 @@ namespace CarService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return 0;
+                throw e;
             }
         }
     }

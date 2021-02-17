@@ -20,34 +20,66 @@ namespace CarService.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var typeOfFuels = await _repository.GetAll();
-            return Ok(typeOfFuels);
+            try
+            {
+                var typeOfFuels = await _repository.GetAll();
+                return Ok(typeOfFuels);
+            }
+            catch (Exception e)
+            {
+                //Log e
+                return BadRequest("An error ocurred, contact IT Staff");
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var typeOfFuel = await _repository.Get(id);
-            return Ok(typeOfFuel);
+            try
+            {
+                var typeOfFuel = await _repository.Get(id);
+                return Ok(typeOfFuel);
+            }
+            catch (Exception e)
+            {
+                //Log e
+                return BadRequest("An error ocurred, contact IT Staff");
+            }
         }
 
         [HttpGet("GetReport")]
         public async Task<IActionResult> GetReport(int? id = null, string description = null, string status = null)
         {
-            var typeOfFuels = await _repository.GetReport(id, description, status);
-            return Ok(typeOfFuels);
+            try
+            {
+                var typeOfFuels = await _repository.GetReport(id, description, status);
+                return Ok(typeOfFuels);
+            }
+            catch (Exception e)
+            {
+                //Log e
+                return BadRequest("An error ocurred, contact IT Staff");
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(TypeOfFuel typeOfFuel)
         {
-            var response = await _repository.Add(typeOfFuel);
-            if (response != 0)
+            try
             {
-                return Ok("Added successfully");
+                var response = await _repository.Add(typeOfFuel);
+                if (response != 0)
+                {
+                    return Ok("Added successfully");
+                }
+                else
+                {
+                    return BadRequest("An error ocurred, contact IT Staff");
+                }
             }
-            else
+            catch (Exception e)
             {
+                //Log e
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -55,13 +87,21 @@ namespace CarService.Controllers
         [HttpPut]
         public async Task<IActionResult> Put(TypeOfFuel typeOfFuel)
         {
-            var response = await _repository.Update(typeOfFuel);
-            if (response != 0)
+            try
             {
-                return Ok("Updated successfully");
+                var response = await _repository.Update(typeOfFuel);
+                if (response != 0)
+                {
+                    return Ok("Updated successfully");
+                }
+                else
+                {
+                    return BadRequest("An error ocurred, contact IT Staff");
+                }
             }
-            else
+            catch (Exception e)
             {
+                //Log e
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -69,13 +109,21 @@ namespace CarService.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _repository.Delete(id);
-            if (response != 0)
+            try
             {
-                return Ok("Deleted successfully");
+                var response = await _repository.Delete(id);
+                if (response != 0)
+                {
+                    return Ok("Deleted successfully");
+                }
+                else
+                {
+                    return BadRequest("An error ocurred, contact IT Staff");
+                }
             }
-            else
+            catch (Exception e)
             {
+                //Log e
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }

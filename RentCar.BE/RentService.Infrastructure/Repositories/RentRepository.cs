@@ -38,7 +38,7 @@ namespace RentService.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                return 0;
+                throw e;
             }
 
         }
@@ -46,41 +46,51 @@ namespace RentService.Infrastructure.Repositories
         public async Task<int> Delete(int id)
         {
             var sql = "DELETE FROM Rents WHERE ID = @ID;";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("RentConnection")))
+            try
             {
-                connection.Open();
-                var affectedRows = await connection.ExecuteAsync(sql, new { ID = id });
-                return affectedRows;
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("RentConnection")))
+                {
+                    connection.Open();
+                    var affectedRows = await connection.ExecuteAsync(sql, new { ID = id });
+                    return affectedRows;
+                }
+            }catch(Exception e)
+            {
+                throw e;
             }
         }
 
         public async Task<Rent> Get(int id)
         {
             var sql = "SELECT * FROM Rents WHERE ID = @ID;";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("RentConnection")))
+            try
             {
-                connection.Open();
-                var result = await connection.QueryAsync<Rent>(sql, new { ID = id });
-                return result.FirstOrDefault();
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("RentConnection")))
+                {
+                    connection.Open();
+                    var result = await connection.QueryAsync<Rent>(sql, new { ID = id });
+                    return result.FirstOrDefault();
+                }
+            }catch(Exception e)
+            {
+                throw e;
             }
         }
 
         public async Task<IEnumerable<Rent>> GetAll()
         {
+            var sql = "SELECT * FROM Rents;";
             try
             {
-                var sql = "SELECT * FROM Rents;";
                 using (var connection = new SqlConnection(_configuration.GetConnectionString("RentConnection")))
                 {
                     connection.Open();
                     var result = await connection.QueryAsync<Rent>(sql);
                     return result;
                 }
-            }
-            catch (Exception e)
+            }catch(Exception e)
             {
-                //Log Error
-                return new List<Rent>();
+                throw e;
             }
         }
 
@@ -106,7 +116,7 @@ namespace RentService.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                return 0;
+                throw e;
             }
         }
 
@@ -125,7 +135,7 @@ namespace RentService.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                return 0;
+                throw e;
             }
         }
 
@@ -144,7 +154,7 @@ namespace RentService.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                return 0;
+                throw e;
             }
         }
 
@@ -163,7 +173,7 @@ namespace RentService.Infrastructure.Repositories
             }
             catch (Exception e)
             {
-                return 0;
+                throw e;
             }
         }
 
@@ -177,20 +187,27 @@ namespace RentService.Infrastructure.Repositories
                "AND EmployeeID = ISNULL(@EmployeeID, EmployeeID)" +
                "AND ClientID = ISNULL(@ClientID, ClientID)" +
                "AND CarID = ISNULL(@CarID, CarID);";
-            using (var connection = new SqlConnection(_configuration.GetConnectionString("RentConnection")))
+
+            try
             {
-                connection.Open();
-                var result = await connection.QueryAsync<Rent>(sql, new
+                using (var connection = new SqlConnection(_configuration.GetConnectionString("RentConnection")))
                 {
-                    ID = id,
-                    AmountForDays = amountForDays,
-                    NumberOfDays = numberOfDays,
-                    Status = status,
-                    EmployeeID = employeeID,
-                    ClientID = clientID,
-                    CarID = carID
-                });
-                return result;
+                    connection.Open();
+                    var result = await connection.QueryAsync<Rent>(sql, new
+                    {
+                        ID = id,
+                        AmountForDays = amountForDays,
+                        NumberOfDays = numberOfDays,
+                        Status = status,
+                        EmployeeID = employeeID,
+                        ClientID = clientID,
+                        CarID = carID
+                    });
+                    return result;
+                }
+            }catch(Exception e)
+            {
+                throw e;
             }
         }
     }

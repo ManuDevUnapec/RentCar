@@ -1,8 +1,7 @@
 ﻿<Properties StartupConfiguration="{8A265033-2DA1-4791-81F6-3526F5BB7E11}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="RentCar.UI/Pages/Inspections/inspectionReport.razor">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RentCar.UI/Pages/Inspections/CreateInspection.razor">
     <Files>
-      <File FileName="RentCar.UI/Pages/Inspections/inspectionReport.razor" Line="102" Column="9" />
-      <File FileName="RentCar.UI/Pages/Inspections/CreateInspection.razor" Line="1" Column="1" />
+      <File FileName="RentCar.UI/Pages/Inspections/CreateInspection.razor" Line="92" Column="18" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -11,7 +10,7 @@
             <Node name="RentCar.UI" expanded="True">
               <Node name="Pages" expanded="True">
                 <Node name="Inspections" expanded="True">
-                  <Node name="InspectionReport.razor" selected="True" />
+                  <Node name="CreateInspection.razor" selected="True" />
                 </Node>
               </Node>
             </Node>
