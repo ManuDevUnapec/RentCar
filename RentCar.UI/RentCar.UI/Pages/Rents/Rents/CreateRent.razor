@@ -1,6 +1,6 @@
 ﻿@page "/create_rent"
 
-@using System; 
+@using System;
 @using RentCar.UI.Data.Rents.Models;
 @using RentCar.UI.Data.Cars.Cars.Models;
 @using RentCar.UI.Data.Clients.Clients.Models;
@@ -18,10 +18,25 @@
 
 <h1>Create a Rent!</h1>
 
+@if (requesting)
+{
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" style="width: 12rem; height: 12rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+}
+else
+{
 <EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
 
     <DataAnnotationsValidator />
     <ValidationSummary />
+
+    @if (requestFailed)
+    {
+        <strong style="color: red;">@errorMessage</strong>
+    }
 
     @if (LocalErrorMessage)
     {
@@ -33,39 +48,39 @@
             <label for="rent-client">Client</label>
             <InputSelect @bind-Value="model.ClientID" id="rent-client" class="form-control valid">
                 @if (Clients is not null)
-                {
+                    {
                     <option>Select</option>
                     @foreach (var model in Clients)
-                    {
+                        {
                         <option value="@model.ID">@model.Name</option>
+                        }
                     }
-                }
             </InputSelect>
         </div>
         <div class="form-group col-md-4">
             <label for="rent-employee">Employee</label>
             <InputSelect @bind-Value="model.EmployeeID" id="rent-employee" class="form-control valid">
                 @if (Employees is not null)
-                {
+                    {
                     <option>Select</option>
                     @foreach (var model in Employees)
-                    {
+                        {
                         <option value="@model.ID">@model.Name</option>
+                        }
                     }
-                }
             </InputSelect>
         </div>
         <div class="form-group col-md-4">
             <label for="rent-car">Car</label>
             <InputSelect @bind-Value="model.CarID" id="rent-car" class="form-control valid">
                 @if (Clients is not null)
-                {
+                    {
                     <option>Select</option>
                     @foreach (var model in Cars)
-                    {
+                        {
                         <option value="@model.ID">@model.Description</option>
+                        }
                     }
-                }
             </InputSelect>
         </div>
     </div>
@@ -81,7 +96,7 @@
         </div>
         <div class="form-group col-md-4">
             <label for="rent-status">Status</label>
-            <InputSelect @bind-Value="model.Status" id="rent-status" class="form-control valid" disabled> 
+            <InputSelect @bind-Value="model.Status" id="rent-status" class="form-control valid" disabled>
                 <option value="@Enum.GetName(typeof(RentStatus), 0)">@Enum.GetName(typeof(RentStatus), 0)</option>
             </InputSelect>
         </div>
@@ -94,48 +109,55 @@
         </div>
     </div>
 
-    
+
     <button type="submit" class="btn btn-primary">Submit</button>
 
 </EditForm>
-
-
-@code {
-    public List<Client> Clients { get; set; }
-    public List<Employee> Employees { get; set; }
-    public List<Car> Cars { get; set; }
-    public List<Rent> Rents { get; set; }
-    public bool LocalErrorMessage { get; set; }
-    private Rent model = new Rent();
-
-    protected override async Task OnInitializedAsync()
-    {
-        Clients = await ClientService.GetAll();
-        Employees = await EmployeeService.GetAll();
-        Cars = await CarService.GetAll();
-        Rents = await RentService.GetAll();
-    }
-
-    private async Task HandleValidSubmit()
-    {
-        try
-        {
-            if(Rents.Any(m => m.CarID == model.CarID && m.Status == RentStatus.Rented.ToString()))
-            {
-                LocalErrorMessage = true;
-            }
-            else
-            {
-                LocalErrorMessage = false;
-                await RentService.Create(model);
-                NavigationManager.NavigateTo("/rents");
-            }
-
-        }
-        catch (Exception e)
-        {
-            //Redirectionate to error page
-            //NavigationManager.NavigateTo("error");
-        }
-    }
 }
+
+    @code {
+        public List<Client> Clients { get; set; }
+        public List<Employee> Employees { get; set; }
+        public List<Car> Cars { get; set; }
+        public List<Rent> Rents { get; set; }
+        public bool LocalErrorMessage { get; set; }
+        private Rent model = new Rent();
+
+        private bool requesting;
+        private bool requestFailed;
+        private string errorMessage;
+
+        protected override async Task OnInitializedAsync()
+        {
+            Clients = await ClientService.GetAll();
+            Employees = await EmployeeService.GetAll();
+            Cars = await CarService.GetAll();
+            Rents = await RentService.GetAll();
+        }
+
+        private async Task HandleValidSubmit()
+        {
+            try
+            {
+                if (Rents.Any(m => m.CarID == model.CarID && m.Status == RentStatus.Rented.ToString()))
+                {
+                    LocalErrorMessage = true;
+                }
+                else
+                {
+                    LocalErrorMessage = false;
+                    requesting = true;
+                    await RentService.Create(model);
+                    requesting = false;
+                    NavigationManager.NavigateTo("/rents");
+                }
+
+            }
+            catch (Exception e)
+            {
+                requestFailed = true;
+                requesting = false;
+                errorMessage = e.Message;
+            }
+        }
+    }

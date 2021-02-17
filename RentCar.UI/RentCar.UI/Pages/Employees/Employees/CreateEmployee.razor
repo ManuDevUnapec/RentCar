@@ -8,10 +8,25 @@
 
 <h1>Create an Employee!</h1>
 
+@if (requesting)
+{
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" style="width: 12rem; height: 12rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+}
+else
+{
 <EditForm Model="@employee" OnValidSubmit="@HandleValidSubmit">
 
     <DataAnnotationsValidator />
     <ValidationSummary />
+
+    @if (requestFailed)
+    {
+        <strong style="color: red;">@errorMessage</strong>
+    }
 
     <div class="form-group">
 
@@ -35,9 +50,9 @@
             <InputSelect @bind-Value="employee.HourHand" id="employee-hour-hand" class="form-control valid">
                 <option>Select</option>
                 @foreach (var hourHand in Enum.GetValues(typeof(EmployeeHourHand)))
-                {
+                    {
                     <option value="@hourHand">@hourHand</option>
-                }
+                    }
             </InputSelect>
         </div>
 
@@ -46,9 +61,9 @@
             <InputSelect @bind-Value="employee.Status" id="employee-status" class="form-control valid">
                 <option>Select</option>
                 @foreach (var status in Enum.GetValues(typeof(EmployeeStatus)))
-                {
+                    {
                     <option value="@status">@status</option>
-                }
+                    }
             </InputSelect>
         </div>
 
@@ -56,22 +71,30 @@
 
     <button type="submit" class="btn btn-primary">Submit</button>
 </EditForm>
+}
 
 @code {
     private Employee employee = new Employee();
+
+    private bool requesting;
+    private bool requestFailed;
+    private string errorMessage;
 
     private async Task HandleValidSubmit()
     {
         try
         {
+            requesting = true;
             await EmployeeService.Create(employee);
+            requesting = false;
             NavigationManager.NavigateTo("/employees");
 
         }
         catch (Exception e)
         {
-            //Redirectionate to error page
-            //NavigationManager.NavigateTo("error");
+            requestFailed = true;
+            requesting = false;
+            errorMessage = e.Message;
         }
     }
 }

@@ -8,10 +8,25 @@
 
 <h1>Create a Brand!</h1>
 
+@if (requesting)
+{
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" style="width: 12rem; height: 12rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+}
+else
+{
 <EditForm Model="@brand" OnValidSubmit="@HandleValidSubmit">
 
     <DataAnnotationsValidator />
     <ValidationSummary />
+
+    @if (requestFailed)
+    {
+        <strong style="color: red;">@errorMessage</strong>
+    }
 
     <div class="form-group">
 
@@ -25,31 +40,38 @@
             <InputSelect @bind-Value="brand.Status" id="brand-status" class="form-control valid">
                 <option>Select</option>
                 @foreach (var status in Enum.GetValues(typeof(BrandStatus)))
-                {
+                    {
                     <option value="@status">@status</option>
-                }
+                    }
             </InputSelect>
         </div>
 
     </div>
-
     <button type="submit" class="btn btn-primary">Submit</button>
 </EditForm>
+}
 
 @code {
     private Brand brand = new Brand();
+    private bool requesting;
+    private bool requestFailed;
+    private string errorMessage;
 
     private async Task HandleValidSubmit()
     {
         try
         {
+            requesting = true;
             await BrandService.Create(brand);
+            requesting = false;
             NavigationManager.NavigateTo("brands");
 
-        }catch(Exception e)
+        }
+        catch (Exception e)
         {
-            //Redirectionate to error page
-            //NavigationManager.NavigateTo("error");
+            requestFailed = true;
+            requesting = false;
+            errorMessage = e.Message;
         }
     }
 }
