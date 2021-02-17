@@ -11,38 +11,57 @@
 
 <hr />
 
-<EditForm Model="@typeOfCar" OnValidSubmit="@HandleValidSubmit">
-
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-group">
-        <input @bind-value="typeOfCar.ID" type="hidden" />
-
-        <div class="form-group">
-            <label for="description">Description</label>
-            <InputText id="description" class="form-control" @bind-Value="typeOfCar.Description" />
+@if (requesting)
+{
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" style="width: 12rem; height: 12rem;" role="status">
+            <span class="sr-only">Loading...</span>
         </div>
-
-        <div class="form-group">
-            <label for="status">Status</label>
-            <InputSelect @bind-Value="typeOfCar.Status" id="status" class="form-control valid">
-                @foreach (var status in Enum.GetValues(typeof(TypeOfCarStauts)))
-                {
-                    <option value="@status">@status</option>
-                }
-            </InputSelect>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-</EditForm>
+}
+else
+{
+    <EditForm Model="@typeOfCar" OnValidSubmit="@HandleValidSubmit">
 
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        @if (requestFailed)
+        {
+            <strong style="color: red;">@errorMessage</strong>
+        }
+
+        <div class="form-group">
+            <input @bind-value="typeOfCar.ID" type="hidden" />
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <InputText id="description" class="form-control" @bind-Value="typeOfCar.Description" />
+            </div>
+
+            <div class="form-group">
+                <label for="status">Status</label>
+                <InputSelect @bind-Value="typeOfCar.Status" id="status" class="form-control valid">
+                    @foreach (var status in Enum.GetValues(typeof(TypeOfCarStauts)))
+                        {
+                        <option value="@status">@status</option>
+                        }
+                </InputSelect>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </EditForm>
+}
 
 @code {
     [Parameter]
     public int ID { get; set; }
 
     private TypeOfCar typeOfCar = new TypeOfCar();
+
+    private bool requesting;
+    private bool requestFailed;
+    private string errorMessage;
 
     protected override async Task OnInitializedAsync()
     {
@@ -53,14 +72,17 @@
     {
         try
         {
+            requesting = true;
             await TypeOfCarService.Put(typeOfCar);
+            requesting = false;
             NavigationManager.NavigateTo("type_of_cars");
 
         }
         catch (Exception e)
         {
-            //Redirectionate to error page
-            //NavigationManager.NavigateTo("error");
+            requestFailed = true;
+            requesting = false;
+            errorMessage = e.Message;
         }
     }
 }

@@ -20,15 +20,29 @@ namespace RentService.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var rents = await _repository.GetAll();
-            return Ok(rents);
+            try
+            {
+                var rents = await _repository.GetAll();
+                return Ok(rents);
+            }catch(Exception e)
+            {
+                //Log e
+                return BadRequest("An error ocurred, contact IT Staff");
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var rent = await _repository.Get(id);
-            return Ok(rent);
+            try
+            {
+                var rent = await _repository.Get(id);
+                return Ok(rent);
+            }catch(Exception e)
+            {
+                //Log e
+                return BadRequest("An error ocurred, contact IT Staff");
+            }
         }
 
         [HttpGet("GetReport")]
@@ -36,21 +50,36 @@ namespace RentService.Controllers
             int? numberOfDays = null, string status = null, int? employeeID = null, int? clientID = null,
             int? carID = null)
         {
-            var cars = await _repository.GetReport(id, amountForDays, numberOfDays,
-                status, employeeID, clientID, carID);
-            return Ok(cars);
+            try
+            {
+                var cars = await _repository.GetReport(id, amountForDays, numberOfDays,
+                    status, employeeID, clientID, carID);
+                return Ok(cars);
+            }catch(Exception e)
+            {
+                //Log e
+                return BadRequest("An error ocurred, contact IT Staff");
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(Rent rent)
         {
-            var response = await _repository.Add(rent);
-            if (response != 0)
+            try
             {
-                return Ok("Added successfully");
+                var response = await _repository.Add(rent);
+                if (response != 0)
+                {
+                    return Ok("Added successfully");
+                }
+                else
+                {
+                    return BadRequest("An error ocurred, contact IT Staff");
+                }
             }
-            else
+            catch (Exception e)
             {
+                //Log e
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -58,13 +87,21 @@ namespace RentService.Controllers
         [HttpPut]
         public async Task<IActionResult> Put(Rent rent)
         {
-            var response = await _repository.Update(rent);
-            if (response != 0)
+            try
             {
-                return Ok("Updated successfully");
+                var response = await _repository.Update(rent);
+                if (response != 0)
+                {
+                    return Ok("Updated successfully");
+                }
+                else
+                {
+                    return BadRequest("An error ocurred, contact IT Staff");
+                }
             }
-            else
+            catch (Exception e)
             {
+                //Log e
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -72,13 +109,21 @@ namespace RentService.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _repository.Delete(id);
-            if (response != 0)
+            try
             {
-                return Ok("Deleted successfully");
+                var response = await _repository.Delete(id);
+                if (response != 0)
+                {
+                    return Ok("Deleted successfully");
+                }
+                else
+                {
+                    return BadRequest("An error ocurred, contact IT Staff");
+                }
             }
-            else
+            catch (Exception e)
             {
+                //Log e
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }

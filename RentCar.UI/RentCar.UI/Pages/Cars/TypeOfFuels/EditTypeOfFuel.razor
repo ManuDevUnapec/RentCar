@@ -11,38 +11,57 @@
 
 <hr />
 
-<EditForm Model="@typeOfFuel" OnValidSubmit="@HandleValidSubmit">
-
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-group">
-        <input @bind-value="typeOfFuel.ID" type="hidden" />
-
-        <div class="form-group">
-            <label for="fuel-description">Description</label>
-            <InputText id="fuel-description" class="form-control" @bind-Value="typeOfFuel.Description" />
+@if (requesting)
+{
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" style="width: 12rem; height: 12rem;" role="status">
+            <span class="sr-only">Loading...</span>
         </div>
-
-        <div class="form-group">
-            <label for="fuel-status">Status</label>
-            <InputSelect @bind-Value="typeOfFuel.Status" id="fuel-status" class="form-control valid">
-                @foreach (var status in Enum.GetValues(typeof(TypeOfFuelStauts)))
-                {
-                    <option value="@status">@status</option>
-                }
-            </InputSelect>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-</EditForm>
+}
+else
+{
+    <EditForm Model="@typeOfFuel" OnValidSubmit="@HandleValidSubmit">
 
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        @if (requestFailed)
+        {
+            <strong style="color: red;">@errorMessage</strong>
+        }
+
+        <div class="form-group">
+            <input @bind-value="typeOfFuel.ID" type="hidden" />
+
+            <div class="form-group">
+                <label for="fuel-description">Description</label>
+                <InputText id="fuel-description" class="form-control" @bind-Value="typeOfFuel.Description" />
+            </div>
+
+            <div class="form-group">
+                <label for="fuel-status">Status</label>
+                <InputSelect @bind-Value="typeOfFuel.Status" id="fuel-status" class="form-control valid">
+                    @foreach (var status in Enum.GetValues(typeof(TypeOfFuelStauts)))
+                        {
+                        <option value="@status">@status</option>
+                        }
+                </InputSelect>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </EditForm>
+}
 
 @code {
     [Parameter]
     public int ID { get; set; }
 
     private TypeOfFuel typeOfFuel = new TypeOfFuel();
+
+    private bool requesting;
+    private bool requestFailed;
+    private string errorMessage;
 
     protected override async Task OnInitializedAsync()
     {
@@ -59,8 +78,9 @@
         }
         catch (Exception e)
         {
-            //Redirectionate to error page
-            //NavigationManager.NavigateTo("error");
+            requestFailed = true;
+            requesting = false;
+            errorMessage = e.Message;
         }
     }
 }

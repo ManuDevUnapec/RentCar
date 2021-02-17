@@ -14,46 +14,61 @@
 
 <hr />
 
-<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
-
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <div class="form-group">
-        <input @bind-value="model.ID" type="hidden" />
-
-        <div class="form-group">
-            <label for="model-description">Description</label>
-            <InputText id="model-description" class="form-control" @bind-Value="model.Description" />
+@if (requesting)
+{
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" style="width: 12rem; height: 12rem;" role="status">
+            <span class="sr-only">Loading...</span>
         </div>
-
-        <div class="form-group">
-            <label for="model-brand">Brand</label>
-            <InputSelect @bind-Value="model.BrandID" id="model-brand" class="form-control valid">
-                @if (Brands is not null)
-                {
-                    <option>Select</option>
-                    @foreach (var brand in Brands)
-                    {
-                        <option value="@brand.ID">@brand.Description</option>
-                    }
-                }
-            </InputSelect>
-        </div>
-
-        <div class="form-group">
-            <label for="model-status">Status</label>
-            <InputSelect @bind-Value="model.Status" id="model-status" class="form-control valid">
-                @foreach (var status in Enum.GetValues(typeof(ModelStatus)))
-                {
-                    <option value="@status">@status</option>
-                }
-            </InputSelect>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-</EditForm>
+}
+else
+{
+    <EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
 
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        @if (requestFailed)
+        {
+            <strong style="color: red;">@errorMessage</strong>
+        }
+
+        <div class="form-group">
+            <input @bind-value="model.ID" type="hidden" />
+
+            <div class="form-group">
+                <label for="model-description">Description</label>
+                <InputText id="model-description" class="form-control" @bind-Value="model.Description" />
+            </div>
+
+            <div class="form-group">
+                <label for="model-brand">Brand</label>
+                <InputSelect @bind-Value="model.BrandID" id="model-brand" class="form-control valid">
+                    @if (Brands is not null)
+                        {
+                        <option>Select</option>
+                        @foreach (var brand in Brands)
+                            {
+                            <option value="@brand.ID">@brand.Description</option>
+                            }
+                        }
+                </InputSelect>
+            </div>
+
+            <div class="form-group">
+                <label for="model-status">Status</label>
+                <InputSelect @bind-Value="model.Status" id="model-status" class="form-control valid">
+                    @foreach (var status in Enum.GetValues(typeof(ModelStatus)))
+                        {
+                        <option value="@status">@status</option>
+                        }
+                </InputSelect>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </EditForm>
+}
 
 @code {
     [Parameter]
@@ -61,6 +76,10 @@
 
     public List<Brand> Brands { get; set; }
     private Model model = new Model();
+
+    private bool requesting;
+    private bool requestFailed;
+    private string errorMessage;
 
     protected override async Task OnInitializedAsync()
     {
@@ -72,14 +91,17 @@
     {
         try
         {
+            requesting = true;
             await ModelService.Put(model);
+            requesting = false;
             NavigationManager.NavigateTo("models");
 
         }
         catch (Exception e)
         {
-            //Redirectionate to error page
-            //NavigationManager.NavigateTo("error");
+            requestFailed = true;
+            requesting = false;
+            errorMessage = e.Message;
         }
     }
 }

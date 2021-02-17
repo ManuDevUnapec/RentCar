@@ -20,15 +20,31 @@ namespace InspectionService.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var inspections = await _repository.GetAll();
-            return Ok(inspections);
+            try
+            {
+                var inspections = await _repository.GetAll();
+                return Ok(inspections);
+            }catch(Exception e)
+            {
+                //Log e
+                return BadRequest("An error ocurred, contact IT Staff");
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var inspection = await _repository.Get(id);
-            return Ok(inspection);
+            try
+            {
+                var inspection = await _repository.Get(id);
+                return Ok(inspection);
+            }
+            catch (Exception e)
+            {
+                //Log e
+                return BadRequest("An error ocurred, contact IT Staff");
+            }
+            
         }
 
         [HttpGet("GetReport")]
@@ -38,22 +54,37 @@ namespace InspectionService.Controllers
             string amountOfFuel = null, string status = null, int? employeeID = null, int? clientID = null,
             int? carID = null)
         {
-            var cars = await _repository.GetReport(id, grated, cat, rubberBack, glassBreak,
-                rubberStateOne, rubberStateTwo, rubberStateThree, rubberStateFourth, amountOfFuel, status,
-                employeeID, clientID, carID);
-            return Ok(cars);
+            try
+            {
+                var cars = await _repository.GetReport(id, grated, cat, rubberBack, glassBreak,
+                    rubberStateOne, rubberStateTwo, rubberStateThree, rubberStateFourth, amountOfFuel, status,
+                    employeeID, clientID, carID);
+                return Ok(cars);
+            }
+            catch (Exception e)
+            {
+                //Log e
+                return BadRequest("An error ocurred, contact IT Staff");
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(Inspection inspection)
         {
-            var response = await _repository.Add(inspection);
-            if (response != 0)
+            try
             {
-                return Ok("Added successfully");
-            }
-            else
+                var response = await _repository.Add(inspection);
+                if (response != 0)
+                {
+                    return Ok("Added successfully");
+                }
+                else
+                {
+                    return BadRequest("An error ocurred, contact IT Staff");
+                }
+            }catch(Exception e)
             {
+                //Log e
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -61,13 +92,20 @@ namespace InspectionService.Controllers
         [HttpPut]
         public async Task<IActionResult> Put(Inspection inspection)
         {
-            var response = await _repository.Update(inspection);
-            if (response != 0)
+            try
             {
-                return Ok("Updated successfully");
-            }
-            else
+                var response = await _repository.Update(inspection);
+                if (response != 0)
+                {
+                    return Ok("Updated successfully");
+                }
+                else
+                {
+                    return BadRequest("An error ocurred, contact IT Staff");
+                }
+            }catch(Exception e)
             {
+                //Log e
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -75,13 +113,20 @@ namespace InspectionService.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _repository.Delete(id);
-            if (response != 0)
+            try
             {
-                return Ok("Deleted successfully");
-            }
-            else
+                var response = await _repository.Delete(id);
+                if (response != 0)
+                {
+                    return Ok("Deleted successfully");
+                }
+                else
+                {
+                    return BadRequest("An error ocurred, contact IT Staff");
+                }
+            }catch(Exception e)
             {
+                //Log e
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }

@@ -23,36 +23,64 @@ namespace ClientService.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var clients = await _repository.GetAll();
-            return Ok(clients);
+            try
+            {
+                var clients = await _repository.GetAll();
+                return Ok(clients);
+            }catch(Exception e)
+            {
+                //Log e
+                return BadRequest("An error ocurred, contact IT Staff");
+            }
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var client = await _repository.Get(id);
-            return Ok(client);
+            try
+            {
+                var client = await _repository.Get(id);
+                return Ok(client);
+            }catch(Exception e)
+            {
+                //Log e
+                return BadRequest("An error ocurred, contact IT Staff");
+            }
         }
 
         [HttpGet("GetReport")]
         public async Task<IActionResult> GetReport(int? id = null, string name = null, string identificationCard = null,
             string cardNumber = null, int? creditLimit = null, string personType = null, string status = null)
         {
-            var cars = await _repository.GetReport(id, name, identificationCard, cardNumber, creditLimit, personType,
-                status);
-            return Ok(cars);
+            try
+            {
+                var cars = await _repository.GetReport(id, name, identificationCard, cardNumber, creditLimit, personType,
+                    status);
+                return Ok(cars);
+            }catch(Exception e)
+            {
+                //Log e
+                return BadRequest("An error ocurred, contact IT Staff");
+            }
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(Client client)
         {
-            var response = await _repository.Add(client);
-            if (response != 0)
+            try
             {
-                return Ok("Added successfully");
-            }
-            else
+                var response = await _repository.Add(client);
+                if (response != 0)
+                {
+                    return Ok("Added successfully");
+                }
+                else
+                {
+                    return BadRequest("An error ocurred, contact IT Staff");
+                }
+            }catch(Exception e)
             {
+                //Log e
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -60,16 +88,23 @@ namespace ClientService.Controllers
         [HttpPut]
         public async Task<IActionResult> Put(Client client)
         {
-            var response = await _repository.Update(client);
-            if (response != 0)
+            try
             {
-                //Sending the object to the client exchange
-                await _publishEndpoint.Publish<Client>(client);
+                var response = await _repository.Update(client);
+                if (response != 0)
+                {
+                    //Sending the object to the client exchange
+                    await _publishEndpoint.Publish<Client>(client);
 
-                return Ok("Updated successfully");
-            }
-            else
+                    return Ok("Updated successfully");
+                }
+                else
+                {
+                    return BadRequest("An error ocurred, contact IT Staff");
+                }
+            }catch(Exception e)
             {
+                //Log e
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -77,13 +112,20 @@ namespace ClientService.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var response = await _repository.Delete(id);
-            if (response != 0)
+            try
             {
-                return Ok("Deleted successfully");
-            }
-            else
+                var response = await _repository.Delete(id);
+                if (response != 0)
+                {
+                    return Ok("Deleted successfully");
+                }
+                else
+                {
+                    return BadRequest("An error ocurred, contact IT Staff");
+                }
+            }catch(Exception e)
             {
+                //Log e
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }

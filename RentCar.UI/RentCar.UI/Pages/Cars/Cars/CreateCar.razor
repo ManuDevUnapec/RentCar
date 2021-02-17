@@ -20,10 +20,25 @@
 
 <h1>Create a Car!</h1>
 
+@if (requesting)
+{
+    <div class="d-flex justify-content-center">
+        <div class="spinner-border" style="width: 12rem; height: 12rem;" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+}
+else
+{
 <EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
 
     <DataAnnotationsValidator />
     <ValidationSummary />
+
+    @if (requestFailed)
+    {
+        <strong style="color: red;">@errorMessage</strong>
+    }
 
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -36,9 +51,9 @@
             <InputSelect @bind-Value="model.Status" id="car-status" class="form-control valid">
                 <option>Select</option>
                 @foreach (var status in Enum.GetValues(typeof(CarStatus)))
-                {
+                    {
                     <option value="@status">@status</option>
-                }
+                    }
             </InputSelect>
         </div>
     </div>
@@ -48,52 +63,52 @@
             <label for="car-model">Model</label>
             <InputSelect @bind-Value="model.ModelID" id="car-brand" class="form-control valid">
                 @if (Models is not null)
-                {
+                    {
                     <option>Select</option>
                     @foreach (var model in Models)
-                    {
+                        {
                         <option value="@model.ID">@model.Description</option>
+                        }
                     }
-                }
-             </InputSelect>
+            </InputSelect>
         </div>
         <div class="form-group col-md-3">
             <label for="car-brand">Brand</label>
             <InputSelect @bind-Value="model.BrandID" id="car-brand" class="form-control valid">
                 @if (Brands is not null)
-                {
+                    {
                     <option>Select</option>
                     @foreach (var brand in Brands)
-                    {
+                        {
                         <option value="@brand.ID">@brand.Description</option>
+                        }
                     }
-                }
             </InputSelect>
         </div>
         <div class="form-group col-md-3">
             <label for="car-type-of-car">Type Of Car</label>
             <InputSelect @bind-Value="model.TypeOfCarID" id="car-type-of-car" class="form-control valid">
                 @if (TypeOfCars is not null)
-                {
+                    {
                     <option>Select</option>
                     @foreach (var typeOfCar in TypeOfCars)
-                    {
+                        {
                         <option value="@typeOfCar.ID">@typeOfCar.Description</option>
+                        }
                     }
-                }
             </InputSelect>
         </div>
         <div class="form-group col-md-3">
             <label for="car-type-of-fuel">Type Of Fuels</label>
             <InputSelect @bind-Value="model.TypeOfFuelID" id="car-type-of-fuel" class="form-control valid">
                 @if (TypeOfFuels is not null)
-                {
+                    {
                     <option>Select</option>
                     @foreach (var typeOfFuel in TypeOfFuels)
-                    {
+                        {
                         <option value="@typeOfFuel.ID">@typeOfFuel.Description</option>
+                        }
                     }
-                }
             </InputSelect>
         </div>
     </div>
@@ -117,7 +132,7 @@
     <button type="submit" class="btn btn-primary">Submit</button>
 
 </EditForm>
-
+}
 
 @code {
     public List<Brand> Brands { get; set; }
@@ -125,6 +140,10 @@
     public List<TypeOfCar> TypeOfCars { get; set; }
     public List<TypeOfFuel> TypeOfFuels { get; set; }
     private Car model = new Car();
+
+    private bool requesting;
+    private bool requestFailed;
+    private string errorMessage;
 
     protected override async Task OnInitializedAsync()
     {
@@ -138,14 +157,17 @@
     {
         try
         {
+            requesting = true;
             await CarService.Create(model);
+            requesting = false;
             NavigationManager.NavigateTo("/");
 
         }
         catch (Exception e)
         {
-            //Redirectionate to error page
-            //NavigationManager.NavigateTo("error");
+            requestFailed = true;
+            requesting = false;
+            errorMessage = e.Message;
         }
     }
 }
