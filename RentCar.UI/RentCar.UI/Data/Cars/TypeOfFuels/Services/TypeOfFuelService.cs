@@ -23,6 +23,7 @@ namespace RentCar.UI.Data.Cars.TypeOfFuels.Services
             {
                 var client = _carFactory.CreateClient("Cars");
                 var typeOfFuels = await client.GetFromJsonAsync<List<TypeOfFuel>>("TypeOfFuel");
+                typeOfFuels.Reverse();
                 return typeOfFuels;
             }
             catch (Exception e)
@@ -57,8 +58,9 @@ namespace RentCar.UI.Data.Cars.TypeOfFuels.Services
                 parameters.Add("description", description);
                 parameters.Add("status", status);
                 var url = new Uri(QueryHelpers.AddQueryString($"{client.BaseAddress}TypeOfFuel/GetReport", parameters));
-                var typeOfCars = await client.GetFromJsonAsync<List<TypeOfFuel>>(url);
-                return typeOfCars;
+                var typeOfFuels = await client.GetFromJsonAsync<List<TypeOfFuel>>(url);
+                typeOfFuels.Reverse();
+                return typeOfFuels;
             }
             catch (Exception e)
             {

@@ -23,6 +23,7 @@ namespace RentCar.UI.Data.Employees.Employees.Services
             {
                 var client = _clientFactory.CreateClient("Employees");
                 var employees = await client.GetFromJsonAsync<List<Employee>>("Employee");
+                employees.Reverse();
                 return employees;
             }
             catch (Exception e)
@@ -61,8 +62,9 @@ namespace RentCar.UI.Data.Employees.Employees.Services
                 parameters.Add("commisionPercent", commisionPercent);
                 parameters.Add("status", status);
                 var url = new Uri(QueryHelpers.AddQueryString($"{client.BaseAddress}Employee/GetReport", parameters));
-                var clients = await client.GetFromJsonAsync<List<Employee>>(url);
-                return clients;
+                var employees = await client.GetFromJsonAsync<List<Employee>>(url);
+                employees.Reverse();
+                return employees;
             }
             catch (Exception e)
             {

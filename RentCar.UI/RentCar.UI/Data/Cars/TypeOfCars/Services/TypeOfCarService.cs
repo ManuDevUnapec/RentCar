@@ -24,6 +24,7 @@ namespace RentCar.UI.Data.Cars.TypeOfCars.Services
             {
                 var client = _carFactory.CreateClient("Cars");
                 var typeOfCars = await client.GetFromJsonAsync<List<TypeOfCar>>("TypeOfCar");
+                typeOfCars.Reverse();
                 return typeOfCars;
             }catch(Exception e)
             {
@@ -58,6 +59,7 @@ namespace RentCar.UI.Data.Cars.TypeOfCars.Services
                 parameters.Add("status", status);
                 var url = new Uri(QueryHelpers.AddQueryString($"{client.BaseAddress}TypeOfCar/GetReport", parameters));
                 var typeOfCars = await client.GetFromJsonAsync<List<TypeOfCar>>(url);
+                typeOfCars.Reverse();
                 return typeOfCars;
             }
             catch (Exception e)
