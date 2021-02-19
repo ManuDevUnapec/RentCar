@@ -31,6 +31,7 @@ namespace ClientService.Controllers
             {
                 //Log e
                 return BadRequest("An error ocurred, contact IT Staff");
+                //throw e;
             }
         }
 

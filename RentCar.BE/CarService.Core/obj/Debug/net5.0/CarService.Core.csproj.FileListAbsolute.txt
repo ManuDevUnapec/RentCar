@@ -21,4 +21,3 @@
 /Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Core/obj/Debug/net5.0/CarService.Core.dll
 /Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Core/obj/Debug/net5.0/ref/CarService.Core.dll
 /Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Core/obj/Debug/net5.0/CarService.Core.pdb
-/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Core/obj/Debug/net5.0/CarService.Core.csprojAssemblyReference.cache

@@ -69,19 +69,6 @@ else
 
             <div class="form-row">
                 <div class="form-group col-md-3">
-                    <label for="car-model">Model</label>
-                    <InputSelect @bind-Value="model.ModelID" id="car-brand" class="form-control valid">
-                        @if (Models is not null)
-                                {
-                            <option>Select</option>
-                            @foreach (var model in Models)
-                                    {
-                                <option value="@model.ID">@model.Description</option>
-                                    }
-                                }
-                    </InputSelect>
-                </div>
-                <div class="form-group col-md-3">
                     <label for="car-brand">Brand</label>
                     <InputSelect @bind-Value="model.BrandID" id="car-brand" class="form-control valid">
                         @if (Brands is not null)
@@ -90,6 +77,19 @@ else
                             @foreach (var brand in Brands)
                                     {
                                 <option value="@brand.ID">@brand.Description</option>
+                                    }
+                                }
+                    </InputSelect>
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="car-model">Model</label>
+                    <InputSelect @bind-Value="model.ModelID" id="car-brand" class="form-control valid">
+                        @if (Models is not null)
+                                {
+                            <option>Select</option>
+                            @foreach (var model in Models)
+                                    {
+                                <option value="@model.ID">@model.Description</option>
                                     }
                                 }
                     </InputSelect>
@@ -126,15 +126,15 @@ else
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label for="car-chassis">Chassis Number</label>
-                    <InputText id="car-chassis" class="form-control" @bind-Value="model.ChassisNumber" />
+                    <InputText type="number" id="car-chassis" class="form-control" @bind-Value="model.ChassisNumber" />
                 </div>
                 <div class="form-group col-md-4">
                     <label for="car-engine">Engine Number</label>
-                    <InputText id="car-engine" class="form-control" @bind-Value="model.EngineNumber" />
+                    <InputText type="number" id="car-engine" class="form-control" @bind-Value="model.EngineNumber" />
                 </div>
                 <div class="form-group col-md-4">
                     <label for="car-plate">Plate Number</label>
-                    <InputText id="car-plate" class="form-control" @bind-Value="model.PlateNumber" />
+                    <InputText type="number" id="car-plate" class="form-control" @bind-Value="model.PlateNumber" />
                 </div>
             </div>
 

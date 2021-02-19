@@ -23,7 +23,7 @@ namespace RentCar.UI.Data.Employees.Employees.Models
         [StringLength(100, ErrorMessage = "Name is too long, the maximum allowed is 100")]
         public string Name { get; set; }
         [Required]
-        [StringLength(50, ErrorMessage = "IdentificationCard is too long, the maximum allowed is 50")]
+        [StringLength(11, ErrorMessage = "IdentificationCard is too long, the maximum allowed is 11")]
         public string IdentificationCard { get; set; }
         [Required]
         [StringLength(50, ErrorMessage = "HourHand is too long, the maximum allowed is 50")]

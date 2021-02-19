@@ -23,6 +23,7 @@ namespace RentCar.UI.Data.Cars.Models.Services
             {
                 var client = _carFactory.CreateClient("Cars");
                 var models = await client.GetFromJsonAsync<List<Model>>("Model");
+                models.Reverse();
                 return models;
             }
             catch (Exception e)
@@ -59,6 +60,7 @@ namespace RentCar.UI.Data.Cars.Models.Services
                 parameters.Add("brandId", brandID.ToString());
                 var url = new Uri(QueryHelpers.AddQueryString($"{client.BaseAddress}Model/GetReport", parameters));
                 var models = await client.GetFromJsonAsync<List<Model>>(url);
+                models.Reverse();
                 return models;
             }
             catch (Exception e)

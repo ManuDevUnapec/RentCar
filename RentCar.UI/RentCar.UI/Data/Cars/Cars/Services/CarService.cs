@@ -23,6 +23,7 @@ namespace RentCar.UI.Data.Cars.Cars.Services
             {
                 var client = _carFactory.CreateClient("Cars");
                 var cars = await client.GetFromJsonAsync<List<Car>>("Car");
+                cars.Reverse();
                 return cars;
             }
             catch (Exception e)
