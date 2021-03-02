@@ -1,15 +1,15 @@
 ﻿<Properties StartupConfiguration="{A6360092-1F63-4BAE-A7DD-AF66EFE90AA9}|Default">
   <MonoDevelop.Ide.ItemProperties.InspectionService PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="RentService/Startup.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="RentService/Program.cs">
     <Files>
-      <File FileName="RentService/Startup.cs" Line="1" Column="1" />
+      <File FileName="RentService/Program.cs" Line="32" Column="30" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
             <Node name="RentService" expanded="True">
-              <Node name="Startup.cs" selected="True" />
+              <Node name="Program.cs" selected="True" />
             </Node>
           </Node>
         </State>
