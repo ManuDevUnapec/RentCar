@@ -26,9 +26,8 @@ namespace RentCar.UI.Data.Cars.TypeOfCars.Services
                 var typeOfCars = await client.GetFromJsonAsync<List<TypeOfCar>>("TypeOfCar");
                 typeOfCars.Reverse();
                 return typeOfCars;
-            }catch(Exception e)
+            }catch(Exception)
             {
-                //Log error
                 return new List<TypeOfCar>();
             }
         }
@@ -41,9 +40,8 @@ namespace RentCar.UI.Data.Cars.TypeOfCars.Services
                 var typeOfCar = await client.GetFromJsonAsync<TypeOfCar>($"TypeOfCar/{id}");
                 return typeOfCar;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
                 return new TypeOfCar();
             }
         }
@@ -62,9 +60,8 @@ namespace RentCar.UI.Data.Cars.TypeOfCars.Services
                 typeOfCars.Reverse();
                 return typeOfCars;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
                 return new List<TypeOfCar>();
             }
         }
@@ -77,10 +74,9 @@ namespace RentCar.UI.Data.Cars.TypeOfCars.Services
                 var response = await client.PostAsJsonAsync<TypeOfCar>("TypeOfCar", typeOfCar);
                 return response;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
-                throw e;
+                throw;
             }
         }
 
@@ -92,10 +88,9 @@ namespace RentCar.UI.Data.Cars.TypeOfCars.Services
                 var response = await client.PutAsJsonAsync<TypeOfCar>("TypeOfCar", typeOfCar);
                 return response;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
-                throw e;
+                throw;
             }
         }
 
@@ -107,10 +102,9 @@ namespace RentCar.UI.Data.Cars.TypeOfCars.Services
                 var response = await client.DeleteAsync($"TypeOfCar/{id}");
                 return response;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
-                throw e;
+                throw;
             }
         }
     }

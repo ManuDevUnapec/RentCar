@@ -26,9 +26,8 @@ namespace RentCar.UI.Data.Cars.Models.Services
                 models.Reverse();
                 return models;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
                 return new List<Model>();
             }
         }
@@ -41,9 +40,8 @@ namespace RentCar.UI.Data.Cars.Models.Services
                 var model = await client.GetFromJsonAsync<Model>($"Model/{id}");
                 return model;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
                 return new Model();
             }
         }
@@ -63,9 +61,8 @@ namespace RentCar.UI.Data.Cars.Models.Services
                 models.Reverse();
                 return models;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
                 return new List<Model>();
             }
         }
@@ -78,10 +75,9 @@ namespace RentCar.UI.Data.Cars.Models.Services
                 var response = await client.PostAsJsonAsync<Model>("Model", model);
                 return response;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
-                throw e;
+                throw;
             }
         }
 
@@ -93,10 +89,9 @@ namespace RentCar.UI.Data.Cars.Models.Services
                 var response = await client.PutAsJsonAsync<Model>("Model", model);
                 return response;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
-                throw e;
+                throw;
             }
         }
 
@@ -108,10 +103,9 @@ namespace RentCar.UI.Data.Cars.Models.Services
                 var response = await client.DeleteAsync($"Model/{id}");
                 return response;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
-                throw e;
+                throw;
             }
         }
     }

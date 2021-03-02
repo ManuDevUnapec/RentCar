@@ -26,9 +26,8 @@ namespace RentCar.UI.Data.Employees.Employees.Services
                 employees.Reverse();
                 return employees;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
                 return new List<Employee>();
             }
         }
@@ -41,9 +40,8 @@ namespace RentCar.UI.Data.Employees.Employees.Services
                 var model = await client.GetFromJsonAsync<Employee>($"Employee/{id}");
                 return model;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
                 return new Employee();
             }
         }
@@ -66,9 +64,8 @@ namespace RentCar.UI.Data.Employees.Employees.Services
                 employees.Reverse();
                 return employees;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
                 return new List<Employee>();
             }
         }
@@ -81,10 +78,9 @@ namespace RentCar.UI.Data.Employees.Employees.Services
                 var response = await client.PostAsJsonAsync<Employee>("Employee", employee);
                 return response;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
-                throw e;
+                throw;
             }
         }
 
@@ -96,10 +92,9 @@ namespace RentCar.UI.Data.Employees.Employees.Services
                 var response = await client.PutAsJsonAsync<Employee>("Employee", employee);
                 return response;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
-                throw e;
+                throw;
             }
         }
 
@@ -111,10 +106,9 @@ namespace RentCar.UI.Data.Employees.Employees.Services
                 var response = await client.DeleteAsync($"Employee/{id}");
                 return response;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
-                throw e;
+                throw;
             }
         }
     }
