@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using InspectionService.Core.Entities;
 using InspectionService.Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace InspectionService.Controllers
 {
@@ -26,7 +27,9 @@ namespace InspectionService.Controllers
                 return Ok(inspections);
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -41,7 +44,9 @@ namespace InspectionService.Controllers
             }
             catch (Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
             
@@ -63,7 +68,9 @@ namespace InspectionService.Controllers
             }
             catch (Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -84,7 +91,9 @@ namespace InspectionService.Controllers
                 }
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -105,7 +114,9 @@ namespace InspectionService.Controllers
                 }
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -126,7 +137,9 @@ namespace InspectionService.Controllers
                 }
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }

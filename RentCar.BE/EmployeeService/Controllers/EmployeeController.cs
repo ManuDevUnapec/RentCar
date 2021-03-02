@@ -4,6 +4,7 @@ using EmployeeService.Core.Entities;
 using EmployeeService.Core.Interfaces;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace EmployeeService.Controllers
 {
@@ -30,7 +31,9 @@ namespace EmployeeService.Controllers
                 return Ok(employees);
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -44,7 +47,9 @@ namespace EmployeeService.Controllers
                 return Ok(employee);
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -60,7 +65,9 @@ namespace EmployeeService.Controllers
                 return Ok(employees);
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -81,7 +88,9 @@ namespace EmployeeService.Controllers
                 }
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -105,7 +114,9 @@ namespace EmployeeService.Controllers
                 }
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -126,7 +137,9 @@ namespace EmployeeService.Controllers
                 }
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }

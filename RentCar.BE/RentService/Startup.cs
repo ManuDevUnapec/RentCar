@@ -16,6 +16,7 @@ using RentService.Core.Interfaces;
 using RentService.Infrastructure;
 using RentService.Infrastructure.Repositories;
 using RentService.Queues;
+using Serilog;
 
 namespace RentService
 {
@@ -83,6 +84,8 @@ namespace RentService
             }
 
             app.UseHttpsRedirection();
+
+            app.UseSerilogRequestLogging();
 
             app.UseRouting();
 

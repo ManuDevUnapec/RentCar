@@ -35,9 +35,9 @@ namespace CarService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch(Exception e)
+            catch(Exception)
             {
-                throw e;
+                throw;
             }
             
         }
@@ -53,9 +53,9 @@ namespace CarService.Infrastructure.Repositories
                     var affectedRows = await connection.ExecuteAsync(sql, new { ID = id });
                     return affectedRows;
                 }
-            }catch(Exception e)
+            }catch(Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -78,9 +78,9 @@ namespace CarService.Infrastructure.Repositories
                     return result.FirstOrDefault();
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
 
         }
@@ -101,9 +101,9 @@ namespace CarService.Infrastructure.Repositories
                     var result = await connection.QueryAsync<Car>(sql);
                     return result;
                 }
-            }catch(Exception e)
+            }catch(Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -150,9 +150,9 @@ namespace CarService.Infrastructure.Repositories
                     return result;
                 }
             }
-            catch(Exception e)
+            catch(Exception)
             {
-                throw e;
+                throw;
             }
             
         }
@@ -171,9 +171,9 @@ namespace CarService.Infrastructure.Repositories
                     var affectedRows = await connection.ExecuteAsync(sql, entity);
                     return affectedRows;
                 }
-            }catch(Exception e)
+            }catch(Exception)
             {
-                throw e;
+                throw;
             }
         }
     }

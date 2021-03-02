@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using CarService.Core.Entities;
 using CarService.Core.Interfaces;
+using Serilog;
 
 namespace CarService.Controllers
 {
@@ -27,7 +28,9 @@ namespace CarService.Controllers
             }
             catch (Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -42,7 +45,9 @@ namespace CarService.Controllers
             }
             catch (Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -57,7 +62,9 @@ namespace CarService.Controllers
             }
             catch (Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -79,7 +86,9 @@ namespace CarService.Controllers
             }
             catch (Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -101,7 +110,9 @@ namespace CarService.Controllers
             }
             catch (Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -123,7 +134,9 @@ namespace CarService.Controllers
             }
             catch (Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }

@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using RentService.Core.Entities;
 using RentService.Core.Interfaces;
+using Serilog;
 
 namespace RentService.Controllers
 {
@@ -26,7 +27,9 @@ namespace RentService.Controllers
                 return Ok(rents);
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -40,7 +43,9 @@ namespace RentService.Controllers
                 return Ok(rent);
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -57,7 +62,9 @@ namespace RentService.Controllers
                 return Ok(cars);
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -79,7 +86,9 @@ namespace RentService.Controllers
             }
             catch (Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -101,7 +110,9 @@ namespace RentService.Controllers
             }
             catch (Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -123,7 +134,9 @@ namespace RentService.Controllers
             }
             catch (Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
