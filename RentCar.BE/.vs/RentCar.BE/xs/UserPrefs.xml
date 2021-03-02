@@ -1,15 +1,16 @@
-﻿<Properties StartupConfiguration="{A6360092-1F63-4BAE-A7DD-AF66EFE90AA9}|Default">
+﻿<Properties StartupConfiguration="{B00CA829-9C97-4D3F-99E4-4F307720DE7A}|Default">
   <MonoDevelop.Ide.ItemProperties.InspectionService PreferredExecutionTarget="/Applications/Safari.app" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="RentService/Program.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="CarService/Startup.cs">
     <Files>
-      <File FileName="RentService/Program.cs" Line="32" Column="30" />
+      <File FileName="CarService/Controllers/BrandController.cs" Line="17" Column="10" />
+      <File FileName="CarService/Startup.cs" Line="65" Column="48" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="RentCar.BE" expanded="True">
-            <Node name="RentService" expanded="True">
-              <Node name="Program.cs" selected="True" />
+            <Node name="CarService" expanded="True">
+              <Node name="Startup.cs" selected="True" />
             </Node>
           </Node>
         </State>
@@ -26,6 +27,7 @@
       <Breakpoint file="/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/CarService.Infrastructure/Repositories/BrandRepository.cs" relfile="CarService.Infrastructure/Repositories/BrandRepository.cs" line="91" column="1" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.CarService PreferredExecutionTarget="/Applications/Safari.app" />
   <MultiItemStartupConfigurations>
     <MultiItemSolutionRunConfiguration Id="RentCar.BE" Name="RentCar.BE">
       <Items>
