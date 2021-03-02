@@ -4,6 +4,7 @@ using ClientService.Core.Entities;
 using ClientService.Core.Interfaces;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace ClientService.Controllers
 {
@@ -29,9 +30,10 @@ namespace ClientService.Controllers
                 return Ok(clients);
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
-                //throw e;
             }
         }
 
@@ -44,7 +46,9 @@ namespace ClientService.Controllers
                 return Ok(client);
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -60,7 +64,9 @@ namespace ClientService.Controllers
                 return Ok(cars);
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -81,7 +87,9 @@ namespace ClientService.Controllers
                 }
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -105,7 +113,9 @@ namespace ClientService.Controllers
                 }
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
@@ -126,7 +136,9 @@ namespace ClientService.Controllers
                 }
             }catch(Exception e)
             {
-                //Log e
+                //Log error
+                Log.Error(e.Message);
+                Log.Error(e.StackTrace);
                 return BadRequest("An error ocurred, contact IT Staff");
             }
         }
