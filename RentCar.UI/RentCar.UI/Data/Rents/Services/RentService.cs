@@ -39,9 +39,8 @@ namespace RentCar.UI.Data.Rents.Services
                 rents.Reverse();
                 return rents;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
                 return new List<Rent>();
             }
         }
@@ -54,9 +53,8 @@ namespace RentCar.UI.Data.Rents.Services
                 var model = await client.GetFromJsonAsync<Rent>($"Rent/{id}");
                 return model;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
                 return new Rent();
             }
         }
@@ -80,9 +78,8 @@ namespace RentCar.UI.Data.Rents.Services
                 rents.Reverse();
                 return rents;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
                 return new List<Rent>();
             }
         }
@@ -107,10 +104,9 @@ namespace RentCar.UI.Data.Rents.Services
                 var response = await clientFactory.PostAsJsonAsync<Rent>("Rent", rent);
                 return response;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
-                throw e;
+                throw;
             }
         }
 
@@ -133,10 +129,9 @@ namespace RentCar.UI.Data.Rents.Services
                 var response = await clientFactory.PutAsJsonAsync<Rent>("Rent", rent);
                 return response;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
-                throw e;
+                throw;
             }
         }
 
@@ -148,10 +143,9 @@ namespace RentCar.UI.Data.Rents.Services
                 var response = await client.DeleteAsync($"Rent/{id}");
                 return response;
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                //Log error
-                throw e;
+                throw;
             }
         }
     }
