@@ -2,7 +2,6 @@
 /Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/InspectionService.Core/bin/Debug/net5.0/InspectionService.Core.dll
 /Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/InspectionService.Core/bin/Debug/net5.0/ref/InspectionService.Core.dll
 /Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/InspectionService.Core/bin/Debug/net5.0/InspectionService.Core.pdb
-/Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/InspectionService.Core/obj/Debug/net5.0/InspectionService.Core.csprojAssemblyReference.cache
 /Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/InspectionService.Core/obj/Debug/net5.0/InspectionService.Core.GeneratedMSBuildEditorConfig.editorconfig
 /Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/InspectionService.Core/obj/Debug/net5.0/InspectionService.Core.AssemblyInfoInputs.cache
 /Users/manueldejesusguerrerovasquez/Projects/RentCar/RentCar.BE/InspectionService.Core/obj/Debug/net5.0/InspectionService.Core.AssemblyInfo.cs

@@ -38,9 +38,9 @@ namespace InspectionService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
 
         }
@@ -56,9 +56,10 @@ namespace InspectionService.Infrastructure.Repositories
                     var affectedRows = await connection.ExecuteAsync(sql, new { ID = id });
                     return affectedRows;
                 }
-            }catch(Exception e)
+            }
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -74,9 +75,9 @@ namespace InspectionService.Infrastructure.Repositories
                     return result.FirstOrDefault();
                 }
             }
-            catch(Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
 
         }
@@ -93,9 +94,9 @@ namespace InspectionService.Infrastructure.Repositories
                     return result;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -116,9 +117,9 @@ namespace InspectionService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -135,9 +136,9 @@ namespace InspectionService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -154,9 +155,9 @@ namespace InspectionService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -173,9 +174,9 @@ namespace InspectionService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -223,9 +224,9 @@ namespace InspectionService.Infrastructure.Repositories
                     return result;
                 }
             }
-            catch(Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
     }

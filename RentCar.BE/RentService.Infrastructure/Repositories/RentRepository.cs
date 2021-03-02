@@ -36,9 +36,9 @@ namespace RentService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
 
         }
@@ -54,9 +54,10 @@ namespace RentService.Infrastructure.Repositories
                     var affectedRows = await connection.ExecuteAsync(sql, new { ID = id });
                     return affectedRows;
                 }
-            }catch(Exception e)
+            }
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -71,9 +72,10 @@ namespace RentService.Infrastructure.Repositories
                     var result = await connection.QueryAsync<Rent>(sql, new { ID = id });
                     return result.FirstOrDefault();
                 }
-            }catch(Exception e)
+            }
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -88,9 +90,10 @@ namespace RentService.Infrastructure.Repositories
                     var result = await connection.QueryAsync<Rent>(sql);
                     return result;
                 }
-            }catch(Exception e)
+            }
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -114,9 +117,9 @@ namespace RentService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -133,9 +136,9 @@ namespace RentService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -152,9 +155,9 @@ namespace RentService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -171,9 +174,9 @@ namespace RentService.Infrastructure.Repositories
                     return affectedRows;
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
 
@@ -205,9 +208,10 @@ namespace RentService.Infrastructure.Repositories
                     });
                     return result;
                 }
-            }catch(Exception e)
+            }
+            catch (Exception)
             {
-                throw e;
+                throw;
             }
         }
     }
